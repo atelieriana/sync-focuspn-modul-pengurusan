@@ -37,7 +37,6 @@ class SyncRefPejabat extends Command
     private int $idSatuanKerja;
     private Collection $listPejabat;
 
-
     public function __construct()
     {
         parent::__construct();
@@ -81,17 +80,42 @@ class SyncRefPejabat extends Command
         return $this;
     }
 
+    /**
+     * Digunakan untuk melakukan sinkronisasi pejabat
+     * @return $this
+     */
     private function doSync()
     {
         // Remove all existing data
-        $this->deleteOldData();
+        $this->deleteOldData()
+            ->saveNewData();
 
+        $this->info('Sinkronisasi pejabat selesai');
+        return $this;
+    }
+
+    /**
+     * Digunakan untuk menghapus data pejabat
+     * @return $this
+     */
+    private function deleteOldData()
+    {
+        $this->refPejabatRepository->deleteByIdSatuanKerja($this->idSatuanKerja);
+        return $this;
+    }
+
+    /**
+     * Digunakan untuk menyimpan data pejabat baru
+     * @return $this
+     */
+    private function saveNewData()
+    {
         $this->database::beginTransaction();
         try
         {
             foreach ($this->listPejabat as $pejabat)
             {
-                $refPejabat = new RefPejabat();
+                $refPejabat = new RefPejabatRepository();
                 $refPejabat->UUID = Str::uuid();
                 $refPejabat->ID_REF_SATUAN_KERJA = $pejabat->ID_REF_SATUAN_KERJA;
                 $refPejabat->ID_REF_JABATAN = $pejabat->ID_REF_JABATAN;
@@ -112,7 +136,6 @@ class SyncRefPejabat extends Command
             }
 
             $this->database::commit();
-            $this->info('Sinkronisasi berhasil');
         }
         catch (Exception $e)
         {
@@ -121,10 +144,5 @@ class SyncRefPejabat extends Command
         }
 
         return $this;
-    }
-
-    private function deleteOldData()
-    {
-        $this->refPejabatRepository->deleteByIdSatuanKerja($this->idSatuanKerja);
     }
 }

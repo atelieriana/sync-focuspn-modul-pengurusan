@@ -6,6 +6,11 @@ use App\Models\FocusPN\MigrasiRefPejabat;
 
 class MigrasiRefPejabatRepository extends MigrasiRefPejabat
 {
+    /**
+     * Get pejabat berdasarkan kode satuan kerja
+     * @param $kodeSatuanKerja
+     * @return mixed
+     */
     public function getByKodeSatuanKerja($kodeSatuanKerja)
     {
         return self::select(
