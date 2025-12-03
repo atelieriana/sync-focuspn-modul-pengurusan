@@ -44,8 +44,11 @@ class SyncRefSaksi extends Command
      */
     public function handle()
     {
+        $this->info('Sinkronisasi ref saksi dimulai');
         $this->getListSaksi()
             ->doSync();
+
+        $this->info('Sinkronisasi ref saksi selesai');
     }
 
     private function getListSaksi()

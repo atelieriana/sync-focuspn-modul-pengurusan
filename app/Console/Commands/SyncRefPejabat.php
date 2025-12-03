@@ -56,7 +56,7 @@ class SyncRefPejabat extends Command
             ->getListPejabat()
             ->doSync();
 
-        echo $this->idSatuanKerja;
+        $this->info('Sinkronisasi pejabat selesai');
     }
 
     /**
@@ -90,7 +90,6 @@ class SyncRefPejabat extends Command
         $this->deleteOldData()
             ->saveNewData();
 
-        $this->info('Sinkronisasi pejabat selesai');
         return $this;
     }
 

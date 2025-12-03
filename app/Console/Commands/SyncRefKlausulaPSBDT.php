@@ -54,6 +54,8 @@ class SyncRefKlausulaPSBDT extends Command
         $this->setSatuanKerja()
             ->getListKlausulaPSBDT()
             ->doSync();
+
+        $this->info('Sinkronisasi klausul PSBDT selesai.');
     }
 
     /**
@@ -81,8 +83,6 @@ class SyncRefKlausulaPSBDT extends Command
     {
         $this->deleteOldData()
             ->saveNewData();
-
-        $this->info('Sinkronisasi klausul PSBDT selesai.');
     }
 
     /**

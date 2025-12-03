@@ -45,8 +45,11 @@ class SycnRefRohaniwan extends Command
      */
     public function handle()
     {
+        $this->info('Sinkronisasi ref rohaniwan dimulai');
         $this->getListRohaniwan()
             ->doSync();
+
+        $this->info('Sinkronisasi ref rohaniwan selesai');
     }
 
     private function getListRohaniwan()
