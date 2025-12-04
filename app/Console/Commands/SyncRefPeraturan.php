@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Repositories\FocusPN\MigrasiRefPeraturanRepository;
+use App\Repositories\ModulPengurusan\RefPeraturanRepository;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SyncRefPeraturan extends Command
 {
@@ -25,6 +28,7 @@ class SyncRefPeraturan extends Command
 
     private DB $database;
     private MigrasiRefPeraturanRepository $migrasiRefPeraturanRepository;
+    private RefPeraturanRepository $refPeraturanRepository;
     private Collection $listPeraturan;
 
     public function __construct()
@@ -32,6 +36,7 @@ class SyncRefPeraturan extends Command
         parent::__construct();
         $this->database = new DB();
         $this->migrasiRefPeraturanRepository = new MigrasiRefPeraturanRepository();
+        $this->refPeraturanRepository = new RefPeraturanRepository();
     }
 
     /**
@@ -41,7 +46,8 @@ class SyncRefPeraturan extends Command
     {
         $this->info('Sinkronisasi ref peraturan dimulai');
 
-        $this->getListPeraturan();
+        $this->getListPeraturan()
+            ->doSync();
 
         $this->info('Sinkronisasi ref peraturan selesai');
     }
@@ -54,17 +60,42 @@ class SyncRefPeraturan extends Command
 
     private function doSync()
     {
-
+        $this->deleteOldData()
+            ->saveNewData();
     }
 
     private function deleteOldData()
     {
-
+        $this->refPeraturanRepository->query()->forceDelete();
+        return $this;
     }
 
     private function saveNewData()
     {
+        $this->database::beginTransaction();
 
+        try
+        {
+            foreach ($this->listPeraturan as $peraturan)
+            {
+                $refPeraturan = new RefPeraturanRepository();
+                $refPeraturan->UUID = Str::uuid();
+                $refPeraturan->NOMOR_PERATURAN = $peraturan->NOMOR_PERATURAN;
+                $refPeraturan->TANGGAL_PERATURAN = $peraturan->TANGGAL_PERATURAN;
+                $refPeraturan->PERIHAL = $peraturan->PERIHAL ?? '-';
+                $refPeraturan->STATUS = $peraturan->STATUS;
+                $refPeraturan->CREATED_BY = 'Migrasi FocusPN';
+                $refPeraturan->UPDATED_BY = 'Migrasi FocusPN';
+                $refPeraturan->save();
+            }
+
+            $this->database::commit();
+        }
+        catch (Exception $e)
+        {
+            $this->database::rollBack();
+            $this->error($e->getMessage());
+        }
     }
 }
 
