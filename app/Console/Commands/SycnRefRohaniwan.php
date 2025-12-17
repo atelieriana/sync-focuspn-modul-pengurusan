@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\RefRohaniwan;
 use App\Repositories\FocusPN\MigrasiRefRohaniwanRepository;
 use App\Repositories\ModulPengurusan\RefRohaniwanRepository;
 use Exception;
