@@ -111,12 +111,13 @@ class SyncTransPiutang extends Command
                 'TAHUN_REGISTER_PIUTANG' => $transPiutang['TAHUN_REGISTER_PIUTANG'],
                 'KEADAAN_USAHA' => $transPiutang['KEADAAN_USAHA'],
                 'PERMASALAHAN_PIUTANG' => $transPiutang['PERMASALAHAN_PIUTANG'] ?? '-',
-                'PENDAPAT' => $transPiutang['PENDAPAT'],
-                'SARAN' => $transPiutang['SARAN'],
+                'PENDAPAT' => $transPiutang['PENDAPAT'] ?? '-',
+                'SARAN' => $transPiutang['SARAN'] ?? '-',
                 'CREATED_BY' => $transPiutang['CREATED_BY'] ?? 'Migrasi FocusPN',
                 'CREATED_AT' => $transPiutang['CREATED_AT'],
                 'UPDATED_BY' => $transPiutang['UPDATED_BY'] ?? 'Migrasi FocusPN',
-                'UPDATED_AT' => $transPiutang['UPDATED_AT']
+                'UPDATED_AT' => $transPiutang['UPDATED_AT'],
+                'ID_FOCUSPN' => $transPiutang['ID_FOCUSPN'],
             ];
         }, $this->listTransPiutang->toArray());
         return $this;
