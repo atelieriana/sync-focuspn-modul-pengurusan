@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Repositories\FocusPN\MigrasiTransDebiturRepository;
+use App\Repositories\FocusPN\TGlobalRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransDebiturRepository;
 use Exception;
@@ -19,8 +20,10 @@ class SyncTransDebitur extends Command
     private MigrasiTransDebiturRepository $migrasiTransDebiturRepository;
     private TransDebiturRepository $transDebiturRepository;
     private Collection $listTransDebiturFocusPN;
+    private Collection $listTransDebiturModulPengurusan;
     private int $idSatuanKerja = 0;
     private array $remappingTransDebiturFocusPN;
+    private array $remappingTransDebiturModulPengurusan;
 
     public function __construct()
     {
@@ -54,7 +57,10 @@ class SyncTransDebitur extends Command
         $this->setSatuanKerja()
             ->getListTransDebiturFocusPN()
             ->mappingTransDebiturFocusPN()
-            ->doSync();
+            ->doSync()
+            ->getListTransDebiturModulPengurusan()
+            ->mappingTransDebiturModulPengurusan()
+            ->doResyncIdTransDebitur();
         $this->info('Sinkronisasi transaksi piutang selesai');
     }
 
@@ -84,7 +90,6 @@ class SyncTransDebitur extends Command
     }
 
     /**
-     * Digunakan untuk melakukan mapping dari migrasi trans debitur focus pn ke table trans debitur modul pengurusan
      * @return static
      */
     private function mappingTransDebiturFocusPN(): static
@@ -109,10 +114,6 @@ class SyncTransDebitur extends Command
         return $this;
     }
 
-    /**
-     * Digunakan untuk melakukan sync data trans debitur
-     * @return $this
-     */
     private function doSync()
     {
         $this->deleteOlData()
@@ -132,7 +133,6 @@ class SyncTransDebitur extends Command
     }
 
     /**
-     * Digunakan untuk menyimpan data
      * @return void
      */
     private function saveNewData()
@@ -148,6 +148,58 @@ class SyncTransDebitur extends Command
             {
                 $transDebitur = new TransDebiturRepository();
                 $transDebitur::insert($chunk->toArray());
+                $progressBar->advance();
+            }
+            $this->database::commit();
+            $progressBar->finish();
+            $this->output->newLine();
+        }
+        catch (Exception $exception)
+        {
+            $this->database::rollBack();
+            $this->error($exception->getMessage());
+        }
+    }
+
+    /**
+     * Digunakan untuk mendapatkan list trans debitur dari modul pengurusan
+     * @return $this
+     */
+    private function getListTransDebiturModulPengurusan()
+    {
+        $this->listTransDebiturModulPengurusan = $this->transDebiturRepository->getByIdSatuanKerja($this->idSatuanKerja);
+        return $this;
+    }
+
+    /**
+     * Digunakan untuk mapping
+     * @return $this
+     */
+    private function mappingTransDebiturModulPengurusan(): static
+    {
+        $this->remappingTransDebiturModulPengurusan = array_map(function ($transDebitur) {
+            return [
+                'ID' => $transDebitur['ID_FOCUSPN'],
+                'ID_TRANS_DEBITUR' => $transDebitur['ID'],
+            ];
+        }, $this->listTransDebiturModulPengurusan->toArray());
+
+        return $this;
+    }
+
+    private function doResyncIdTransDebitur()
+    {
+        $this->info('Tahapan sinkonrisasi TRANS_DEBITUR ke T_GLOBAL: ');
+
+        $this->database::beginTransaction();
+        try
+        {
+            $chunkData = collect($this->remappingTransDebiturModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $progressBar = $this->output->createProgressBar(count($chunkData));
+            foreach ($chunkData as $chunk)
+            {
+                $tGlobal = new TGlobalRepository();
+                $tGlobal->upsert($chunk->toArray(),['ID'],['ID_TRANS_DEBITUR']);
                 $progressBar->advance();
             }
             $this->database::commit();
