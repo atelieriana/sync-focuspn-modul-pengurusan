@@ -53,7 +53,7 @@ class SyncTransDebitur extends Command
      */
     public function handle()
     {
-        $this->info('Sinkronisasi transaksi piutang dimulai!');
+        $this->info('Sinkronisasi transaksi debitur dimulai!');
         $this->setSatuanKerja()
             ->getListTransDebiturFocusPN()
             ->mappingTransDebiturFocusPN()
@@ -61,7 +61,7 @@ class SyncTransDebitur extends Command
             ->getListTransDebiturModulPengurusan()
             ->mappingTransDebiturModulPengurusan()
             ->doResyncIdTransDebitur();
-        $this->info('Sinkronisasi transaksi piutang selesai');
+        $this->info('Sinkronisasi transaksi debitur selesai');
     }
 
     /**
