@@ -33,12 +33,11 @@ class SyncTransPiutang extends Command
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPiutangRepository $migrasiTransPiutangRepository;
     private TransPiutangRepository $transPiutangRepository;
-    private string $kodeSatuanKerja;
     private int $idSatuanKerja = 0;
     private Collection $listTransPiutangFocusPN;
     private Collection $listTransPiutangModulPengurusan;
-    private array $reMappingListTransPiutangFocusPN;
-    private array $reMappingListTransPiutangModulPengurusan;
+    private array $remappingListTransPiutangFocusPN;
+    private array $remappingListTransPiutangModulPengurusan;
 
     public function __construct()
     {
@@ -71,8 +70,8 @@ class SyncTransPiutang extends Command
      */
     private function setSatuanKerja()
     {
-        $this->kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja);
+        $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
+        $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
             $this->idSatuanKerja = $satuanKerja->ID;
         else
@@ -96,7 +95,7 @@ class SyncTransPiutang extends Command
      */
     private function mappingTransPiutangFocusPN()
     {
-        $this->reMappingListTransPiutangFocusPN = array_map(function ($transPiutang) {
+        $this->remappingListTransPiutangFocusPN = array_map(function ($transPiutang) {
             return [
                 'UUID' => Str::uuid()->toString(),
                 'ID_REF_SATUAN_KERJA_KPKNL' => $transPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
@@ -162,7 +161,7 @@ class SyncTransPiutang extends Command
         $this->database::beginTransaction();
         try
         {
-            $chunkData = collect($this->reMappingListTransPiutangFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $chunkData = collect($this->remappingListTransPiutangFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
             $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
@@ -197,7 +196,7 @@ class SyncTransPiutang extends Command
      */
     private function mappingTransPiutangModulPengurusan(): static
     {
-        $this->reMappingListTransPiutangModulPengurusan = array_map(function ($transPiutang) {
+        $this->remappingListTransPiutangModulPengurusan = array_map(function ($transPiutang) {
             return [
                 'ID' => $transPiutang['ID_FOCUSPN'],
                 'ID_MODUL_PENGURUSAN' => $transPiutang['ID']
@@ -218,7 +217,7 @@ class SyncTransPiutang extends Command
         $this->database::beginTransaction();
         try
         {
-            $chunkData = collect($this->reMappingListTransPiutangModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $chunkData = collect($this->remappingListTransPiutangModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
             $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
