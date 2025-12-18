@@ -84,6 +84,7 @@ class SyncTransDebitur extends Command
     }
 
     /**
+     * Digunakan untuk melakukan mapping dari migrasi trans debitur focus pn ke table trans debitur modul pengurusan
      * @return static
      */
     private function mappingTransDebiturFocusPN(): static
@@ -108,6 +109,10 @@ class SyncTransDebitur extends Command
         return $this;
     }
 
+    /**
+     * Digunakan untuk melakukan sync data trans debitur
+     * @return $this
+     */
     private function doSync()
     {
         $this->deleteOlData()
@@ -127,6 +132,7 @@ class SyncTransDebitur extends Command
     }
 
     /**
+     * Digunakan untuk menyimpan data
      * @return void
      */
     private function saveNewData()
