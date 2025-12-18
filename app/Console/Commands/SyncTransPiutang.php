@@ -207,6 +207,10 @@ class SyncTransPiutang extends Command
         return $this;
     }
 
+    /**
+     * Digunakan untuk sinkronisasi id trans piutang modul pengurusan ke t global focuspn
+     * @return void
+     */
     private function doResyncIdTransPiutangModulPengurusan()
     {
         $this->info('Tahapan sinkonrisasi TRANS_PIUTANG ke T_GLOBAL: ');
