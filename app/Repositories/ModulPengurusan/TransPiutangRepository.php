@@ -15,4 +15,14 @@ class TransPiutangRepository extends TransPiutang
         return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
             ->forceDelete();
     }
+
+    /**
+     * Digunakan untuk mendapatkan ID Satuan Kerja KPKNL
+     * @param int $idSatuanKerjaKPKNL
+     * @return mixed
+     */
+    public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
+    {
+        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)->get();
+    }
 }

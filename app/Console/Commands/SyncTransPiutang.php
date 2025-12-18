@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\TransPiutang;
 use App\Repositories\FocusPN\MigrasiTransPiutangRepository;
+use App\Repositories\FocusPN\TGlobalRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransPiutangRepository;
 use Exception;
@@ -35,8 +35,10 @@ class SyncTransPiutang extends Command
     private TransPiutangRepository $transPiutangRepository;
     private string $kodeSatuanKerja;
     private int $idSatuanKerja = 0;
-    private Collection $listTransPiutang;
-    private array $reMappingListTransPiutang;
+    private Collection $listTransPiutangFocusPN;
+    private Collection $listTransPiutangModulPengurusan;
+    private array $reMappingListTransPiutangFocusPN;
+    private array $reMappingListTransPiutangModulPengurusan;
 
     public function __construct()
     {
@@ -54,9 +56,12 @@ class SyncTransPiutang extends Command
     {
         $this->info('Sinkronisasi transaksi piutang dimulai!');
         $this->setSatuanKerja()
-            ->getListTransPiutang()
-            ->mappingTransPiutang()
-            ->doSync();
+            ->getListTransPiutangFocusPN()
+            ->mappingTransPiutangFocusPN()
+            ->doSync()
+            ->getListTransPiutangModulPengurusan()
+            ->mappingTransPiutangModulPengurusan()
+            ->doResyncIdTransPiutangModulPengurusan();
         $this->info('Sinkronisasi transaksi piutang selesai');
     }
 
@@ -76,21 +81,22 @@ class SyncTransPiutang extends Command
     }
 
     /**
+     * Digunakan untuk mendapatkan list transaksi piutang FocusPN
      * @return $this
      */
-    private function getListTransPiutang()
+    private function getListTransPiutangFocusPN()
     {
-        $this->listTransPiutang = $this->migrasiTransPiutangRepository->getByIdSatuanKerja($this->idSatuanKerja);
+        $this->listTransPiutangFocusPN = $this->migrasiTransPiutangRepository->getByIdSatuanKerja($this->idSatuanKerja);
         return $this;
     }
 
     /**
-     * Added UUID
+     * Digunakan untuk mapping transaksi piutang FocusPN sebelum masuk ke Modul Pengurusan
      * @return $this
      */
-    private function mappingTransPiutang()
+    private function mappingTransPiutangFocusPN()
     {
-        $this->reMappingListTransPiutang = array_map(function ($transPiutang) {
+        $this->reMappingListTransPiutangFocusPN = array_map(function ($transPiutang) {
             return [
                 'UUID' => Str::uuid()->toString(),
                 'ID_REF_SATUAN_KERJA_KPKNL' => $transPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
@@ -119,18 +125,24 @@ class SyncTransPiutang extends Command
                 'UPDATED_AT' => $transPiutang['UPDATED_AT'],
                 'ID_FOCUSPN' => $transPiutang['ID_FOCUSPN'],
             ];
-        }, $this->listTransPiutang->toArray());
+        }, $this->listTransPiutangFocusPN->toArray());
         return $this;
     }
 
+    /**
+     * Digunakan untuk melakukan sync focuspn ke modul pengurusan pn
+     * @return static
+     */
     private function doSync()
     {
         $this->deleteOldData()
             ->saveNewData();
+
+        return $this;
     }
 
     /**
-     * Digunakan untuk melakukan penghapusan data klausul PSBDT
+     * Digunakan untuk melakukan penghapusan data transaksi piutang berdasarkan id satuan kerja KPKNL
      * @return $this
      */
     public function deleteOldData()
@@ -145,17 +157,74 @@ class SyncTransPiutang extends Command
      */
     private function saveNewData()
     {
+        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+
         $this->database::beginTransaction();
         try
         {
-            $chunkData = collect($this->reMappingListTransPiutang)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $chunkData = collect($this->reMappingListTransPiutangFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
                 $transPiutang = new TransPiutangRepository();
                 $transPiutang::insert($chunk->toArray());
+                $progressBar->advance();
             }
 
             $this->database::commit();
+            $progressBar->finish();
+            $this->output->newLine();
+        }
+        catch (Exception $exception)
+        {
+            $this->database::rollBack();
+            $this->error($exception->getMessage());
+        }
+    }
+
+    /**
+     *
+     * @return static
+     */
+    private function getListTransPiutangModulPengurusan(): static
+    {
+        $this->listTransPiutangModulPengurusan = $this->transPiutangRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerja);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    private function mappingTransPiutangModulPengurusan(): static
+    {
+        $this->reMappingListTransPiutangModulPengurusan = array_map(function ($transPiutang) {
+            return [
+                'ID' => $transPiutang['ID_FOCUSPN'],
+                'ID_MODUL_PENGURUSAN' => $transPiutang['ID']
+            ];
+        }, $this->listTransPiutangModulPengurusan->toArray());
+
+        return $this;
+    }
+
+    private function doResyncIdTransPiutangModulPengurusan()
+    {
+        $this->info('Tahapan sinkonrisasi TRANS_PIUTANG ke T_GLOBAL: ');
+
+        $this->database::beginTransaction();
+        try
+        {
+            $chunkData = collect($this->reMappingListTransPiutangModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $progressBar = $this->output->createProgressBar(count($chunkData));
+            foreach ($chunkData as $chunk)
+            {
+                $tGlobal = new TGlobalRepository();
+                $tGlobal->upsert($chunk->toArray(),['ID'],['ID_MODUL_PENGURUSAN']);
+                $progressBar->advance();
+            }
+            $this->database::commit();
+            $progressBar->finish();
+            $this->output->newLine();
         }
         catch (Exception $exception)
         {
