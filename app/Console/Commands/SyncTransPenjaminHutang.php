@@ -112,9 +112,9 @@ class SyncTransPenjaminHutang extends Command
                 'KELURAHAN' => $transPenjaminHutang['KELURAHAN'],
                 'RT_RW' => $transPenjaminHutang['RT_RW'],
                 'ALAMAT' => $transPenjaminHutang['ALAMAT'],
-                'CREATED_BY' => $transPenjaminHutang['CREATED_BY'] ?? 'Migrasi FocusPN',
+                'CREATED_BY' => $transPenjaminHutang['CREATED_BY'] ?? '-',
                 'CREATED_AT' => $transPenjaminHutang['CREATED_AT'],
-                'UPDATED_BY' => $transPenjaminHutang['UPDATED_BY'] ?? 'Migrasi FocusPN',
+                'UPDATED_BY' => $transPenjaminHutang['UPDATED_BY'] ?? '-',
                 'UPDATED_AT' => $transPenjaminHutang['UPDATED_AT']
             ];
         }, $this->listTransPenjaminHutangFocusPN->toArray());
