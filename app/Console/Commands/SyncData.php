@@ -29,9 +29,6 @@ class SyncData extends Command
     {
         $this->info('Migrasi dimulai!');
 
-        // Set Satuan Kerja
-        $this->setSatuanKerja();
-
         // Sync Trans Piutang
         $this->call('sync:trans-piutang',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
