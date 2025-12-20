@@ -53,7 +53,7 @@ class SyncTransPenjaminHutang extends Command
      */
     public function handle()
     {
-        $this->info('Sinkronisasi transaksi debitur badan hukum dimulai!');
+        $this->info('Sinkronisasi transaksi penjamin hutang dimulai!');
         $this->setSatuanKerja()
             ->getListTransPenjaminHutangFocusPN()
             ->mappingListTransPenjaminHutangFocusPN()
@@ -61,7 +61,7 @@ class SyncTransPenjaminHutang extends Command
             ->getListTransPenjaminHutangModulPengurusan()
             ->mappingListTransPenjaminHutangModulPengurusan()
             ->doResyncIdTransPenjaminHutangModulPengurusan();
-        $this->info('Sinkronisasi transaksi debitur badan hukum selesai!');
+        $this->info('Sinkronisasi transaksi penjamin hutang selesai!');
     }
 
     /**
