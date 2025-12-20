@@ -8,15 +8,6 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class SyncData extends Command
 {
-    private RefSatuanKerjaRepository $refSatuanKerjaRepository;
-    private int $idSatuanKerja = 0;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
-    }
-
     /**
      * The name and signature of the console command.
      *
@@ -71,19 +62,16 @@ class SyncData extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-        $this->info('Migrasi selesai!');
-    }
+        // Sync Trans Penjamin Hutang Lainnya
+        $this->call('sync:trans-penjamin-hutang',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
 
-    /**
-     * Digunakan untuk melakukan set kode satuan kerja yang akan dilakukan sinkronisasi
-     */
-    private function setSatuanKerja()
-    {
-        $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
-        if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
-        else
-            $this->error('Kode satuan kerja tidak ditemukan');
+        // Sync Trans Tahap Pengurusan
+        $this->call('sync:trans-tahap-pengurusan',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
+        $this->info('Migrasi selesai!');
     }
 }
