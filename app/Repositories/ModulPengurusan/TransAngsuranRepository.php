@@ -8,7 +8,7 @@ class TransAngsuranRepository extends TransAngsuran
 {
     public function deleteByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        self::whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL) {
+        return self::whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL) {
             return $subQuery->select('ID')
                 ->from('TRANS_PIUTANG')
                 ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
@@ -18,7 +18,7 @@ class TransAngsuranRepository extends TransAngsuran
 
     public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        self::whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL) {
+        return self::whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL) {
             return $subQuery->select('ID')
                 ->from('TRANS_PIUTANG')
                 ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
