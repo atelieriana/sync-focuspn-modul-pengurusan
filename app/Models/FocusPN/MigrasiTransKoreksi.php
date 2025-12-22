@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class MigrasiTransKoreksi extends Model
 {
-
+    protected $connection = 'oracle_focuspn';
+    protected $table = 'MIGRASI_TRANS_KOREKSI';
 }

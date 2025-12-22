@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Repositories\FocusPN\MigrasiTransKoreksiRepository;
+use App\Repositories\FocusPN\TKoreksiRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransKoreksiRepository;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -46,7 +48,7 @@ class SyncTransKoreksi extends Command
      */
     public function handle()
     {
-        $this->info('Sinkronisasi transaksi piutang dimulai!');
+        $this->info('Sinkronisasi transaksi koreksi dimulai!');
         $this->setSatuanKerja()
             ->getListTransKoreksiFocusPN()
             ->mappingListTransKoreksiFocusPN()
@@ -54,7 +56,7 @@ class SyncTransKoreksi extends Command
             ->getListTransKoreksiModulPengurusan()
             ->mappingListTransaksiKoreksiModulPengurusan()
             ->doResyncTransKoreksiModulPengurusan();
-        $this->info('Sinkronisasi transaksi piutang selesai');
+        $this->info('Sinkronisasi transaksi koreksi selesai');
     }
 
     /**
@@ -84,7 +86,18 @@ class SyncTransKoreksi extends Command
             return [
                 'UUID' => Str::uuid()->toString(),
                 'ID_TRANS_PIUTANG' => $transKoreksi['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_TAHAP_PENGURUSAN' => $transKoreksi['ID_TRA']
+                'ID_TAHAP_PENGURUSAN' => $transKoreksi['ID_TAHAP_PENGURUSAN'],
+                'ID_REF_MATA_UANG' => $transKoreksi['ID_REF_MATA_UANG'],
+                'ID_REF_BIAD' => $transKoreksi['ID_REF_BIAD'],
+                'ID_FOCUSPN' => $transKoreksi['ID_FOCUSPN'],
+                'KOREKSI_POKOK' => $transKoreksi['KOREKSI_POKOK'],
+                'KOREKSI_BUNGA' => $transKoreksi['KOREKSI_BUNGA'],
+                'KOREKSI_DENDA' => $transKoreksi['KOREKSI_DENDA'],
+                'KOREKSI_LAINNYA' => $transKoreksi['KOREKSI_LAINNYA'],
+                'CREATED_BY' => $transKoreksi['CREATED_BY'],
+                'CREATED_AT' => $transKoreksi['CREATED_AT'],
+                'UPDATED_BY' => $transKoreksi['UPDATED_BY'],
+                'UPDATED_AT' => $transKoreksi['UPDATED_AT'],
             ];
         }, $this->listTransKoreksiFocusPN->toArray());
 
@@ -100,26 +113,78 @@ class SyncTransKoreksi extends Command
 
     private function deleteOldData()
     {
+        $this->transKoreksiRepository->deleteByIdSatuanKerja($this->idSatuanKerja);
         return $this;
     }
 
     private function saveNewData()
     {
+        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
 
+        $this->database::beginTransaction();
+        try
+        {
+            $chunkData = collect($this->remappingListTransKoreksiFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $progressBar = $this->output->createProgressBar(count($chunkData));
+            foreach ($chunkData as $chunk)
+            {
+                $transKoreksi = new TransKoreksiRepository();
+                $transKoreksi->insert($chunk->toArray());
+                $progressBar->advance();
+            }
+
+            $this->database::commit();
+            $progressBar->finish();
+            $this->output->newLine();
+        }
+        catch (Exception $exception)
+        {
+            $this->database::rollBack();
+            $this->error($exception->getMessage());
+        }
     }
 
     private function getListTransKoreksiModulPengurusan()
     {
+        $this->listTransKoreksiModulPengurusan = $this->transKoreksiRepository->getByIdSatuanKerja($this->idSatuanKerja);
         return $this;
     }
 
     private function mappingListTransaksiKoreksiModulPengurusan()
     {
+        $this->remappingListTransKoreksiModulPengurusan = array_map(function ($transKoreksi){
+            return [
+                'ID' => $transKoreksi['ID_FOCUSPN'],
+                'ID_MODUL_PENGURUSAN' => $transKoreksi['ID']
+            ];
+        }, $this->listTransKoreksiModulPengurusan->toArray());
         return $this;
     }
 
     private function doResyncTransKoreksiModulPengurusan()
     {
-        return $this;
+        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+
+        $this->database::beginTransaction();
+        try
+        {
+            $chunkData = collect($this->remappingListTransKoreksiModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
+            $progressBar = $this->output->createProgressBar(count($chunkData));
+            foreach ($chunkData as $chunk)
+            {
+                $tKoreksi = new TKoreksiRepository();
+                $tKoreksi->upsert($chunk->toArray(),['ID'],['ID_MODUL_PENGURUSAN']);
+                $progressBar->advance();
+            }
+
+            $this->database::commit();
+            $progressBar->finish();
+            $this->output->newLine();
+        }
+        catch (Exception $exception)
+        {
+            $this->database::rollBack();
+            $this->error($exception->getMessage());
+        }
     }
 }
