@@ -133,7 +133,7 @@ class SyncTransKeringananUsulan extends Command
 
     private function saveNewData()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi T_KERINGANAN_USULAN ke TRANS_KERINGANAN_USULAN: ');
 
         $this->database::beginTransaction();
         try
@@ -179,7 +179,7 @@ class SyncTransKeringananUsulan extends Command
 
     private function doResyncIdTransKeringananUsulanModulPengurusan()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi TRANS_KERINGANAN_USULAN ke T_KERINGANAN_USULAN: ');
 
         $this->database::beginTransaction();
         try

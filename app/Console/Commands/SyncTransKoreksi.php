@@ -119,7 +119,7 @@ class SyncTransKoreksi extends Command
 
     private function saveNewData()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi T_KOREKSI ke TRANS_KOREKSI: ');
 
         $this->database::beginTransaction();
         try
@@ -163,7 +163,7 @@ class SyncTransKoreksi extends Command
 
     private function doResyncTransKoreksiModulPengurusan()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi TRANS_KOREKSI ke T_KOREKSI: ');
 
         $this->database::beginTransaction();
         try

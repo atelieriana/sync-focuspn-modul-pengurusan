@@ -58,12 +58,7 @@ class SyncData extends Command
         $this->call('sync:trans-penjamin-hutang',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
-
-        // Sync Trans Penjamin Hutang Lainnya
-        $this->call('sync:trans-penjamin-hutang',[
-            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
-        ]);
-
+        
         // Sync Trans Tahap Pengurusan
         $this->call('sync:trans-tahap-pengurusan',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),

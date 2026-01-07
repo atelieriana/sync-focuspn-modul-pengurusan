@@ -51,7 +51,7 @@ class SyncTransTahapPengurusan extends Command
      */
     public function handle()
     {
-        $this->info('Sinkronisasi transaksi tahap penghurusan!');
+        $this->info('Sinkronisasi transaksi tahap pengurusan!');
         $this->setSatuanKerja()
             ->getListTransTahapPengurusanFocusPN()
             ->mappingListTransTahapPengurusanFocusPN()
