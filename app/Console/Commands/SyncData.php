@@ -89,8 +89,13 @@ class SyncData extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-                // Sync Trans Keringanan Usulan
+        // Sync Trans Keringanan Usulan
         $this->call('sync:trans-keringanan-setuju',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
+        // Sync Trans Keringanan Usulan
+        $this->call('sync:ref-jurusita',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
