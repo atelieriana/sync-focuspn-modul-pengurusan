@@ -15,7 +15,9 @@ use Illuminate\Support\Str;
 
 class SyncRefJurusita extends Command
 {
+    const STATUS_PEJABAT_JURUSITA_AKTIF = 1;
     const TOTAL_DATA_EACH_CHUNK = 500;
+
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiRefJurusitaRepository $migrasiRefJurusitaRepository;
@@ -87,6 +89,7 @@ class SyncRefJurusita extends Command
                 'NIP' => $refJurusita['NIP_JURUSITA'],
                 'NAMA_LENGKAP' => $refJurusita['NAMA_JURUSITA'],
                 'NOMOR_SK_PENGANGKATAN' => trim($refJurusita['NOMOR_SK_JURUSITA']),
+                'STATUS' => self::STATUS_PEJABAT_JURUSITA_AKTIF,
                 'CREATED_BY' => 'Migrasi FocusPN',
                 'CREATED_AT' => Carbon::now(),
                 'UPDATED_BY' => 'Migrasi FocusPN',
