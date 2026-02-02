@@ -257,7 +257,7 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
             foreach ($chunkData as $chunk)
             {
                 $tBASP = new TBASPRepository();
-                $tBASP->insert($chunk->toArray());
+                $tBASP->upsert($chunk->toArray(),['ID'],['ID_MODUL_PENGURUSAN']);
                 $progressBar->advance();
             }
 
