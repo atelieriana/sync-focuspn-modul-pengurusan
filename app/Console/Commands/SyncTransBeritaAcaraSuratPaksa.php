@@ -51,7 +51,7 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Digunakan untuk melakukan sinkronisasi transaksi berita acara surat paksa dari Focus PN ke Modul Pengurusan berdasarkan kode satuan kerja KPKNL';
 
     /**
      * Execute the console command.
