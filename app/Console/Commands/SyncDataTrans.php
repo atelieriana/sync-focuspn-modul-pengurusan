@@ -6,14 +6,14 @@ use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-class SyncData extends Command
+class SyncDataTrans extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sync:data {kode-satuan-kerja : kode satuan kerja 6 digit}';
+    protected $signature = 'sync:transaksi {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
     /**
      * The console command description.
@@ -27,7 +27,22 @@ class SyncData extends Command
      */
     public function handle()
     {
-        $this->info('Migrasi dimulai!');
+        $this->info('Migrasi transaksi dimulai!');
+
+        // Sync Ref Pejabat
+        $this->call('sync:ref-pejabat',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
+        // Sync Ref Klausul PSBDT
+        $this->call('sync:ref-klausul-psbdt',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
+        // Sync Ref Jurusita
+        $this->call('sync:ref-jurusita',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
 
         // Sync Trans Piutang
         $this->call('sync:trans-piutang',[
@@ -89,16 +104,21 @@ class SyncData extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-        // Sync Trans Keringanan Usulan
+        // Sync Trans Keringanan Setuju
         $this->call('sync:trans-keringanan-setuju',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-        // Sync Trans Keringanan Usulan
-        $this->call('sync:ref-jurusita',[
+        // Sync Trans Berita Acara Surat Paksa
+        $this->call('sync:trans-berita-acara-surat-paksa',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-        $this->info('Migrasi selesai!');
+        // Sync Trans Berita Acara Tanya Jawab
+        $this->call('sync:trans-berita-acara-tanya-jawab',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
+        $this->info('Migrasi transaksi selesai!');
     }
 }
