@@ -7,6 +7,7 @@ use App\Repositories\FocusPN\TBAPenyitaanRepository;
 use App\Repositories\ModulPengurusan\RefJurusitaRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransBeritaAcaraPenyitaanRepository;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
