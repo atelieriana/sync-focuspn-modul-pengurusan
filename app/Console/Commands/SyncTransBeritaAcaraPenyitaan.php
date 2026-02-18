@@ -65,6 +65,7 @@ class SyncTransBeritaAcaraPenyitaan extends Command
             ->mappingListTransBeritaAcaraPenyitaanFocusPN()
             ->doSync()
             ->getListTransBeritaAcaraPenyitaanModulPengurusan()
+            ->mappingListTransBeritaAcaraPenyitaanModulPengurusan()
             ->resyncIdTransBeritaAcaraPenyitaanModulPengurusan();
         $this->info('Mulai proses sinkronisasi transaksi berita acara penyitaan');
     }
@@ -121,11 +122,9 @@ class SyncTransBeritaAcaraPenyitaan extends Command
     {
         $this->remappingListTransBeritaAcaraPenyitaanFocusPN = array_map(function($transBeritaAcaraPenyitaan){
             $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraPenyitaan['NIP_JURUSITA'], $transBeritaAcaraPenyitaan['NAMA_JURUSITA']);
-            echo $transBeritaAcaraPenyitaan['NIP_JURUSITA'];
-            echo ".";
-            echo $transBeritaAcaraPenyitaan['NAMA_JURUSITA'];
             return [
                 'UUID' => Str::uuid()->toString(),
+                'ID_FOCUSPN' => $transBeritaAcaraPenyitaan['ID_FOCUSPN'],
                 'ID_TRANS_PIUTANG' => $transBeritaAcaraPenyitaan['ID_TRANS_PIUTANG'],
                 'ID_TRANS_TAHAP_BERITA_ACARA_PENYITAAN' => $transBeritaAcaraPenyitaan['ID_TAHAP_PENGURUSAN'],
                 'ID_TAHAP_SURAT_SITA' => $transBeritaAcaraPenyitaan['ID_TAHAP_SURAT_SITA'],
@@ -159,7 +158,6 @@ class SyncTransBeritaAcaraPenyitaan extends Command
         {
             if ($jurusitaData['NIP'] === $nipJurusita && $jurusitaData['NAMA_LENGKAP'] === $namaJurusita)
                 return $key;
-            return null;
         }
 
         return $this;
