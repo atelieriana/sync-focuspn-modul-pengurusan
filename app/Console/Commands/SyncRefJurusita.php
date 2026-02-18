@@ -76,7 +76,7 @@ class SyncRefJurusita extends Command
 
     private function getListJurusita()
     {
-        $this->listJurusitaFocusPN = $this->migrasiRefJurusitaRepository->getByIdSatuanKerjaKPKNL($this->kodeSatuanKerja);
+        $this->listJurusitaFocusPN = $this->migrasiRefJurusitaRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerja);
         return $this;
     }
 

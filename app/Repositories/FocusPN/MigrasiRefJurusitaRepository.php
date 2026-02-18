@@ -6,8 +6,8 @@ use App\Models\FocusPN\MigrasiRefJurusita;
 
 class MigrasiRefJurusitaRepository extends MigrasiRefJurusita
 {
-    public function getByIdSatuanKerjaKPKNL(int $kodeSatuanKerja)
+    public function getByIdSatuanKerjaKPKNL(int $idRefSatuanKerjaKPKNL)
     {
-        return self::where('KODE_SATUAN_KERJA', $kodeSatuanKerja)->get();
+        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idRefSatuanKerjaKPKNL)->get();
     }
 }
