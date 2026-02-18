@@ -28,7 +28,7 @@ class SyncTransPiutang extends Command
      */
     protected $description = 'Digunakan untuk melakukan sinkronisasi trans piutang';
 
-    const TOTAL_DATA_EACH_CHUNK = 1;
+    const TOTAL_DATA_EACH_CHUNK = 100;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPiutangRepository $migrasiTransPiutangRepository;
