@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\TransDebiturPerseorangan;
 use App\Repositories\FocusPN\MigrasiTransDebiturPerseoranganRepository;
 use App\Repositories\FocusPN\TGlobalRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
