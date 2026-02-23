@@ -8,5 +8,5 @@ class TDasarHukum extends Model
 {
     protected $connection = 'oracle_focuspn';
     protected $table = 'T_DASARHUKUM';
-    public $timestamp = false;
+    public $timestamps = false;
 }

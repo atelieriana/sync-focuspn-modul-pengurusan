@@ -124,6 +124,11 @@ class SyncDataTrans extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
+        // Sync Trans Dasar Terjadinya Piutang
+        $this->call('sync:trans-dasar-terjadinya-piutang',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
+        ]);
+
         $this->info('Migrasi transaksi selesai!');
     }
 }
