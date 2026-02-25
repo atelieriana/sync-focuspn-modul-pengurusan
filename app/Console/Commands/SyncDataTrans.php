@@ -143,6 +143,11 @@ class SyncDataTrans extends Command
         $this->call('sync:trans-nilai-pernyataan-bersama-pjpn',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
+
+        // Sync Trans Nilai Sebelum Penyerahan
+        $this->call('sync:trans-nilai-sebelum-penyerahan',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
         
         $this->info('Migrasi transaksi selesai!');
     }
