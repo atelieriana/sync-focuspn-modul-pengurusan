@@ -60,6 +60,31 @@ return [
             'report' => false,
         ],
 
+        's3_focuspn' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID_FOCUSPN'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY_FOCUSPN'),
+            'region' => env('AWS_DEFAULT_REGION_FOCUSPN'),
+            'bucket' => env('AWS_BUCKET_FOCUSPN'),
+            'url' => env('AWS_URL_FOCUSPN'),
+            'endpoint' => env('AWS_ENDPOINT_FOCUSPN'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT_FOCUSPN', false),
+            'throw' => true,
+            'report' => false,
+        ],
+
+        's3_modul_pengurusan' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID_MODUL_PENGURUSAN'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY_MODUL_PENGURUSAN'),
+            'region' => env('AWS_DEFAULT_REGION_MODUL_PENGURUSAN'),
+            'bucket' => env('AWS_BUCKET_MODUL_PENGURUSAN'),
+            'url' => env('AWS_URL_MODUL_PENGURUSAN'),
+            'endpoint' => env('AWS_ENDPOINT_MODUL_PENGURUSAN'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT_MODUL_PENGURUSAN', false),
+            'throw' => true,
+            'report' => false,
+        ],
     ],
 
     /*

@@ -163,6 +163,11 @@ class SyncDataTrans extends Command
         $this->call('sync:trans-permintaan-pemblokiran',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
+
+        // Sync Trans PPDTO
+        $this->call('sync:trans-ppdto',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
         
         $this->info('Migrasi transaksi selesai!');
     }
