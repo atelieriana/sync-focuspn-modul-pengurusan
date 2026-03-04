@@ -173,6 +173,11 @@ class SyncDataTrans extends Command
         $this->call('sync:trans-ppdto-nominal',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
+
+        // Sync Trans PPDTO
+        $this->call('sync:trans-ppnto',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
         
         $this->info('Migrasi transaksi selesai!');
     }
