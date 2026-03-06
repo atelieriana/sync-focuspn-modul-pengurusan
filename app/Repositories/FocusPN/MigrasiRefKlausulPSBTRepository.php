@@ -13,15 +13,7 @@ class MigrasiRefKlausulPSBTRepository extends MigrasiRefKlausulPSBDT
      */
     public function getByKodeSatuanKerja(string $kodeSatuanKerja)
     {
-        return self::select(
-            'ID_REF_SATUAN_KERJA_KPKNL',
-            'KLAUSUL_PSBDT',
-            'CREATED_BY',
-            'CREATED_AT',
-            'UPDATED_BY',
-            'UPDATED_AT'
-        )
-            ->where('KODE_SATUAN_KERJA', $kodeSatuanKerja)
+        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $kodeSatuanKerja)
             ->get();
     }
 }
