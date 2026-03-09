@@ -11,7 +11,7 @@ class MigrasiRefKlausulPSBTRepository extends MigrasiRefKlausulPSBDT
      * @param string $kodeSatuanKerja
      * @return mixed
      */
-    public function getByKodeSatuanKerja(string $kodeSatuanKerja)
+    public function getByIdSatuanKerjaKPKNL(string $kodeSatuanKerja)
     {
         return self::where('ID_REF_SATUAN_KERJA_KPKNL', $kodeSatuanKerja)
             ->get();

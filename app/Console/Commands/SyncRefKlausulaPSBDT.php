@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\RefKlausulPSBDT;
 use App\Repositories\FocusPN\MigrasiRefKlausulPSBTRepository;
 use App\Repositories\FocusPN\RKlausulaPSBDTRepository;
 use App\Repositories\ModulPengurusan\RefKlausulPSBDTRepository;
@@ -17,9 +16,9 @@ class SyncRefKlausulaPSBDT extends Command
 {
     const TOTAL_DATA_EACH_CHUNK = 50;
     private DB $database;
-    private MigrasiRefKlausulPSBTRepository $migrasiRefKlausulPSBTRepository;
-    private RefKlausulPSBDTRepository $refKlausulPSBDTRepository;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
+    private RefKlausulPSBDTRepository $refKlausulPSBDTRepository;
+    private MigrasiRefKlausulPSBTRepository $migrasiRefKlausulPSBDTRepository;
     private Collection $listKlausulPSBDTFocusPN;
     private Collection $listKlausulPSBDTModulPengurusan;
     private int $idSatuanKerja;
@@ -30,11 +29,10 @@ class SyncRefKlausulaPSBDT extends Command
     {
         parent::__construct();
         $this->database = new DB();
-        $this->migrasiRefKlausulPSBTRepository = new MigrasiRefKlausulPSBTRepository();
-        $this->refKlausulPSBDTRepository = new RefKlausulPSBDTRepository();
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
+        $this->refKlausulPSBDTRepository = new RefKlausulPSBDTRepository();
+        $this->migrasiRefKlausulPSBDTRepository = new MigrasiRefKlausulPSBTRepository();
     }
-
     /**
      * The name and signature of the console command.
      *
@@ -47,7 +45,7 @@ class SyncRefKlausulaPSBDT extends Command
      *
      * @var string
      */
-    protected $description = 'Digunakan untuk melakukan sinkronisasi klausula PSBDT berdasarkan kode satuan kerja';
+    protected $description = 'Digunakan melakukan sinkronisasi ref klausul psbdt tanpa kode KPKNL';
 
     /**
      * Execute the console command.
@@ -66,24 +64,20 @@ class SyncRefKlausulaPSBDT extends Command
         $this->info('Sinkronisasi klausul PSBDT selesai.');
     }
 
-    /**
-     * Digunakan untuk melakukan set kode satuan kerja yang akan dilakukan sinkronisasi
-     * @return $this
-     */
     private function setSatuanKerja()
     {
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $this->idSatuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja)->ID;
+        $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
+        if (!is_null($satuanKerja))
+            $this->idSatuanKerja = $satuanKerja->ID;
+        else
+            $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
     }
 
-    /**
-     * Diguynakan untuk melakukan pengambilan klausula PSBDT berdasarkan kode satuan kerja
-     * @return $this
-     */
     public function getListKlausulaPSBDTFocusPN()
     {
-        $this->listKlausulPSBDTFocusPN = $this->migrasiRefKlausulPSBTRepository->getByKodeSatuanKerja($this->idSatuanKerja);
+        $this->listKlausulPSBDTFocusPN = $this->migrasiRefKlausulPSBDTRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerja);
         return $this;
     }
 
