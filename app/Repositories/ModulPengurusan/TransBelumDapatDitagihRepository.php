@@ -23,6 +23,6 @@ class TransBelumDapatDitagihRepository extends TransBelumDapatDitagih
                 ->from('TRANS_PIUTANG')
                 ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
         })
-            ->forceDelete();
+            ->get();
     }
 }

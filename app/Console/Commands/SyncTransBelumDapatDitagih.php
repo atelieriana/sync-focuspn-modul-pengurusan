@@ -86,6 +86,7 @@ class SyncTransBelumDapatDitagih extends Command
         $this->remappingListTransBelumDapatDitagihFocusPN = array_map(function($transBelumDapatDitagih){
             return [
                 'UUID' => Str::uuid()->toString(),
+                'ID_FOCUSPN' => $transBelumDapatDitagih['ID_FOCUSPN'],
                 'ID_TRANS_PIUTANG' => $transBelumDapatDitagih['ID_TRANS_PIUTANG'],
                 'ID_TRANS_TAHAP_PENGURUSAN' => $transBelumDapatDitagih['ID_TRANS_TAHAP_PENGURUSAN'],
                 'ID_REF_JENIS_NILAI_BARANG_JAMINAN' => $transBelumDapatDitagih['ID_REF_JENIS_NILAI_BARANG_JAMINAN'],
