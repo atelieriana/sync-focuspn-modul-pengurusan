@@ -184,6 +184,11 @@ class SyncDataTrans extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
 
+        // Sync Trans Rekonsiliasi
+        $this->call('sync:trans-rekonsiliasi',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
+
         $this->info('Migrasi transaksi selesai!');
     }
 }
