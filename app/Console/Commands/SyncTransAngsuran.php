@@ -136,7 +136,7 @@ class SyncTransAngsuran extends Command
 
     private function saveNewData()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi T_ANGSURAN ke TRANS_ANGSURAN: ');
 
         $this->database::beginTransaction();
         try
@@ -181,7 +181,7 @@ class SyncTransAngsuran extends Command
 
     private function doResyncListTransAngsuranModulPengurusan()
     {
-        $this->info('Tahapan sinkonrisasi T_GLOBAL ke TRANS_PIUTANG: ');
+        $this->info('Tahapan sinkonrisasi TRANS_ANGSURAN ke T_ANGSURAN: ');
 
         $this->database::beginTransaction();
         try
