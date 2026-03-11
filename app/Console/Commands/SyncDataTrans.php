@@ -199,6 +199,10 @@ class SyncDataTrans extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
 
+        // Sync Trans Dihapus Mutlak
+        $this->call('sync:trans-dihapus-mutlak',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
 
         $this->info('Migrasi transaksi selesai!');
     }
