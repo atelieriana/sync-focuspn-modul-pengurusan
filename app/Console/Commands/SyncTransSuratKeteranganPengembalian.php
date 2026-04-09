@@ -39,7 +39,7 @@ class SyncTransSuratKeteranganPengembalian extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:trans-surat-keterangan-pengembalian  {kode-satuan-kerja : kode satuan kerja 6 digit}';
+    protected $signature = 'sync:trans-surat-keterangan-pengembalian {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
     /**
      * The console command description.
