@@ -39,7 +39,7 @@ class SyncTransSuratPaksa extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:surat-paksa {kode-satuan-kerja : kode satuan kerja 6 digit}';
+    protected $signature = 'sync:trans-surat-paksa {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
     /**
      * The console command description.
@@ -153,7 +153,7 @@ class SyncTransSuratPaksa extends Command
     {
         $this->remappingListTransSuratPaksaModulPengurusan = array_map(function($transSuratPaksa){
             return [
-                'ID_FOCUSPN' => $transSuratPaksa['ID'],
+                'ID' => $transSuratPaksa['ID_FOCUSPN'],
                 'ID_MODUL_PENGURUSAN' => $transSuratPaksa['ID']
             ];
         }, $this->listTransSuratPaksaModulPengurusan->toArray());
