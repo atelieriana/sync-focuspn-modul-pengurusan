@@ -40,7 +40,7 @@ class SyncTransPPNTO extends Command
     /**
      * The name and signature of the console command.
      *
-     * @var string
+     * @var string 
      */
     protected $signature = 'sync:trans-ppnto {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
