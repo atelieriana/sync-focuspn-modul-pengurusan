@@ -95,9 +95,9 @@ class SyncTransBarangJaminan extends Command
                 'NILAI_BARANG_JAMINAN' => $transBarangJaminan['NILAI_BARANG_JAMINAN'],
                 'NILAI_APPRAISAL' => $transBarangJaminan['NILAI_APPRAISAL'],
                 'KETERANGAN' => $transBarangJaminan['KETERANGAN'],
-                'CREATED_BY' => $transBarangJaminan['CREATED_BY'],
+                'CREATED_BY' => $transBarangJaminan['CREATED_BY'] ?? '-',
                 'CREATED_AT' => $transBarangJaminan['CREATED_AT'],
-                'UPDATED_BY' => $transBarangJaminan['UPDATED_BY'],
+                'UPDATED_BY' => $transBarangJaminan['UPDATED_BY'] ?? '-',
                 'UPDATED_AT' => $transBarangJaminan['UPDATED_AT']
             ];
         }, $this->listTransBarangJaminanFocusPN->toArray());

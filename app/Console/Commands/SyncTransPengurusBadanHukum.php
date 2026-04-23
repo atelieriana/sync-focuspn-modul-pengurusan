@@ -96,7 +96,7 @@ class SyncTransPengurusBadanHukum extends Command
                 'UUID' => Str::uuid()->toString(),
                 'ID_FOCUSPN' => $transPengurusBadanHukumFocusPN['ID_FOCUSPN'],
                 'ID_TRANS_PIUTANG' => $transPengurusBadanHukumFocusPN['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'NAMA' => $transPengurusBadanHukumFocusPN['NAMA'],
+                'NAMA' => trim($transPengurusBadanHukumFocusPN['NAMA']),
                 'JABATAN' => $transPengurusBadanHukumFocusPN['JABATAN'],
                 'KTP' => $transPengurusBadanHukumFocusPN['KTP'],
                 'NPWP' => $transPengurusBadanHukumFocusPN['NPWP'],

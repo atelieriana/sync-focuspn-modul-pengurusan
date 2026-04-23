@@ -99,7 +99,7 @@ class SyncTransDebitur extends Command
                 'UUID' => Str::uuid()->toString(),
                 'ID_TRANS_PIUTANG' => $transDebitur['ID_MODUL_PENGURUSAN'],
                 'ID_FOCUSPN' => $transDebitur['ID_FOCUSPN'],
-                'NAMA' => $transDebitur['NAMA'],
+                'NAMA' => trim($transDebitur['NAMA']),
                 'KELURAHAN' => $transDebitur['KELURAHAN'] ?? null,
                 'RT_RW' => $transDebitur['RT_RW'] ?? null,
                 'ALAMAT' => $transDebitur['ALAMAT'],

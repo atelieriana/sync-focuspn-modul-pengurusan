@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class SyncTransBeritaAcaraSuratPaksa extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 100;
+    const TOTAL_DATA_EACH_CHUNK = 50;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransBeritaAcaraSuratPaksaRepository $migrasiTransBeritaAcaraSuratPaksaRepository;
@@ -116,6 +116,7 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
             $result[$jurusitaData['ID']] = [
                 'NIP' => $jurusitaData['NIP'],
                 'NAMA_LENGKAP' => $jurusitaData['NAMA_LENGKAP'],
+                'NOMOR_SK_JURUSITA' => $jurusitaData['NOMOR_SK_PENGANGKATAN']
             ];
             return $result;
         }, []);
@@ -130,7 +131,9 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
     private function mappingListTransBeritaAcaraSuratPaksaFocusPN()
     {
         $this->remappingTransBeritaAcaraSuratPaksaFocusPN = array_map(function($transBeritaAcaraSuratPaksa){
-            $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraSuratPaksa['NIP_JURUSITA'], $transBeritaAcaraSuratPaksa['NAMA_JURUSITA']);
+            $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraSuratPaksa['NIP_JURUSITA'], 
+                                                            $transBeritaAcaraSuratPaksa['NAMA_JURUSITA'],
+                                                            $transBeritaAcaraSuratPaksa['NOMOR_SK_JURUSITA']);
             return [
                 'UUID' => Str::uuid()->toString(),
                 'ID_TRANS_PIUTANG' => $transBeritaAcaraSuratPaksa['ID_TRANS_PIUTANG'],
@@ -161,11 +164,13 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
      * Digunakan untuk mencari referensi jurusita berdasarkan NIP dan nama lengkap
      * @return $this|int
      */
-    private function searchReferensiJurusita(string $nipJurusita, string $namaJurusita)
+    private function searchReferensiJurusita(string $nipJurusita, string $namaJurusita, string $nomorSKJurusita)
     {
         foreach ($this->remappingRefJurusita as $key => $jurusitaData) 
         {
-            if ($jurusitaData['NIP'] === $nipJurusita && $jurusitaData['NAMA_LENGKAP'] === $namaJurusita) {
+            if ($jurusitaData['NIP'] == $nipJurusita 
+                && $jurusitaData['NAMA_LENGKAP'] == $namaJurusita
+                && trim($jurusitaData['NOMOR_SK_JURUSITA']) == trim($nomorSKJurusita)) {
                 return $key;
             }
         }

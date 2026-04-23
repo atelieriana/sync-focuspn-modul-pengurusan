@@ -104,7 +104,7 @@ class SyncTransPenjaminHutang extends Command
                 'ID_FOCUSPN' => $transPenjaminHutang['ID_FOCUSPN'],
                 'ID_TRANS_PIUTANG' => $transPenjaminHutang['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
                 'ID_REF_JENIS_PENJAMIN_HUTANG' => $transPenjaminHutang['ID_REF_JENIS_PENJAMIN_HUTANG'],
-                'NAMA' => $transPenjaminHutang['NAMA'],
+                'NAMA' => trim($transPenjaminHutang['NAMA']),
                 'TELEPON' => $transPenjaminHutang['TELEPON'],
                 'KTP' => $transPenjaminHutang['KTP'],
                 'NPWP' => $transPenjaminHutang['NPWP'],

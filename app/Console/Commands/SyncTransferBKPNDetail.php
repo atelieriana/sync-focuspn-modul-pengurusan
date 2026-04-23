@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use App\Repositories\FocusPN\MigrasiTransferBKPNDetailRepository;
 use App\Repositories\FocusPN\TTransferArsipRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
