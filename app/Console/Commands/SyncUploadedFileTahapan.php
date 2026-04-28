@@ -186,17 +186,24 @@ class SyncUploadedFileTahapan extends Command
                 if ($value === 'spps_setelah') $bucket = 'spps-setelah';
             }
 
-            $newLocation = $bucket.'/'.date('Y/m/d',strtotime($createdDate)).'/';
+            $newLocation = 'tahapan-pengurusan/'.$bucket.'/'.date('Y/m/d',strtotime($createdDate)).'/';
             
             // File
             if ($key === 'Key') 
             {
                 $this->info("Clone ".$value." in progress...");
                 $file = explode('/',$value);
-                $fileContent = $this->storage::disk('s3_focuspn')->get($value);
-                $newFileLocation = $newLocation.$file[1];
-                $this->storage::disk('s3_modul_pengurusan')->put($newFileLocation, $fileContent);
-                $this->info("Clone ".$value." Done!");
+                if($this->storage::disk('s3_focuspn')->exists($value))
+                {
+                    $fileContent = $this->storage::disk('s3_focuspn')->get($value);
+                    $newFileLocation = $newLocation.$file[1];
+                    $this->storage::disk('s3_modul_pengurusan')->put($newFileLocation, $fileContent);
+                    $this->info("Clone ".$value." Done!");
+                }
+                else
+                {
+                    return null;   
+                }
             }
         }
         return $newFileLocation;
