@@ -92,9 +92,9 @@ class SyncUploadedFileTahapan extends Command
                         'ID_TRANS_TAHAP_PENGURUSAN' => $uploadedFile['ID_TRANS_TAHAP_PENGURUSAN'],
                         'ID_FOCUSPN' => $uploadedFile['ID_FOCUSPN'],
                         'PATH_TO_FILE' => $this->cloneFile($file, $uploadedFile['CREATED_AT']),
-                        'CREATED_BY' => $uploadedFile['CREATED_BY'],
+                        'CREATED_BY' => $this->getUploadedNIP($file),
                         'CREATED_AT' => $uploadedFile['CREATED_AT'],
-                        'UPDATED_BY' => $uploadedFile['UPDATED_BY'],
+                        'UPDATED_BY' => $this->getUploadedNIP($file),
                         'UPDATED_AT' => $uploadedFile['UPDATED_AT']
                     ];
                 }   
@@ -206,7 +206,13 @@ class SyncUploadedFileTahapan extends Command
                 }
             }
         }
+
         return $newFileLocation;
+    }
+
+    private function getUploadedNIP(object $pathToFile)
+    {
+        return $pathToFile->Nip;
     }
 
     private function saveNewData()
