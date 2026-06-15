@@ -122,7 +122,7 @@ class SyncUploadedFileTahapan extends Command
             {
                 if ($value === 'sp3n') $bucket = 'sp3n';
                 if ($value === 'rhpk') $bucket = 'rhpk';
-                if ($value === 'sttpn') $bucket = 'sttpn';
+                if ($value === 'stppn') $bucket = 'stppn';
                 if ($value === 'nd_register') $bucket = 'nd-register';
                 if ($value === 'hvppn') $bucket = 'hvppn';
                 if ($value === 'panggilan') $bucket = 'panggilan';
