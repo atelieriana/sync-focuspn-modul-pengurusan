@@ -73,7 +73,7 @@ class SyncDataTrans extends Command
         $this->call('sync:trans-penjamin-hutang',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
-        
+
         // Sync Trans Tahap Pengurusan
         $this->call('sync:trans-tahap-pengurusan',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
@@ -154,6 +154,11 @@ class SyncDataTrans extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
 
+        // Sync Trans Belum Dapat Ditagih
+        $this->call('sync:trans-belum-dapat-ditagih',[
+            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        ]);
+
         // Sync Trans Uraian Pernyataan Bersama PJPN
         $this->call('sync:trans-uraian-pernyataan-bersama-pjpn',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
@@ -178,7 +183,7 @@ class SyncDataTrans extends Command
         $this->call('sync:trans-ppnto',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
-        
+
         // Sync Trans PPNTO NOminal
         $this->call('sync:trans-ppnto-nominal',[
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
