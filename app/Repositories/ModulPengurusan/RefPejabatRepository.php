@@ -14,6 +14,6 @@ class RefPejabatRepository extends RefPejabat
      */
     public function deleteByIdSatuanKerja($idSatuanKerja)
     {
-        self::where('ID_REF_SATUAN_KERJA', $idSatuanKerja)->forceDelete();
+        self::where('id_ref_satuan_kerja', $idSatuanKerja)->forceDelete();
     }
 }

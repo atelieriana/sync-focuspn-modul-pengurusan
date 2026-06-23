@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RefPejabat extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'REF_PEJABAT';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'ref_pejabat';
     public $timestamps = false;
 }

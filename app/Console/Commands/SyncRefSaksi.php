@@ -78,15 +78,15 @@ class SyncRefSaksi extends Command
             foreach ($this->listSaksi as $saksi)
             {
                 $refSaksi = new RefSaksiRepository();
-                $refSaksi->UUID = Str::uuid();
-                $refSaksi->NAMA_LENGKAP = $saksi->NAMA_LENGKAP;
-                $refSaksi->NIP = $saksi->NIP;
-                $refSaksi->PANGKAT = $saksi->PANGKAT;
-                $refSaksi->GOLONGAN = $saksi->GOLONGAN;
-                $refSaksi->JABATAN = $saksi->JABATAN;
-                $refSaksi->STATUS = $saksi->STATUS;
-                $refSaksi->CREATED_BY = 'Migrasi FocusPN';
-                $refSaksi->UPDATED_BY = 'Migrasi FocusPN';
+                $refSaksi->uuid = Str::uuid();
+                $refSaksi->nama_lengkap = $saksi->NAMA_LENGKAP;
+                $refSaksi->nip = $saksi->NIP;
+                $refSaksi->pangkat = $saksi->PANGKAT;
+                $refSaksi->golongan = $saksi->GOLONGAN;
+                $refSaksi->jabatan = $saksi->JABATAN;
+                $refSaksi->status = $saksi->STATUS == 1;
+                $refSaksi->created_by = 'Migrasi FocusPN';
+                $refSaksi->updated_by = 'Migrasi FocusPN';
                 $refSaksi->save();
             }
             $this->database::commit();

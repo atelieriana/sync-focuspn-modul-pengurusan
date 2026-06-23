@@ -78,13 +78,13 @@ class SycnRefRohaniwan extends Command
             foreach ($this->listRohaniwan as $rohaniwan)
             {
                 $refRohaniwan = new RefRohaniwanRepository();
-                $refRohaniwan->UUID = Str::uuid();
-                $refRohaniwan->NIP = $rohaniwan->NIP;
-                $refRohaniwan->NAMA_LENGKAP = $rohaniwan->NAMA_LENGKAP;
-                $refRohaniwan->JABATAN = $rohaniwan->JABATAN;
-                $refRohaniwan->STATUS = $rohaniwan->STATUS;
-                $refRohaniwan->CREATED_BY = 'Migrasi FocusPN';
-                $refRohaniwan->UPDATED_BY = 'Migrasi FocusPN';
+                $refRohaniwan->uuid = Str::uuid();
+                $refRohaniwan->nip = $rohaniwan->NIP;
+                $refRohaniwan->nama_lengkap = $rohaniwan->NAMA_LENGKAP;
+                $refRohaniwan->jabatan = $rohaniwan->JABATAN;
+                $refRohaniwan->status = $rohaniwan->STATUS == 1;
+                $refRohaniwan->created_by = 'Migrasi FocusPN';
+                $refRohaniwan->updated_by = 'Migrasi FocusPN';
                 $refRohaniwan->save();
             }
             $this->database::commit();

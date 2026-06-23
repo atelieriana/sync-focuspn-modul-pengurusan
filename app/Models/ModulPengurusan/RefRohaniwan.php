@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RefRohaniwan extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'REF_ROHANIWAN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'ref_rohaniwan';
 }

@@ -65,18 +65,18 @@ class SyncRefKurs extends Command
     {
         $this->remappingListKursFocusPN = array_map(function($refKurs){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_MATA_UANG' => $refKurs['ID_MATA_UANG'],
-                'NILAI_KURS' => $refKurs['NILAI_KURS'],
-                'REVIEWED' => $refKurs['REVIEWED'],
-                'SUMBER' => $refKurs['SUMBER'],
-                'TANGGAL_KURS' => $refKurs['TANGGAL_KURS'],
-                'REVIEWED_BY' => $refKurs['REVIEWED_BY'],
-                'REVIEWED_AT' => $refKurs['REVIEWED_AT'],
-                'CREATED_BY' => $refKurs['CREATED_BY'],
-                'CREATED_AT' => $refKurs['CREATED_AT'],
-                'UPDATED_BY' => $refKurs['UPDATED_BY'],
-                'UPDATED_AT' => $refKurs['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_mata_uang' => $refKurs['ID_MATA_UANG'],
+                'nilai_kurs' => $refKurs['NILAI_KURS'],
+                'reviewed' => $refKurs['REVIEWED'] == 1,
+                'sumber' => $refKurs['SUMBER'],
+                'tanggal_kurs' => $refKurs['TANGGAL_KURS'],
+                'reviewed_by' => $refKurs['REVIEWED_BY'],
+                'reviewed_at' => $refKurs['REVIEWED_AT'],
+                'created_by' => $refKurs['CREATED_BY'],
+                'created_at' => $refKurs['CREATED_AT'],
+                'updated_by' => $refKurs['UPDATED_BY'],
+                'updated_at' => $refKurs['UPDATED_AT'],
             ];
         }, $this->listKurs->toArray());
 

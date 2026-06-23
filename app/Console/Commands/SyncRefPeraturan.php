@@ -79,13 +79,13 @@ class SyncRefPeraturan extends Command
             foreach ($this->listPeraturan as $peraturan)
             {
                 $refPeraturan = new RefPeraturanRepository();
-                $refPeraturan->UUID = Str::uuid();
-                $refPeraturan->NOMOR_PERATURAN = $peraturan->NOMOR_PERATURAN;
-                $refPeraturan->TANGGAL_PERATURAN = $peraturan->TANGGAL_PERATURAN;
-                $refPeraturan->PERIHAL = $peraturan->PERIHAL ?? '-';
-                $refPeraturan->STATUS = $peraturan->STATUS;
-                $refPeraturan->CREATED_BY = 'Migrasi FocusPN';
-                $refPeraturan->UPDATED_BY = 'Migrasi FocusPN';
+                $refPeraturan->uuid = Str::uuid();
+                $refPeraturan->nomor_peraturan = $peraturan->NOMOR_PERATURAN;
+                $refPeraturan->tanggal_peraturan = $peraturan->TANGGAL_PERATURAN;
+                $refPeraturan->perihal = $peraturan->PERIHAL ?? '-';
+                $refPeraturan->status = $peraturan->STATUS;
+                $refPeraturan->created_by = 'Migrasi FocusPN';
+                $refPeraturan->updated_by = 'Migrasi FocusPN';
                 $refPeraturan->save();
             }
 

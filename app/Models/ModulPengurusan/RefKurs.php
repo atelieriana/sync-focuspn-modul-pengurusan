@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RefKurs extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'REF_KURS';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'ref_kurs';
     public $timestamps = false;
 }
