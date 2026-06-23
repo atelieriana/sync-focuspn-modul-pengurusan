@@ -8,13 +8,13 @@ class TransPPDTORepository extends TransPPDTO
 {
     public function deleteByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)
             ->forceDelete();
     }
 
     public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)
             ->get();
     }
 }

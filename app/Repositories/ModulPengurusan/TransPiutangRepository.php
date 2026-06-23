@@ -12,7 +12,7 @@ class TransPiutangRepository extends TransPiutang
      */
     public function deleteByIdSatuanKerja(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)
             ->forceDelete();
     }
 
@@ -23,6 +23,6 @@ class TransPiutangRepository extends TransPiutang
      */
     public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)->get();
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)->get();
     }
 }

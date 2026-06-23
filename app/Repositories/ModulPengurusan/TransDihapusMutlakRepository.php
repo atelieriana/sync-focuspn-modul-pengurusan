@@ -8,13 +8,13 @@ class TransDihapusMutlakRepository extends TransDihapusMutlak
 {
     public function deleteByIdSatuanKerja(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)
             ->forceDelete();
     }
 
     public function getByIdSatuanKerja(int $idSatuanKerjaKPKNL)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL)
             ->get();
     }
 }

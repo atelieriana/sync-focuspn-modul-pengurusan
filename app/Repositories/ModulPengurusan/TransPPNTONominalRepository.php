@@ -8,20 +8,20 @@ class TransPPNTONominalRepository extends TransPPNTONominal
 {
     public function deleteByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        return self::whereIn('ID_TRANS_PPNTO', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ID')
-                ->from('TRANS_PPNTO')
-                ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
+        return self::whereIn('id_trans_ppnto', function($subQuery) use ($idSatuanKerjaKPKNL){
+            $subQuery->select('id')
+                ->from('trans_ppnto')
+                ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
         })
             ->forceDelete();
     }
 
     public function getyIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
-        return self::whereIn('ID_TRANS_PPNTO', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ID')
-                ->from('TRANS_PPNTO')
-                ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
+        return self::whereIn('id_trans_ppnto', function($subQuery) use ($idSatuanKerjaKPKNL){
+            $subQuery->select('id')
+                ->from('trans_ppnto')
+                ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
         })
             ->get();
     }

@@ -8,13 +8,13 @@ class TransCekalRepository extends TransCekal
 {
     public function deleteByIdSatuanKerja(int $idSatuanKerjaKPKNL)
     {
-        return self::whereIn('ID_TRANS_DEBITUR', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ID')
-                ->from('TRANS_DEBITUR')
-                ->whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL){
-                    $subQuery->select('ID')
-                    ->from('TRANS_PIUTANG')
-                    ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
+        return self::whereIn('id_trans_debitur', function($subQuery) use ($idSatuanKerjaKPKNL){
+            $subQuery->select('id')
+                ->from('trans_debitur')
+                ->whereIn('id_trans_piutang', function($subQuery) use ($idSatuanKerjaKPKNL){
+                    $subQuery->select('id')
+                    ->from('trans_piutang')
+                    ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
             });
         })
             ->forceDelete();
@@ -22,14 +22,14 @@ class TransCekalRepository extends TransCekal
 
     public function getByIdSatuanKerja(int $idSatuanKerjaKPKNL)
     {
-        return self::whereIn('ID_TRANS_DEBITUR', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ID')
-                ->from('TRANS_DEBITUR')
-                ->whereIn('ID_TRANS_PIUTANG', function($subQuery) use ($idSatuanKerjaKPKNL){
-                    $subQuery->select('ID')
-                    ->from('TRANS_PIUTANG')
-                    ->where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerjaKPKNL);
-            });
+        return self::whereIn('id_trans_debitur', function($subQuery) use ($idSatuanKerjaKPKNL){
+            $subQuery->select('id')
+                ->from('trans_debitur')
+                ->whereIn('id_trans_piutang', function($subQuery) use ($idSatuanKerjaKPKNL){
+                    $subQuery->select('id')
+                        ->from('trans_piutang')
+                        ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
+                });
         })
             ->get();
     }
