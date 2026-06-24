@@ -65,7 +65,7 @@ class SyncRefPejabat extends Command
     private function setSatuanKerja()
     {
         $this->kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $this->idSatuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->ID;
+        $this->idSatuanKerja = (int) $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->id;
         return $this;
     }
 

@@ -73,7 +73,7 @@ class SyncTransPiutang extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -110,7 +110,7 @@ class SyncTransPiutang extends Command
                 'nomor_penyerahan' => $transPiutang['NOMOR_PENYERAHAN'] ?? null,
                 'tanggal_penyerahan' => $transPiutang['TANGGAL_PENYERAHAN'],
                 'kode_piutang' => null,
-                'nomro_piutang' => null,
+                'nomor_piutang' => null,
                 'nomor_register_piutang' => $transPiutang['NOMOR_REGISTER_PIUTANG'],
                 'bulan_register_piutang' => $transPiutang['BULAN_REGISTER_PIUTANG'],
                 'tahun_register_piutang' => $transPiutang['TAHUN_REGISTER_PIUTANG'],
