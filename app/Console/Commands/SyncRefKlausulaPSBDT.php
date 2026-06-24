@@ -156,8 +156,8 @@ class SyncRefKlausulaPSBDT extends Command
     {
         $this->remappingListKlausulPSBDTModulPengurusan = array_map(function($refKlausulPSBDT){
             return [
-                'ID' => $refKlausulPSBDT['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $refKlausulPSBDT['ID']
+                'ID' => $refKlausulPSBDT['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $refKlausulPSBDT['id']
             ];
         }, $this->listKlausulPSBDTModulPengurusan->toArray());
         return $this;
