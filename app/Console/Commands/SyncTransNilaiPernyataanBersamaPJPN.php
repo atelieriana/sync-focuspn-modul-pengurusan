@@ -89,20 +89,20 @@ class SyncTransNilaiPernyataanBersamaPJPN extends Command
     {
         $this->remappingListTransNilaiPernyataanBersamaPJPNFocusPN = array_map(function($transNilaiPernyataanBersama){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transNilaiPernyataanBersama['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transNilaiPernyataanBersama['ID_TRANS_PIUTANG'],
-                'ID_REF_KETERANGAN_PERNYATAAN_BERSAMA_PJPN' => $transNilaiPernyataanBersama['ID_REF_KETERANGAN_PERNYATAAN_BERSAMA_PJPN'],
-                'ID_REF_MATA_UANG' => $transNilaiPernyataanBersama['ID_REF_MATA_UANG'],
-                'POKOK' => $transNilaiPernyataanBersama['POKOK'],
-                'BUNGA' => $transNilaiPernyataanBersama['BUNGA'],
-                'DENDA' => $transNilaiPernyataanBersama['DENDA'],
-                'LAINNYA' => $transNilaiPernyataanBersama['LAINNYA'],
-                'BIAD' => $transNilaiPernyataanBersama['BIAD'],
-                'CREATED_BY' => $transNilaiPernyataanBersama['CREATED_BY'],
-                'CREATED_AT' => $transNilaiPernyataanBersama['CREATED_AT'],
-                'UPDATED_BY' => $transNilaiPernyataanBersama['UPDATED_BY'],
-                'UPDATED_AT' => $transNilaiPernyataanBersama['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transNilaiPernyataanBersama['ID_FOCUSPN'],
+                'id_trans_piutang' => $transNilaiPernyataanBersama['ID_TRANS_PIUTANG'],
+                'id_ref_keterangan_pernyataan_bersama_pjpn' => $transNilaiPernyataanBersama['ID_REF_KETERANGAN_PERNYATAAN_BERSAMA_PJPN'],
+                'id_ref_mata_uang' => $transNilaiPernyataanBersama['ID_REF_MATA_UANG'],
+                'pokok' => $transNilaiPernyataanBersama['POKOK'],
+                'bunga' => $transNilaiPernyataanBersama['BUNGA'],
+                'denda' => $transNilaiPernyataanBersama['DENDA'],
+                'lainnya' => $transNilaiPernyataanBersama['LAINNYA'],
+                'biad' => $transNilaiPernyataanBersama['BIAD'],
+                'created_by' => $transNilaiPernyataanBersama['CREATED_BY'],
+                'created_at' => $transNilaiPernyataanBersama['CREATED_AT'],
+                'updated_by' => $transNilaiPernyataanBersama['UPDATED_BY'],
+                'updated_at' => $transNilaiPernyataanBersama['UPDATED_AT']
             ];
         }, $this->listTransNilaiPernyataanBersamaPJPNFocusPN->toArray());
         return $this;
@@ -151,15 +151,15 @@ class SyncTransNilaiPernyataanBersamaPJPN extends Command
     private function getListTransNilaiPernyataanBersamaPJPNModulPengurusan()
     {
         $this->listTransNilaiPernyataanBersamaPJPNModulPengurusan = $this->transNilaiPernyataanBersamaPJPNRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerja);
-        return $this; 
+        return $this;
     }
 
     private function mappingListTransNilaiPernyataanBersamaPJPNModulPengurusan()
     {
         $this->remappingListTransNilaiPernyataanBersamaPJPNModulPengurusan = array_map(function($transNilaiPernyataanBersama){
             return [
-                'ID' => $transNilaiPernyataanBersama['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transNilaiPernyataanBersama['ID']
+                'ID' => $transNilaiPernyataanBersama['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transNilaiPernyataanBersama['id']
             ];
         }, $this->listTransNilaiPernyataanBersamaPJPNModulPengurusan->toArray());
 

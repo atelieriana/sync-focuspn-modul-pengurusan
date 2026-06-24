@@ -109,9 +109,9 @@ class SyncTransBeritaAcaraPenyitaan extends Command
     private function mappingListJurusita()
     {
         $this->remappingListJurusita = array_reduce($this->listJurusita->toArray(), function($result, $jurusitaData){
-            $result[$jurusitaData['ID']] = [
-                'NIP' => $jurusitaData['NIP'],
-                'NAMA_LENGKAP' => $jurusitaData['NAMA_LENGKAP'],
+            $result[$jurusitaData['id']] = [
+                'nip' => $jurusitaData['nip'],
+                'nama_lengkap' => $jurusitaData['nama_lengkap'],
             ];
             return $result;
         }, []);
@@ -124,25 +124,25 @@ class SyncTransBeritaAcaraPenyitaan extends Command
         $this->remappingListTransBeritaAcaraPenyitaanFocusPN = array_map(function($transBeritaAcaraPenyitaan){
             $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraPenyitaan['NIP_JURUSITA'], $transBeritaAcaraPenyitaan['NAMA_JURUSITA']);
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transBeritaAcaraPenyitaan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transBeritaAcaraPenyitaan['ID_TRANS_PIUTANG'],
-                'ID_TRANS_TAHAP_BERITA_ACARA_PENYITAAN' => $transBeritaAcaraPenyitaan['ID_TAHAP_PENGURUSAN'],
-                'ID_TAHAP_SURAT_SITA' => $transBeritaAcaraPenyitaan['ID_TAHAP_SURAT_SITA'],
-                'ID_REF_JURUSITA' => $idRefJurusita,
-                'NOMOR_SK_JURUSITA' => $transBeritaAcaraPenyitaan['NOMOR_SK_JURUSITA'],
-                'NAMA_SAKSI_1' => $transBeritaAcaraPenyitaan['NAMA_SAKSI_1'],
-                'USIA_SAKSI_1' => $transBeritaAcaraPenyitaan['UMUR_SAKSI_1'],
-                'PEKERJAAN_SAKSI_1' => $transBeritaAcaraPenyitaan['PEKERJAAN_SAKSI_1'],
-                'ALAMAT_SAKSI_1' => $transBeritaAcaraPenyitaan['ALAMAT_SAKSI_1'],
-                'NAMA_SAKSI_2' => $transBeritaAcaraPenyitaan['NAMA_SAKSI_2'],
-                'USIA_SAKSI_2' => $transBeritaAcaraPenyitaan['UMUR_SAKSI_2'],
-                'PEKERJAAN_SAKSI_2' => $transBeritaAcaraPenyitaan['PEKERJAAN_SAKSI_2'],
-                'ALAMAT_SAKSI_2' => $transBeritaAcaraPenyitaan['ALAMAT_SAKSI_2'],
-                'CREATED_BY' => $transBeritaAcaraPenyitaan['CREATED_BY'],
-                'CREATED_AT' => $transBeritaAcaraPenyitaan['CREATED_AT'],
-                'UPDATED_BY' => $transBeritaAcaraPenyitaan['UPDATED_BY'],
-                'UPDATED_AT' => $transBeritaAcaraPenyitaan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transBeritaAcaraPenyitaan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transBeritaAcaraPenyitaan['ID_TRANS_PIUTANG'],
+                'id_trans_tahap_berita_acara_penyitaan' => $transBeritaAcaraPenyitaan['ID_TAHAP_PENGURUSAN'],
+                'id_tahap_surat_sita' => $transBeritaAcaraPenyitaan['ID_TAHAP_SURAT_SITA'],
+                'id_ref_jurusita' => $idRefJurusita,
+                'nomor_sk_jurusita' => $transBeritaAcaraPenyitaan['NOMOR_SK_JURUSITA'],
+                'nama_saksi_1' => $transBeritaAcaraPenyitaan['NAMA_SAKSI_1'],
+                'usia_saksi_1' => $transBeritaAcaraPenyitaan['UMUR_SAKSI_1'],
+                'pekerjaan_saksi_1' => $transBeritaAcaraPenyitaan['PEKERJAAN_SAKSI_1'],
+                'alamat_saksi_1' => $transBeritaAcaraPenyitaan['ALAMAT_SAKSI_1'],
+                'nama_saksi_2' => $transBeritaAcaraPenyitaan['NAMA_SAKSI_2'],
+                'usia_saksi_2' => $transBeritaAcaraPenyitaan['UMUR_SAKSI_2'],
+                'pekerjaan_saksi_2' => $transBeritaAcaraPenyitaan['PEKERJAAN_SAKSI_2'],
+                'alamat_saksi_2' => $transBeritaAcaraPenyitaan['ALAMAT_SAKSI_2'],
+                'created_by' => $transBeritaAcaraPenyitaan['CREATED_BY'],
+                'created_at' => $transBeritaAcaraPenyitaan['CREATED_AT'],
+                'updated_by' => $transBeritaAcaraPenyitaan['UPDATED_BY'],
+                'updated_at' => $transBeritaAcaraPenyitaan['UPDATED_AT']
             ];
         }, $this->listTransBeritaAcaraPenyitaanFocusPN->toArray());
 
@@ -155,9 +155,9 @@ class SyncTransBeritaAcaraPenyitaan extends Command
      */
     private function searchReferensiJurusita(string $nipJurusita, string $namaJurusita)
     {
-        foreach ($this->remappingListJurusita as $key => $jurusitaData) 
+        foreach ($this->remappingListJurusita as $key => $jurusitaData)
         {
-            if ($jurusitaData['NIP'] === $nipJurusita && $jurusitaData['NAMA_LENGKAP'] === $namaJurusita)
+            if ($jurusitaData['nip'] === $nipJurusita && $jurusitaData['nama_lengkap'] === $namaJurusita)
                 return $key;
         }
 
@@ -168,7 +168,7 @@ class SyncTransBeritaAcaraPenyitaan extends Command
     {
         $this->deleteOldData()
             ->saveNewData();
-        
+
         return $this;
     }
 
@@ -216,8 +216,8 @@ class SyncTransBeritaAcaraPenyitaan extends Command
     {
         $this->remappingListTransBeritaAcaraPenyitaanModulPengurusan = array_map(function($transBeritaAcaraPenyitaan){
             return [
-                'ID' => $transBeritaAcaraPenyitaan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraPenyitaan['ID']
+                'ID' => $transBeritaAcaraPenyitaan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraPenyitaan['id']
             ];
         }, $this->listTransBeritaAcaraPenyitaanModulPengurusan->toArray());
 

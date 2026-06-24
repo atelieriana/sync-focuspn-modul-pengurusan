@@ -34,7 +34,7 @@ class SyncTransKeringananSetuju extends Command
         $this->migrasiTransKeringananSetujuRepository = new MigrasiTransKeringananSetujuRepository();
         $this->transKeringananSetujuRepository = new TransKeringananSetujuRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -86,45 +86,45 @@ class SyncTransKeringananSetuju extends Command
     {
         $this->remappingListTransKeringananSetujuFocusPN = array_map(function ($transKeringananSetuju) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transKeringananSetuju['ID_TRANS_PIUTANG'],
-                'ID_TRANS_USULAN_KERINGANAN' => $transKeringananSetuju['ID_TRANS_USULAN_KERINGANAN'],
-                'ID_TRANS_TAHAP_PERSETUJUAN_KERINGANAN' => $transKeringananSetuju['ID_TRANS_TAHAP_PERSETUJUAN_KERINGANAN'],
-                'ID_REF_MATA_UANG' => $transKeringananSetuju['ID_REF_MATA_UANG'],
-                'ID_REF_DASAR_KERINGANAN' => $transKeringananSetuju['ID_REF_DASAR_KERINGANAN'],
-                'POKOK' => $transKeringananSetuju['POKOK'],
-                'BUNGA' => $transKeringananSetuju['BUNGA'],
-                'DENDA' => $transKeringananSetuju['DENDA'],
-                'LAINNYA' => $transKeringananSetuju['LAINNYA'],
-                'BIAD' => $transKeringananSetuju['BIAD'],
-                'WAKTU' => $transKeringananSetuju['WAKTU'],
-                'TANGGAL_PELUNASAN' => $transKeringananSetuju['TANGGAL_PELUNASAN'],
-                'NOMOR_PERMOHONAN' => $transKeringananSetuju['NOMOR_PERMOHONAN'],
-                'TANGGAL_PERMOHONAN' => $transKeringananSetuju['TANGGAL_PERMOHONAN'],
-                'JANGKA_WAKTU_PENYELESAIAN' => $transKeringananSetuju['JANGKA_WAKTU_PENYELESAIAN'],
-                'HAL_PERMOHONAN' => $transKeringananSetuju['HAL_PERMOHONAN'],
-                'CP_BARANG_JAMINAN' => $transKeringananSetuju['CP_BARANG_JAMINAN'],
-                'CP_KATEGORI_DISKON' => $transKeringananSetuju['CP_KATEGORI_DISKON'],
-                'CP_TANGGAL_PERSETUJUAN' => $transKeringananSetuju['CP_TANGGAL_PERSETUJUAN'],
-                'CP_DISKON_SALDO_POKOK' => $transKeringananSetuju['CP_DISKON_SALDO_POKOK'],
-                'CP_TOTAL_BAYAR_SETELAH_BARJAM' => $transKeringananSetuju['CP_TOTAL_BAYAR_SETELAH_BARJAM'],
-                'CP_DISKON_RENCANA_PELUNASAN_1' => $transKeringananSetuju['CP_DISKON_RENCANA_PELUNASAN_1'],
-                'CP_DISKON_RENCANA_PELUNASAN_2' => $transKeringananSetuju['CP_DISKON_RENCANA_PELUNASAN_2'],
-                'CP_TOTAL_BAYAR_RENCANA_1' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_1'],
-                'CP_TOTAL_BAYAR_RENCANA_2' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_2'],
-                'CP_BIAD_KALKULASI_SISTEM_1' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_1'],
-                'CP_BIAD_KALKULASI_SISTEM_2' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_2'],
-                'ID_REF_BIAD' => $transKeringananSetuju['ID_REF_BIAD'],
-                'CP_KATEGORI_DISKON_WAKTU' => $transKeringananSetuju['CP_KATEGORI_DISKON_WAKTU'],
-                'REF' => $transKeringananSetuju['REF'],
-                'UPDATE_DISKON_CP' => $transKeringananSetuju['UPDATE_DISKON_CP'],
-                'FLAG_PKH' => $transKeringananSetuju['FLAG_PKH'],
-                'BOBOT_NORMA_WAKTU' => $transKeringananSetuju['BOBOT_NORMA_WAKTU'],
-                'TANGGAL_PELUNASAN_PEMBAYARAN' => $transKeringananSetuju['TANGGAL_PELUNASAN_PEMBAYARAN'],
-                'CREATED_BY' => $transKeringananSetuju['CREATED_BY'],
-                'CREATED_AT' => $transKeringananSetuju['CREATED_AT'],
-                'UPDATED_BY' => $transKeringananSetuju['UPDATED_BY'],
-                'UPDATED_AT' => $transKeringananSetuju['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transKeringananSetuju['ID_TRANS_PIUTANG'],
+                'id_trans_usulan_keringanan' => $transKeringananSetuju['ID_TRANS_USULAN_KERINGANAN'],
+                'id_trans_tahap_persetujuan_keringanan' => $transKeringananSetuju['ID_TRANS_TAHAP_PERSETUJUAN_KERINGANAN'],
+                'id_ref_mata_uang' => $transKeringananSetuju['ID_REF_MATA_UANG'],
+                'id_ref_dasar_keringanan' => $transKeringananSetuju['ID_REF_DASAR_KERINGANAN'],
+                'pokok' => $transKeringananSetuju['POKOK'],
+                'bunga' => $transKeringananSetuju['BUNGA'],
+                'denda' => $transKeringananSetuju['DENDA'],
+                'lainnya' => $transKeringananSetuju['LAINNYA'],
+                'biad' => $transKeringananSetuju['BIAD'],
+                'waktu' => $transKeringananSetuju['WAKTU'],
+                'tanggal_pelunasan' => $transKeringananSetuju['TANGGAL_PELUNASAN'],
+                'nomor_permohonan' => $transKeringananSetuju['NOMOR_PERMOHONAN'],
+                'tanggal_permohonan' => $transKeringananSetuju['TANGGAL_PERMOHONAN'],
+                'jangka_waktu_penyelesaian' => $transKeringananSetuju['JANGKA_WAKTU_PENYELESAIAN'],
+                'hal_permohonan' => $transKeringananSetuju['HAL_PERMOHONAN'],
+                'cp_barang_jaminan' => $transKeringananSetuju['CP_BARANG_JAMINAN'],
+                'cp_kategori_diskon' => $transKeringananSetuju['CP_KATEGORI_DISKON'],
+                'cp_tanggal_persetujuan' => $transKeringananSetuju['CP_TANGGAL_PERSETUJUAN'],
+                'cp_diskon_saldo_pokok' => $transKeringananSetuju['CP_DISKON_SALDO_POKOK'],
+                'cp_total_bayar_setelah_barjam' => $transKeringananSetuju['CP_TOTAL_BAYAR_SETELAH_BARJAM'],
+                'cp_diskon_rencana_pelunasan_1' => $transKeringananSetuju['CP_DISKON_RENCANA_PELUNASAN_1'],
+                'cp_diskon_rencana_pelunasan_2' => $transKeringananSetuju['CP_DISKON_RENCANA_PELUNASAN_2'],
+                'cp_total_bayar_rencana_1' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_1'],
+                'cp_total_bayar_rencana_2' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_2'],
+                'cp_biad_kalkulasi_sistem_1' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_1'],
+                'cp_biad_kalkulasi_sistem2' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_2'],
+                'id_ref_biad' => $transKeringananSetuju['ID_REF_BIAD'],
+                'cp_kategori_diskon_waktu' => $transKeringananSetuju['CP_KATEGORI_DISKON_WAKTU'],
+                'ref' => $transKeringananSetuju['REF'],
+                'update_diskon_cp' => $transKeringananSetuju['UPDATE_DISKON_CP'],
+                'flag_pkh' => $transKeringananSetuju['FLAG_PKH'],
+                'bobot_norma_waktu' => $transKeringananSetuju['BOBOT_NORMA_WAKTU'],
+                'tanggal_pelunasan_pembayaran' => $transKeringananSetuju['TANGGAL_PELUNASAN_PEMBAYARAN'],
+                'created_by' => $transKeringananSetuju['CREATED_BY'],
+                'created_at' => $transKeringananSetuju['CREATED_AT'],
+                'updated_by' => $transKeringananSetuju['UPDATED_BY'],
+                'updated_at' => $transKeringananSetuju['UPDATED_AT']
             ];
         }, $this->listTransKeringananSetujuFocusPN->toArray());
         return $this;
@@ -148,11 +148,11 @@ class SyncTransKeringananSetuju extends Command
         $this->info('Tahapan sinkonrisasi T_KERINGANAN_SETUJU ke TRANS_KERINGANAN_SETUJU: ');
 
         $this->database::beginTransaction();
-        try 
+        try
         {
             $chunkData = collect($this->remappingListTransKeringananSetujuFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
             $progressBar = $this->output->createProgressBar(count($chunkData));
-            foreach ($chunkData as $chunk) 
+            foreach ($chunkData as $chunk)
             {
                 $transKeringananSetuju = new TransKeringananSetujuRepository();
                 $transKeringananSetuju->insert($chunk->toArray());
@@ -163,7 +163,7 @@ class SyncTransKeringananSetuju extends Command
             $progressBar->finish();
             $this->output->newLine();
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             $this->database::rollBack();
             $this->error($e->getMessage());
@@ -182,8 +182,8 @@ class SyncTransKeringananSetuju extends Command
     {
         $this->remappingListTransKeringananSetujuModulPengurusan = array_map(function ($transKeringananSetuju) {
             return [
-                'ID' => $transKeringananSetuju['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transKeringananSetuju['ID'],
+                'ID' => $transKeringananSetuju['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transKeringananSetuju['id'],
             ];
         }, $this->listTransKeringananSetujuModulPengurusan->toArray());
 
@@ -195,11 +195,11 @@ class SyncTransKeringananSetuju extends Command
         $this->info('Tahapan sinkonrisasi TRANS_KERINGANAN_SETUJU ke T_KERINGANAN_SETUJU: ');
 
         $this->database::beginTransaction();
-        try 
+        try
         {
             $chunkData = collect($this->remappingListTransKeringananSetujuModulPengurusan)->chunk(self::TOTAL_DATA_EACH_CHUNK);
             $progressBar = $this->output->createProgressBar(count($chunkData));
-            foreach ($chunkData as $chunk) 
+            foreach ($chunkData as $chunk)
             {
                 $tKeringananSetuju = new TKeringananSetujuRepository();
                 $tKeringananSetuju->upsert($chunk->toArray(),['ID'],['ID_MODUL_PENGURUSAN']);
@@ -210,7 +210,7 @@ class SyncTransKeringananSetuju extends Command
             $progressBar->finish();
             $this->output->newLine();
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             $this->database::rollBack();
             $this->error($e->getMessage());

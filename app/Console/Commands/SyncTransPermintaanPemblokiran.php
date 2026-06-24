@@ -85,17 +85,17 @@ class SyncTransPermintaanPemblokiran extends Command
     {
         $this->remappingListTransPermintaanPemblokiranFocusPN = array_map(function($transPermintaanPemblokiran){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPermintaanPemblokiran['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transPermintaanPemblokiran['ID_TRANS_PIUTANG'],
-                'ID_TRANS_BARANG_JAMINAN' => $transPermintaanPemblokiran['ID_TRANS_BARANG_JAMINAN'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transPermintaanPemblokiran['ID_TRANS_TAHAP_PENGURUSAN'],
-                'TUJUAN_SURAT' => $transPermintaanPemblokiran['TUJUAN_SURAT'],
-                'ALAMAT' => $transPermintaanPemblokiran['ALAMAT'],
-                'CREATED_BY' => $transPermintaanPemblokiran['CREATED_BY'],
-                'CREATED_AT' => $transPermintaanPemblokiran['CREATED_AT'],
-                'UPDATED_BY' => $transPermintaanPemblokiran['UPDATED_BY'],
-                'UPDATED_AT' => $transPermintaanPemblokiran['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPermintaanPemblokiran['ID_FOCUSPN'],
+                'id_trans_piutang' => $transPermintaanPemblokiran['ID_TRANS_PIUTANG'],
+                'id_trans_barang_jaminan' => $transPermintaanPemblokiran['ID_TRANS_BARANG_JAMINAN'],
+                'id_trans_tahap_pengurusan' => $transPermintaanPemblokiran['ID_TRANS_TAHAP_PENGURUSAN'],
+                'tujuan_surat' => $transPermintaanPemblokiran['TUJUAN_SURAT'],
+                'alamat' => $transPermintaanPemblokiran['ALAMAT'],
+                'created_by' => $transPermintaanPemblokiran['CREATED_BY'],
+                'created_at' => $transPermintaanPemblokiran['CREATED_AT'],
+                'updated_by' => $transPermintaanPemblokiran['UPDATED_BY'],
+                'updated_at' => $transPermintaanPemblokiran['UPDATED_AT']
             ];
         }, $this->listTransPermintaanPemblokiranFocusPN->toArray());
         return $this;
@@ -151,8 +151,8 @@ class SyncTransPermintaanPemblokiran extends Command
     {
         $this->remappingListTransPermintaanPemblokiranModulPengurusan = array_map(function($transPermintaanPemblokiran){
             return [
-                'ID' => $transPermintaanPemblokiran['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPermintaanPemblokiran['ID']
+                'ID' => $transPermintaanPemblokiran['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPermintaanPemblokiran['id']
             ];
         }, $this->listTransPermintaanPemblokiranModulPengurusan->toArray());
         return $this;

@@ -40,7 +40,7 @@ class SyncTransPPNTO extends Command
     /**
      * The name and signature of the console command.
      *
-     * @var string 
+     * @var string
      */
     protected $signature = 'sync:trans-ppnto {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
@@ -88,29 +88,29 @@ class SyncTransPPNTO extends Command
     {
         $this->remappingListTransPPNTOFocusPN = array_map(function($transPPNTO){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transPPNTO['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_REF_SATUAN_KERJA_KREDITUR' => $transPPNTO['ID_REF_SATUAN_KERJA_KREDITUR'],
-                'NOMOR_PPNTO' => $transPPNTO['NOMOR_PPNTO'],
-                'TANGGAL_PPNTO' => $transPPNTO['TANGGAL_PPNTO'],
-                'NAMA_DEBITUR' => $transPPNTO['NAMA_DEBITUR'],
-                'PATH_TO_FILE' => $this->cloneFile($transPPNTO['PATH_TO_FILE'], $transPPNTO['CREATED_AT']),
-                'VALIDASI_KPKNL' => $transPPNTO['VALIDASI_KPKNL'],
-                'VALIDASI_KPKNL_BY' => $transPPNTO['VALIDASI_KPKNL_BY'],
-                'VALIDASI_KPKNL_AT' => $transPPNTO['VALIDASI_KPKNL_AT'],
-                'VALIDASI_KANWIL' => $transPPNTO['VALIDASI_KANWIL'],
-                'VALIDASI_KANWIL_BY' => $transPPNTO['VALIDASI_KANWIL_BY'],
-                'VALIDASI_KANWIL_AT' => $transPPNTO['VALIDASI_KANWIL_AT'],
-                'VALIDASI_PUSAT' => $transPPNTO['VALIDASI_PUSAT'],
-                'VALIDASI_PUSAT_BY' => $transPPNTO['VALIDASI_PUSAT_BY'],
-                'VALIDASI_PUSAT_AT' => $transPPNTO['VALIDASI_PUSAT_AT'],
-                'CREATED_BY' => $transPPNTO['CREATED_BY'],
-                'CREATED_AT' => $transPPNTO['CREATED_AT'],
-                'UPDATED_BY' => $transPPNTO['UPDATED_BY'],
-                'UPDATED_AT' => $transPPNTO['UPDATED_AT'],
-                'DELETED_BY' => $transPPNTO['DELETED_BY'],
-                'DELETED_AT' => $transPPNTO['DELETED_AT'],
-                'ID_FOCUSPN' => $transPPNTO['ID_FOCUSPN']
+                'uuid' => Str::uuid()->toString(),
+                'id_ref_satuan_kerja_kpknl' => $transPPNTO['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_ref_satuan_kerja_kreditur' => $transPPNTO['ID_REF_SATUAN_KERJA_KREDITUR'],
+                'nomor_ppnto' => $transPPNTO['NOMOR_PPNTO'],
+                'tanggal_ppnto' => $transPPNTO['TANGGAL_PPNTO'],
+                'nama_debitur' => $transPPNTO['NAMA_DEBITUR'],
+                'path_to_file' => $this->cloneFile($transPPNTO['PATH_TO_FILE'], $transPPNTO['CREATED_AT']),
+                'validasi_kpknl' => $transPPNTO['VALIDASI_KPKNL'] == 1,
+                'validasi_kpknl_by' => $transPPNTO['VALIDASI_KPKNL_BY'],
+                'validasi_kpknl_at' => $transPPNTO['VALIDASI_KPKNL_AT'],
+                'valdiasi_kanwil' => $transPPNTO['VALIDASI_KANWIL'] == 1,
+                'validasi_kanwil_by' => $transPPNTO['VALIDASI_KANWIL_BY'],
+                'validasi_kanwil_at' => $transPPNTO['VALIDASI_KANWIL_AT'],
+                'validasi_pusat' => $transPPNTO['VALIDASI_PUSAT'] == 1,
+                'validasi_pusat_by' => $transPPNTO['VALIDASI_PUSAT_BY'],
+                'validasi_pusat_at' => $transPPNTO['VALIDASI_PUSAT_AT'],
+                'created_by' => $transPPNTO['CREATED_BY'],
+                'created_at' => $transPPNTO['CREATED_AT'],
+                'updated_by' => $transPPNTO['UPDATED_BY'],
+                'updated_at' => $transPPNTO['UPDATED_AT'],
+                'deleted_by' => $transPPNTO['DELETED_BY'],
+                'deleted_at' => $transPPNTO['DELETED_AT'],
+                'id_focuspn' => $transPPNTO['ID_FOCUSPN']
             ];
         }, $this->listTransPPNTOFocusPN->toArray());
         return $this;
@@ -176,8 +176,8 @@ class SyncTransPPNTO extends Command
     {
         $this->remappingListTransPPNTOModulPengurusan = array_map(function ($transPPNTO) {
             return [
-                'ID' => $transPPNTO['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPPNTO['ID']
+                'ID' => $transPPNTO['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPPNTO['id']
             ];
         }, $this->listTransPPNTOModulPengurusan->toArray());
         return $this;

@@ -88,22 +88,22 @@ class SyncTransTahapPengurusan extends Command
     {
         $this->remappingListTransTahapPengurusanFocusPN = array_map(function ($transTahapPengurusan){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transTahapPengurusan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transTahapPengurusan['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_REF_TAHAP_PENGURUSAN' => $transTahapPengurusan['ID_REF_TAHAP_PENGURUSAN'],
-                'ID_REF_SIFAT_SURAT' => $transTahapPengurusan['ID_REF_SIFAT_SURAT'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transTahapPengurusan['ID_REF_SATUAN_KERJA_KPKNL'],
-                'NOMOR_TAHAP' => $transTahapPengurusan['NOMOR_TAHAP'],
-                'TANGGAL_TAHAP' => $transTahapPengurusan['TANGGAL_TAHAP'],
-                'VALIDASI_KANWIL' => $transTahapPengurusan['VALIDASI_KANWIL'],
-                'VALIDASI_KANWIL_AT' => $transTahapPengurusan['VALIDASI_KANWIL_AT'],
-                'VALIDASI_PUSAT' => $transTahapPengurusan['VALIDASI_PUSAT'],
-                'VALIDASI_PUSAT_AT' => $transTahapPengurusan['VALIDASI_PUSAT_AT'],
-                'CREATED_BY' => $transTahapPengurusan['CREATED_BY'],
-                'CREATED_AT' => $transTahapPengurusan['CREATED_AT'],
-                'UPDATED_BY' => $transTahapPengurusan['UPDATED_BY'],
-                'UPDATED_AT' => $transTahapPengurusan['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transTahapPengurusan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transTahapPengurusan['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_ref_tahap_pengurusan' => $transTahapPengurusan['ID_REF_TAHAP_PENGURUSAN'],
+                'id_ref_sifat_surat' => $transTahapPengurusan['ID_REF_SIFAT_SURAT'],
+                'id_ref_satuan_kerja_kpknl' => $transTahapPengurusan['ID_REF_SATUAN_KERJA_KPKNL'],
+                'nomor_tahap' => $transTahapPengurusan['NOMOR_TAHAP'],
+                'tanggal_tahap' => $transTahapPengurusan['TANGGAL_TAHAP'],
+                'validasi_kanwil' => $transTahapPengurusan['VALIDASI_KANWIL'] == 1,
+                'validasi_kanwil_at' => $transTahapPengurusan['VALIDASI_KANWIL_AT'],
+                'valdiasi_pusat' => $transTahapPengurusan['VALIDASI_PUSAT'] == 1,
+                'validasi_pusat_at' => $transTahapPengurusan['VALIDASI_PUSAT_AT'],
+                'created_by' => $transTahapPengurusan['CREATED_BY'],
+                'created_at' => $transTahapPengurusan['CREATED_AT'],
+                'updated_by' => $transTahapPengurusan['UPDATED_BY'],
+                'updated_at' => $transTahapPengurusan['UPDATED_AT'],
             ];
         }, $this->listTransTahapPengurusanFocusPN->toArray());
         return $this;
@@ -160,8 +160,8 @@ class SyncTransTahapPengurusan extends Command
     {
         $this->remamppingListTransTahapPengurusanModulPengurusan = array_map(function ($transTahapPengurusan){
             return [
-                'ID' => $transTahapPengurusan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transTahapPengurusan['ID']
+                'ID' => $transTahapPengurusan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transTahapPengurusan['id']
             ];
         }, $this->listTransTahapPengurusanModulPengurusan->toArray());
 

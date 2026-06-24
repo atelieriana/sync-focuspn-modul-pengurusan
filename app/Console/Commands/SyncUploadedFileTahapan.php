@@ -33,7 +33,7 @@ class SyncUploadedFileTahapan extends Command
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
         $this->migrasiTransUploadDokumenPengurusanRepository = new MigrasiTransUploadDokumenPengurusanRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -88,16 +88,16 @@ class SyncUploadedFileTahapan extends Command
                 foreach ($decodedJson as $file)
                 {
                     return [
-                        'UUID' => Str::uuid()->toString(),
-                        'ID_TRANS_TAHAP_PENGURUSAN' => $uploadedFile['ID_TRANS_TAHAP_PENGURUSAN'],
-                        'ID_FOCUSPN' => $uploadedFile['ID_FOCUSPN'],
-                        'PATH_TO_FILE' => $this->cloneFile($file, $uploadedFile['CREATED_AT']),
-                        'CREATED_BY' => $this->getUploadedNIP($file),
-                        'CREATED_AT' => $uploadedFile['CREATED_AT'],
-                        'UPDATED_BY' => $this->getUploadedNIP($file),
-                        'UPDATED_AT' => $uploadedFile['UPDATED_AT']
+                        'uuid' => Str::uuid()->toString(),
+                        'id_trans_tahap_pengurusan' => $uploadedFile['ID_TRANS_TAHAP_PENGURUSAN'],
+                        'id_focuspn' => $uploadedFile['ID_FOCUSPN'],
+                        'path_to_file' => $this->cloneFile($file, $uploadedFile['CREATED_AT']),
+                        'created_by' => $this->getUploadedNIP($file),
+                        'created_at' => $uploadedFile['CREATED_AT'],
+                        'updated_by' => $this->getUploadedNIP($file),
+                        'updated_at' => $uploadedFile['UPDATED_AT']
                     ];
-                }   
+                }
             }
         }, $this->listUploadedFileTahapanFocusPN->toArray());
 
@@ -187,9 +187,9 @@ class SyncUploadedFileTahapan extends Command
             }
 
             $newLocation = 'tahapan-pengurusan/'.$bucket.'/'.date('Y/m/d',strtotime($createdDate)).'/';
-            
+
             // File
-            if ($key === 'Key') 
+            if ($key === 'Key')
             {
                 $this->info("Clone ".$value." in progress...");
                 $file = explode('/',$value);
@@ -202,7 +202,7 @@ class SyncUploadedFileTahapan extends Command
                 }
                 else
                 {
-                    return null;   
+                    return null;
                 }
             }
         }

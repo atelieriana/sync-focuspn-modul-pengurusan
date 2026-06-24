@@ -33,7 +33,7 @@ class SyncTransPPNTONominal extends Command
         $this->migrasiTransPPNTONominalRepository = new MigrasiTransPPNTONominalRepository();
         $this->transPPNTONominalRepository = new TransPPNTONominalRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -85,15 +85,15 @@ class SyncTransPPNTONominal extends Command
     {
         $this->remappingListTransPPNTONominalFocusPN = array_map(function($transPPNTONominal){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPPNTONominal['ID_FOCUSPN'],
-                'ID_TRANS_PPNTO' => $transPPNTONominal['ID_TRANS_PPNTO'],
-                'ID_REF_MATA_UANG' => $transPPNTONominal['ID_REF_MATA_UANG'],
-                'NOMINAL' => $transPPNTONominal['NOMINAL'],
-                'CREATED_BY' => $transPPNTONominal['CREATED_BY'],
-                'CREATED_AT' => $transPPNTONominal['CREATED_AT'],
-                'UPDATED_BY' => $transPPNTONominal['UPDATED_BY'],
-                'UPDATED_AT' => $transPPNTONominal['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPPNTONominal['ID_FOCUSPN'],
+                'id_trans_ppnto' => $transPPNTONominal['ID_TRANS_PPNTO'],
+                'id_ref_mata_uang' => $transPPNTONominal['ID_REF_MATA_UANG'],
+                'nominal' => $transPPNTONominal['NOMINAL'],
+                'created_by' => $transPPNTONominal['CREATED_BY'],
+                'created_at' => $transPPNTONominal['CREATED_AT'],
+                'updated_by' => $transPPNTONominal['UPDATED_BY'],
+                'updated_at' => $transPPNTONominal['UPDATED_AT']
             ];
         }, $this->listTransPPNTONominalFocusPN->toArray());
         return $this;
@@ -149,8 +149,8 @@ class SyncTransPPNTONominal extends Command
     {
         $this->remappingListTransPPNTONominalModulPengurusan = array_map(function($transPPNTONominal){
             return [
-                'ID' => $transPPNTONominal['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPPNTONominal['ID']
+                'ID' => $transPPNTONominal['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPPNTONominal['id']
             ];
         }, $this->listTransPPNTONominalModulPengurusan->toArray());
         return $this;

@@ -89,17 +89,17 @@ class SyncTransCekal extends Command
     {
         $this->remappingListTransCekalFocusPN = array_map(function($transCekal){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transCekal['ID_FOCUSPN'],
-                'ID_TRANS_DEBITUR' => $transCekal['ID_TRANS_DEBITUR'],
-                'NOMOR_KMK' => $transCekal['NOMOR_KMK'],
-                'TANGGAL_KMK' => $transCekal['TANGGAL_KMK'],
-                'TANGGAL_MULAI' => $transCekal['TANGGAL_CEKAL_AWAL'],
-                'TANGGAL_BERAKHIR' => $transCekal['TANGGAL_CEKAL_AKHIR'],
-                'CREATED_BY' => $transCekal['CREATED_BY'],
-                'CREATED_AT' => $transCekal['CREATED_AT'],
-                'UPDATED_BY' => $transCekal['UPDATED_BY'],
-                'UPDATED_AT' => $transCekal['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transCekal['ID_FOCUSPN'],
+                'id_trans_debitur' => $transCekal['ID_TRANS_DEBITUR'],
+                'nomor_kmk' => $transCekal['NOMOR_KMK'],
+                'tanggal_kmk' => $transCekal['TANGGAL_KMK'],
+                'tanggal_mulai' => $transCekal['TANGGAL_CEKAL_AWAL'],
+                'tanggal_berakhir' => $transCekal['TANGGAL_CEKAL_AKHIR'],
+                'created_by' => $transCekal['CREATED_BY'],
+                'created_at' => $transCekal['CREATED_AT'],
+                'updated_by' => $transCekal['UPDATED_BY'],
+                'updated_at' => $transCekal['UPDATED_AT']
             ];
         }, $this->listTransCekalFocusPN->toArray());
 
@@ -159,8 +159,8 @@ class SyncTransCekal extends Command
     {
         $this->remappingListTransCekalModulPengurusan = array_map(function($transCekal){
             return [
-                'ID' => $transCekal['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transCekal['ID']
+                'ID' => $transCekal['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transCekal['id']
             ];
         }, $this->listTransCekalModulPengurusan->toArray());
 

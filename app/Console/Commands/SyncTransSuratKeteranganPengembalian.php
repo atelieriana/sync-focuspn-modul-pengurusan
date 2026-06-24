@@ -85,16 +85,16 @@ class SyncTransSuratKeteranganPengembalian extends Command
     {
         $this->remappingTransSuratKeteranganPengembalianFocusPN = array_map(function($transSuratKeteranganPengembalian){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transSuratKeteranganPengembalian['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transSuratKeteranganPengembalian['ID_TRANS_PIUTANG'],
-                'ID_TAHAP_PENGURUSAN' => $transSuratKeteranganPengembalian['ID_TAHAP_PENGURUSAN'],
-                'ID_SATUAN_KERJA_KREDITUR' => $transSuratKeteranganPengembalian['ID_SATUAN_KERJA_KREDITUR'],
-                'ALASAN_PENGEMBALIAN' => $transSuratKeteranganPengembalian['ALASAN_PENGEMBALIAN'],
-                'CREATED_BY' => $transSuratKeteranganPengembalian['CREATED_BY'],
-                'CREATED_AT' => $transSuratKeteranganPengembalian['CREATED_AT'],
-                'UPDATED_BY' => $transSuratKeteranganPengembalian['UPDATED_BY'],
-                'UPDATED_AT' => $transSuratKeteranganPengembalian['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transSuratKeteranganPengembalian['ID_FOCUSPN'],
+                'id_trans_piutang' => $transSuratKeteranganPengembalian['ID_TRANS_PIUTANG'],
+                'id_tahap_pengurusan' => $transSuratKeteranganPengembalian['ID_TAHAP_PENGURUSAN'],
+                'id_satuan_kerja_kreditur' => $transSuratKeteranganPengembalian['ID_SATUAN_KERJA_KREDITUR'],
+                'alasan_pengembalian' => $transSuratKeteranganPengembalian['ALASAN_PENGEMBALIAN'],
+                'created_by' => $transSuratKeteranganPengembalian['CREATED_BY'],
+                'created_at' => $transSuratKeteranganPengembalian['CREATED_AT'],
+                'updated_by' => $transSuratKeteranganPengembalian['UPDATED_BY'],
+                'updated_at' => $transSuratKeteranganPengembalian['UPDATED_AT']
             ];
         }, $this->listTransSuratKeteranganPengembalianFocusPN->toArray());
 
@@ -151,8 +151,8 @@ class SyncTransSuratKeteranganPengembalian extends Command
     {
         $this->remappingTransSuratKeteranganPengembalianModulPengurusan = array_map(function($transSuratKeteranganPengembalian){
             return [
-                'ID' => $transSuratKeteranganPengembalian['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transSuratKeteranganPengembalian['ID']
+                'ID' => $transSuratKeteranganPengembalian['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transSuratKeteranganPengembalian['id']
             ];
         }, $this->listTransSuratKeteranganPengembalianModulPengurusan->toArray());
         return $this;

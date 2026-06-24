@@ -84,16 +84,16 @@ class SyncTransferBKPN extends Command
     {
         $this->remappingListTransferBKPNFocusPN = array_map(function($transferBKPN){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_SATUAN_KERJA_KPKNL_ASAL' => $transferBKPN['ID_SATUAN_KERJA_KPKNL_ASAL'],
-                'ID_SATUAN_KERJA_KPKNL_TUJUAN' => $transferBKPN['ID_SATUAN_KERJA_KPKNL_TUJUAN'],
-                'ID_REF_STATUS_TRANSFER_BKPN' => $transferBKPN['ID_REF_STATUS_TRANSFER_BKPN'],
-                'NOMOR_BA_PENYERAHAN' => $transferBKPN['NOMOR_BA'],
-                'TANGGAL_BA_PENYERAHAN' => $transferBKPN['TANGGAL_BA'],
-                'CREATED_BY' => $transferBKPN['CREATED_BY'],
-                'CREATED_AT' => $transferBKPN['CREATED_AT'],
-                'UPDATED_BY' => $transferBKPN['UPDATED_BY'],
-                'UPDATED_AT' => $transferBKPN['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_satuan_kerja_kpknl_asal' => $transferBKPN['ID_SATUAN_KERJA_KPKNL_ASAL'],
+                'id_satuan_kerja_kpknl_tujuan' => $transferBKPN['ID_SATUAN_KERJA_KPKNL_TUJUAN'],
+                'id_ref_status_transfer_bkpn' => $transferBKPN['ID_REF_STATUS_TRANSFER_BKPN'],
+                'nomor_ba_penyerahan' => $transferBKPN['NOMOR_BA'],
+                'tanggal_ba_penyerahan' => $transferBKPN['TANGGAL_BA'],
+                'created_by' => $transferBKPN['CREATED_BY'],
+                'created_at' => $transferBKPN['CREATED_AT'],
+                'updated_by' => $transferBKPN['UPDATED_BY'],
+                'updated_at' => $transferBKPN['UPDATED_AT']
             ];
         }, $this->listTransferBKPNFocusPN->toArray());
 
@@ -151,8 +151,8 @@ class SyncTransferBKPN extends Command
     {
         $this->remappingListTransferBKPNModulPengurusan = array_map(function($transferBKPN){
             return [
-                'ID_TRANSFER_BKPN' => $transferBKPN['ID'],
-                'NOMOR_BA' => $transferBKPN['NOMOR_BA_PENYERAHAN']
+                'ID_TRANSFER_BKPN' => $transferBKPN['id'],
+                'NOMOR_BA' => $transferBKPN['nomor_ba_penyerahan'],
             ];
         }, $this->listTransferBKPBModulPengurusan->toArray());
 

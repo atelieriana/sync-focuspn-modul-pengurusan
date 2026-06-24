@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\TransUraianPernyataanBersamaPJPN;
 use App\Repositories\FocusPN\MigrasiTransUraianPernyataanBersamaPJPNRepository;
 use App\Repositories\FocusPN\TPBPJPNUraianRepository;
-use App\Repositories\FocusPN\TUraianPBPJPNRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransUraianPernyataanBersamaPJPNRepository;
 use Exception;
@@ -87,15 +85,15 @@ class SyncTransUraianPernyataanBersamaPJPN extends Command
     {
         $this->remappingTransUraianPernyataanBersamaPJPNFocusPN = array_map(function($transUraianPBPJPN){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transUraianPBPJPN['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transUraianPBPJPN['ID_TRANS_PIUTANG'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transUraianPBPJPN['ID_TRANS_TAHAP_PENGURUSAN'],
-                'URAIAN' => $transUraianPBPJPN['URAIAN'],
-                'CREATED_BY' => $transUraianPBPJPN['CREATED_BY'],
-                'CREATED_AT' => $transUraianPBPJPN['CREATED_AT'],
-                'UPDATED_BY' => $transUraianPBPJPN['UPDATED_BY'],
-                'UPDATED_AT' => $transUraianPBPJPN['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transUraianPBPJPN['ID_FOCUSPN'],
+                'id_trans_piutang' => $transUraianPBPJPN['ID_TRANS_PIUTANG'],
+                'id_trans_tahap_pengurusan' => $transUraianPBPJPN['ID_TRANS_TAHAP_PENGURUSAN'],
+                'uraian' => $transUraianPBPJPN['URAIAN'],
+                'created_by' => $transUraianPBPJPN['CREATED_BY'],
+                'created_at' => $transUraianPBPJPN['CREATED_AT'],
+                'updated_by' => $transUraianPBPJPN['UPDATED_BY'],
+                'updated_at' => $transUraianPBPJPN['UPDATED_AT']
             ];
         }, $this->listTransUraianPernyataanBersamaPJPNFocusPN->toArray());
         return $this;
@@ -151,8 +149,8 @@ class SyncTransUraianPernyataanBersamaPJPN extends Command
     {
         $this->remappingTransUraianPernyataanBersamaPJPNModulPengurusan = array_map(function($transUraianPBPJPN){
             return [
-                'ID' => $transUraianPBPJPN['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transUraianPBPJPN['ID']
+                'ID' => $transUraianPBPJPN['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transUraianPBPJPN['id']
             ];
         }, $this->listTransUraianPernyataanBersamaPJPNModulPengurusan->toArray());
         return $this;

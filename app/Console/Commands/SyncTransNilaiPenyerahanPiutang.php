@@ -89,19 +89,19 @@ class SyncTransNilaiPenyerahanPiutang extends Command
     {
         $this->remappingListTransNilaiPenyerahanPiutangFocusPN = array_map(function ($transNilaiPenyerahanPiutang) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transNilaiPenyerahanPiutang['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_REF_MATA_UANG' => $transNilaiPenyerahanPiutang['ID_REF_MATA_UANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transNilaiPenyerahanPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_FOCUSPN' => $transNilaiPenyerahanPiutang['ID_FOCUSPN'],
-                'POKOK' => $transNilaiPenyerahanPiutang['POKOK'],
-                'BUNGA' => $transNilaiPenyerahanPiutang['BUNGA'],
-                'DENDA' => $transNilaiPenyerahanPiutang['DENDA'],
-                'LAINNYA' => $transNilaiPenyerahanPiutang['LAINNYA'],
-                'CREATED_BY' => $transNilaiPenyerahanPiutang['CREATED_BY'],
-                'CREATED_AT' => $transNilaiPenyerahanPiutang['CREATED_AT'],
-                'UPDATED_BY' => $transNilaiPenyerahanPiutang['UPDATED_BY'],
-                'UPDATED_AT' => $transNilaiPenyerahanPiutang['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transNilaiPenyerahanPiutang['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_ref_mata_uang' => $transNilaiPenyerahanPiutang['ID_REF_MATA_UANG'],
+                'id_ref_satuan_kerja_kpknl' => $transNilaiPenyerahanPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_focuspn' => $transNilaiPenyerahanPiutang['ID_FOCUSPN'],
+                'pokok' => $transNilaiPenyerahanPiutang['POKOK'],
+                'bunga' => $transNilaiPenyerahanPiutang['BUNGA'],
+                'denda' => $transNilaiPenyerahanPiutang['DENDA'],
+                'lainnya' => $transNilaiPenyerahanPiutang['LAINNYA'],
+                'created_by' => $transNilaiPenyerahanPiutang['CREATED_BY'],
+                'created_at' => $transNilaiPenyerahanPiutang['CREATED_AT'],
+                'updated_by' => $transNilaiPenyerahanPiutang['UPDATED_BY'],
+                'updated_at' => $transNilaiPenyerahanPiutang['UPDATED_AT'],
             ];
         }, $this->listTransNilaiPenyerahanPiutangFocusPN->toArray());
 
@@ -159,8 +159,8 @@ class SyncTransNilaiPenyerahanPiutang extends Command
     {
         $this->remappingListTransNilaiPenyerahanPiutangModulPengurusan = array_map(function ($transNilaiPenyerahanPiutang) {
             return [
-                'ID' => $transNilaiPenyerahanPiutang['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transNilaiPenyerahanPiutang['ID']
+                'ID' => $transNilaiPenyerahanPiutang['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transNilaiPenyerahanPiutang['id']
             ];
         }, $this->listTransNilaiPenyerahanPiutangModulPengurusan->toArray());
 

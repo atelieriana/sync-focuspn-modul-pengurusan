@@ -85,19 +85,19 @@ class SyncTransDihapusMutlak extends Command
     {
         $this->remappingListTransDihapusMutlakFocusPN = array_map(function ($transDihapusMutlak) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transDihapusMutlak['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transDihapusMutlak['ID_TRANS_PIUTANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transDihapusMutlak['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN' => $transDihapusMutlak['ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN'],
-                'KEPUTUSAN_PENGHAPUSAN_OLEH' => $transDihapusMutlak['KEPUTUSAN_PENGHAPUSAN_OLEH'],
-                'NOMOR_KEPUTUSAN' => $transDihapusMutlak['NOMOR_KEPUTUSAN'],
-                'TANGGAL_KEPUTUSAN' => $transDihapusMutlak['TANGGAL_KEPUTUSAN'],
-                'PERIHAL_KEPUTUSAN' => $transDihapusMutlak['PERIHAL_KEPUTUSAN'],
-                'CREATED_BY' => $transDihapusMutlak['CREATED_BY'],
-                'CREATED_AT' => $transDihapusMutlak['CREATED_AT'],
-                'UPDATED_BY' => $transDihapusMutlak['UPDATED_BY'],
-                'UPDATED_AT' => $transDihapusMutlak['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transDihapusMutlak['ID_FOCUSPN'],
+                'id_trans_piutang' => $transDihapusMutlak['ID_TRANS_PIUTANG'],
+                'id_ref_satuan_kerja_kpknl' => $transDihapusMutlak['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_ref_jenis_keputusan_penghapusan' => $transDihapusMutlak['ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN'],
+                'keputusan_penghapusan_oleh' => $transDihapusMutlak['KEPUTUSAN_PENGHAPUSAN_OLEH'],
+                'nomor_keputusan' => $transDihapusMutlak['NOMOR_KEPUTUSAN'],
+                'tanggal_keputusan' => $transDihapusMutlak['TANGGAL_KEPUTUSAN'],
+                'perihal_keputusan' => $transDihapusMutlak['PERIHAL_KEPUTUSAN'],
+                'created_by' => $transDihapusMutlak['CREATED_BY'],
+                'created_at' => $transDihapusMutlak['CREATED_AT'],
+                'updated_by' => $transDihapusMutlak['UPDATED_BY'],
+                'updated_at' => $transDihapusMutlak['UPDATED_AT']
             ];
         }, $this->listTransDihapusMutlakFocusPN->toArray());
         return $this;
@@ -152,8 +152,8 @@ class SyncTransDihapusMutlak extends Command
     {
         $this->remappingListTransDihapusMutlakModulPengurusan = array_map(function($transDihapusMutlak){
             return [
-                'ID' => $transDihapusMutlak['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transDihapusMutlak['ID']
+                'ID' => $transDihapusMutlak['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transDihapusMutlak['id']
             ];
         }, $this->listTransDihapusMutlakModulPengurusan->toArray());
         return $this;

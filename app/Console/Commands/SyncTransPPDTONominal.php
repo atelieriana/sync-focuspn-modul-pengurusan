@@ -85,15 +85,15 @@ class SyncTransPPDTONominal extends Command
     {
         $this->remappingListTransPPDTONominalFocusPN = array_map(function($transPPDTONominal){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPPDTONominal['ID_FOCUSPN'],
-                'ID_TRANS_PPDTO' => $transPPDTONominal['ID_TRANS_PPDTO'],
-                'ID_REF_MATA_UANG' => $transPPDTONominal['ID_REF_MATA_UANG'],
-                'NOMINAL' => $transPPDTONominal['NOMINAL'],
-                'CREATED_BY' => $transPPDTONominal['CREATED_BY'],
-                'CREATED_AT' => $transPPDTONominal['CREATED_AT'],
-                'UPDATED_BY' => $transPPDTONominal['UPDATED_BY'],
-                'UPDATED_AT' => $transPPDTONominal['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPPDTONominal['ID_FOCUSPN'],
+                'id_trans_ppdto' => $transPPDTONominal['ID_TRANS_PPDTO'],
+                'id_ref_mata_uang' => $transPPDTONominal['ID_REF_MATA_UANG'],
+                'nominal' => $transPPDTONominal['NOMINAL'],
+                'created_by' => $transPPDTONominal['CREATED_BY'],
+                'created_at' => $transPPDTONominal['CREATED_AT'],
+                'updated_by' => $transPPDTONominal['UPDATED_BY'],
+                'updated_at' => $transPPDTONominal['UPDATED_AT']
             ];
         }, $this->listTransPPDTONominalFocusPN->toArray());
         return $this;
@@ -149,8 +149,8 @@ class SyncTransPPDTONominal extends Command
     {
         $this->remappingListTransPPDTONominalModulPengurusan = array_map(function($transPPDTONominal){
             return [
-                'ID' => $transPPDTONominal['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPPDTONominal['ID']
+                'ID' => $transPPDTONominal['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPPDTONominal['id']
             ];
         }, $this->listTransPPDTONominalModulPengurusan->toArray());
         return $this;

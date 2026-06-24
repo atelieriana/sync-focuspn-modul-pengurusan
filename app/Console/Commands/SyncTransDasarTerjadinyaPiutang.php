@@ -88,16 +88,16 @@ class SyncTransDasarTerjadinyaPiutang extends Command
     {
         $this->remappingTransDasarTerjadinyaPiutangFocusPN = array_map(function($transDasarTerjadinyaPiutang){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transDasarTerjadinyaPiutang['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transDasarTerjadinyaPiutang['ID_TRANS_PIUTANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transDasarTerjadinyaPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
-                'NOMOR' => $transDasarTerjadinyaPiutang['NOMOR'],
-                'URAIAN' => $transDasarTerjadinyaPiutang['URAIAN'],
-                'CREATED_BY' => $transDasarTerjadinyaPiutang['CREATED_BY'],
-                'CREATED_AT' => $transDasarTerjadinyaPiutang['CREATED_AT'],
-                'UPDATED_BY' => $transDasarTerjadinyaPiutang['UPDATED_BY'],
-                'UPDATED_AT' => $transDasarTerjadinyaPiutang['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transDasarTerjadinyaPiutang['ID_FOCUSPN'],
+                'id_trans_piutang' => $transDasarTerjadinyaPiutang['ID_TRANS_PIUTANG'],
+                'id_ref_satuan_kerja_kpknl' => $transDasarTerjadinyaPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
+                'nomor' => $transDasarTerjadinyaPiutang['NOMOR'],
+                'uraian' => $transDasarTerjadinyaPiutang['URAIAN'],
+                'created_by' => $transDasarTerjadinyaPiutang['CREATED_BY'],
+                'created_at' => $transDasarTerjadinyaPiutang['CREATED_AT'],
+                'updated_by' => $transDasarTerjadinyaPiutang['UPDATED_BY'],
+                'updated_at' => $transDasarTerjadinyaPiutang['UPDATED_AT']
             ];
         }, $this->listTransDasarTerjadinyaPiutangFocusPN->toArray());
 
@@ -155,8 +155,8 @@ class SyncTransDasarTerjadinyaPiutang extends Command
     {
         $this->remappingTransDasarTerjadinyaPiutangModulPengurusan = array_map(function($transDasarTerjadinyaPiutang){
             return [
-                'ID' => $transDasarTerjadinyaPiutang['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transDasarTerjadinyaPiutang['ID']
+                'ID' => $transDasarTerjadinyaPiutang['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transDasarTerjadinyaPiutang['id']
             ];
         }, $this->listTransDasarTerjadinyaPiutangModulPengurusan->toArray());
 

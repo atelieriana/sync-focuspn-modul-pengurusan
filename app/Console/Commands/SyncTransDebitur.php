@@ -96,18 +96,18 @@ class SyncTransDebitur extends Command
     {
         $this->remappingTransDebiturFocusPN = array_map(function ($transDebitur) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transDebitur['ID_MODUL_PENGURUSAN'],
-                'ID_FOCUSPN' => $transDebitur['ID_FOCUSPN'],
-                'NAMA' => trim($transDebitur['NAMA']),
-                'KELURAHAN' => $transDebitur['KELURAHAN'] ?? null,
-                'RT_RW' => $transDebitur['RT_RW'] ?? null,
-                'ALAMAT' => $transDebitur['ALAMAT'],
-                'IS_BADAN_HUKUM' => $transDebitur['IS_BADAN_HUKUM'],
-                'CREATED_BY' => $transDebitur['CREATED_BY'],
-                'CREATED_AT' => $transDebitur['CREATED_AT'],
-                'UPDATED_BY' => $transDebitur['UPDATED_BY'],
-                'UPDATED_AT' => $transDebitur['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transDebitur['ID_MODUL_PENGURUSAN'],
+                'id_focuspn' => $transDebitur['ID_FOCUSPN'],
+                'nama' => trim($transDebitur['NAMA']),
+                'kelurahan' => $transDebitur['KELURAHAN'] ?? null,
+                'rt_rw' => $transDebitur['RT_RW'] ?? null,
+                'alamat' => $transDebitur['ALAMAT'],
+                'is_badan_hukum' => $transDebitur['IS_BADAN_HUKUM'] == 1,
+                'created_by' => $transDebitur['CREATED_BY'],
+                'created_at' => $transDebitur['CREATED_AT'],
+                'updated_by' => $transDebitur['UPDATED_BY'],
+                'updated_at' => $transDebitur['UPDATED_AT'],
             ];
         }, $this->listTransDebiturFocusPN->toArray());
 
@@ -179,8 +179,8 @@ class SyncTransDebitur extends Command
     {
         $this->remappingTransDebiturModulPengurusan = array_map(function ($transDebitur) {
             return [
-                'ID' => $transDebitur['ID_FOCUSPN'],
-                'ID_TRANS_DEBITUR' => $transDebitur['ID'],
+                'ID' => $transDebitur['id_focuspn'],
+                'ID_TRANS_DEBITUR' => $transDebitur['id'],
             ];
         }, $this->listTransDebiturModulPengurusan->toArray());
 

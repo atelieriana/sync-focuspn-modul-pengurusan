@@ -20,10 +20,8 @@ class SyncTransLaporanPemberitahuanSuratPaksa extends Command
     private MigrasiTransLaporanPemberitahuanSuratPaksaRepository $migrasiTransLaporanPemberitahuanSuratPaksaRepository;
     private TransLaporanPemberitahuanSuratPaksaRepository $transLaporanPemberitahuanSuratPaksaRepository;
     private Collection $listTransLaporanPemberitahuanSuratPaksaFocusPN;
-    private Collection $listTransLaporanPemberitahuanSuratPaksaModulPengurusan;
     private int $idSatuanKerja;
     private array $remappingListTransLaporanPemberitahuanSuratPaksaFocusPN;
-    private array $remappingListTransLaporanPemberitahuanSuratPaksaModulPengurusan;
 
     public function __construct()
     {
@@ -33,7 +31,7 @@ class SyncTransLaporanPemberitahuanSuratPaksa extends Command
         $this->migrasiTransLaporanPemberitahuanSuratPaksaRepository = new MigrasiTransLaporanPemberitahuanSuratPaksaRepository();
         $this->transLaporanPemberitahuanSuratPaksaRepository = new TransLaporanPemberitahuanSuratPaksaRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -82,15 +80,15 @@ class SyncTransLaporanPemberitahuanSuratPaksa extends Command
     {
         $this->remappingListTransLaporanPemberitahuanSuratPaksaFocusPN = array_map(function($transLaporanPemberitahuanSuratPaksa){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transLaporanPemberitahuanSuratPaksa['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transLaporanPemberitahuanSuratPaksa['ID_TRANS_PIUTANG'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transLaporanPemberitahuanSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
-                'LAPORAN' => $transLaporanPemberitahuanSuratPaksa['LAPORAN'],
-                'CREATED_BY' => $transLaporanPemberitahuanSuratPaksa['CREATED_BY'],
-                'CREATED_AT' => $transLaporanPemberitahuanSuratPaksa['CREATED_AT'],
-                'UPDATED_BY' => $transLaporanPemberitahuanSuratPaksa['UPDATED_BY'],
-                'UPDATED_AT' => $transLaporanPemberitahuanSuratPaksa['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transLaporanPemberitahuanSuratPaksa['ID_FOCUSPN'],
+                'id_trans_piutang' => $transLaporanPemberitahuanSuratPaksa['ID_TRANS_PIUTANG'],
+                'id_trans_tahap_pengurusan' => $transLaporanPemberitahuanSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
+                'laporan' => $transLaporanPemberitahuanSuratPaksa['LAPORAN'],
+                'created_by' => $transLaporanPemberitahuanSuratPaksa['CREATED_BY'],
+                'created_at' => $transLaporanPemberitahuanSuratPaksa['CREATED_AT'],
+                'updated_by' => $transLaporanPemberitahuanSuratPaksa['UPDATED_BY'],
+                'updated_at' => $transLaporanPemberitahuanSuratPaksa['UPDATED_AT']
             ];
         }, $this->listTransLaporanPemberitahuanSuratPaksaFocusPN->toArray());
 
