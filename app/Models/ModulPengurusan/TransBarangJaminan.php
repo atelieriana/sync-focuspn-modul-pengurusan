@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransBarangJaminan extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_BARANG_JAMINAN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_barang_jaminan';
     public $timestamps = false;
 }

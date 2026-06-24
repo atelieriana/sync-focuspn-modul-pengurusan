@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransHasilVerifikasiPPN extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_HASIL_VERIFIKASI_PPN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_hasil_verifikasi_ppn';
     public $timestamps = false;
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransDihapusMutlak extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_DIHAPUS_MUTLAK';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_dihapus_mutlak';
     public $timestamps = false;
 }

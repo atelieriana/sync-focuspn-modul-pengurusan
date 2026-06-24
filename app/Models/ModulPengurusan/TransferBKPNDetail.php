@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransferBKPNDetail extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANSFER_BKPN_DETAIL';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'transfer_bkpn_detail';
     public $timestamp = false;
 }

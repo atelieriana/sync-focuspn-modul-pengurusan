@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransKeringananSetuju extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_KERINGANAN_SETUJU';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_keringanan_setuju';
     public $timestamps = false;
 }
