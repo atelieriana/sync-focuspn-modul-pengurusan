@@ -95,7 +95,7 @@ class SyncTransRekonsiliasi extends Command
                 'id_ref_satuan_kerja_kreditur' => $transRekonsiliasi['ID_REF_SATUAN_KERJA_KREDITUR'],
                 'tahun' => $transRekonsiliasi['TAHUN'],
                 'periode' => $transRekonsiliasi['PERIODE'],
-                'nomor_bar_penyerah_piutang' => $transRekonsiliasi['NOMOR_BAR_PENYERAH_PIUTANG'],
+                'nomor_bar_penyerahan_piutang' => $transRekonsiliasi['NOMOR_BAR_PENYERAH_PIUTANG'],
                 'nomor_bar_kpknl' => $transRekonsiliasi['NOMOR_BAR_KPKNL'],
                 'tanggal_rekon' => $transRekonsiliasi['TANGGAL_REKON'],
                 'path_to_file' => $this->cloneFile($transRekonsiliasi['PATH_TO_FILE'], $transRekonsiliasi['CREATED_AT']),
@@ -178,8 +178,8 @@ class SyncTransRekonsiliasi extends Command
     {
         $this->remappingTransRekonsiliasiModulPengurusan = array_map(function($transRekonsiliasi){
             return [
-                'ID' => $transRekonsiliasi['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transRekonsiliasi['ID']
+                'ID' => $transRekonsiliasi['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transRekonsiliasi['id']
             ];
         }, $this->listTransRekonsiliasiModulPengurusan->toArray());
         return $this;

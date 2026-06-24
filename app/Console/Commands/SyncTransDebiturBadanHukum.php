@@ -102,7 +102,7 @@ class SyncTransDebiturBadanHukum extends Command
             return [
                 'uuid' => Str::uuid()->toString(),
                 'id_focuspn' => $transDebiturBadanHukum['ID_FOCUSPN'],
-                'id_trans_debitu' => $transDebiturBadanHukum['ID_TRANS_DEBITUR'],
+                'id_trans_debitur' => $transDebiturBadanHukum['ID_TRANS_DEBITUR'],
                 'npwp_badan_hukum' => $transDebiturBadanHukum['NPWP'],
                 'created_by' => $transDebiturBadanHukum['CREATED_BY'],
                 'created_at' => $transDebiturBadanHukum['CREATED_AT'],

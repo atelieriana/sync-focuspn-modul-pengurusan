@@ -98,7 +98,7 @@ class SyncTransTahapPengurusan extends Command
                 'tanggal_tahap' => $transTahapPengurusan['TANGGAL_TAHAP'],
                 'validasi_kanwil' => $transTahapPengurusan['VALIDASI_KANWIL'] == 1,
                 'validasi_kanwil_at' => $transTahapPengurusan['VALIDASI_KANWIL_AT'],
-                'valdiasi_pusat' => $transTahapPengurusan['VALIDASI_PUSAT'] == 1,
+                'validasi_pusat' => $transTahapPengurusan['VALIDASI_PUSAT'] == 1,
                 'validasi_pusat_at' => $transTahapPengurusan['VALIDASI_PUSAT_AT'],
                 'created_by' => $transTahapPengurusan['CREATED_BY'],
                 'created_at' => $transTahapPengurusan['CREATED_AT'],

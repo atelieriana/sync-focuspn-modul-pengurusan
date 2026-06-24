@@ -113,7 +113,7 @@ class SyncTransKeringananSetuju extends Command
                 'cp_total_bayar_rencana_1' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_1'],
                 'cp_total_bayar_rencana_2' => $transKeringananSetuju['CP_TOTAL_BAYAR_RENCANA_2'],
                 'cp_biad_kalkulasi_sistem_1' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_1'],
-                'cp_biad_kalkulasi_sistem2' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_2'],
+                'cp_biad_kalkulasi_sistem_2' => $transKeringananSetuju['CP_BIAD_KALKULASI_SISTEM_2'],
                 'id_ref_biad' => $transKeringananSetuju['ID_REF_BIAD'],
                 'cp_kategori_diskon_waktu' => $transKeringananSetuju['CP_KATEGORI_DISKON_WAKTU'],
                 'ref' => $transKeringananSetuju['REF'],

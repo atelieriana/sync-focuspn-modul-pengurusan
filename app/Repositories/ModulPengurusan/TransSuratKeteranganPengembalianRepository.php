@@ -9,7 +9,7 @@ class TransSuratKeteranganPengembalianRepository extends TransSuratKeteranganPen
     public function deleteByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
         return self::whereIn('id_trans_piutang', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ud')
+            $subQuery->select('id')
                 ->from('trans_piutang')
                 ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
         })
@@ -19,7 +19,7 @@ class TransSuratKeteranganPengembalianRepository extends TransSuratKeteranganPen
     public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {
         return self::whereIn('id_trans_piutang', function($subQuery) use ($idSatuanKerjaKPKNL){
-            $subQuery->select('ud')
+            $subQuery->select('id')
                 ->from('trans_piutang')
                 ->where('id_ref_satuan_kerja_kpknl', $idSatuanKerjaKPKNL);
         })
