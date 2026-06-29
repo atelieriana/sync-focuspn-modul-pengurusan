@@ -6,6 +6,7 @@ use App\Repositories\FocusPN\MigrasiTransTahapPengurusanRepository;
 use App\Repositories\FocusPN\TTahapRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransTahapPengurusanRepository;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -100,10 +101,10 @@ class SyncTransTahapPengurusan extends Command
                 'validasi_kanwil_at' => $transTahapPengurusan['VALIDASI_KANWIL_AT'],
                 'validasi_pusat' => $transTahapPengurusan['VALIDASI_PUSAT'] == 1,
                 'validasi_pusat_at' => $transTahapPengurusan['VALIDASI_PUSAT_AT'],
-                'created_by' => $transTahapPengurusan['CREATED_BY'],
-                'created_at' => $transTahapPengurusan['CREATED_AT'],
-                'updated_by' => $transTahapPengurusan['UPDATED_BY'],
-                'updated_at' => $transTahapPengurusan['UPDATED_AT'],
+                'created_by' => $transTahapPengurusan['CREATED_BY'] ?? '-',
+                'created_at' => $transTahapPengurusan['CREATED_AT'] ?? Carbon::parse($transTahapPengurusan['TANGGAL_TAHAP']),
+                'updated_by' => $transTahapPengurusan['UPDATED_BY'] ?? '-',
+                'updated_at' => $transTahapPengurusan['UPDATED_AT'] ?? Carbon::parse($transTahapPengurusan['TANGGAL_TAHAP']),
             ];
         }, $this->listTransTahapPengurusanFocusPN->toArray());
         return $this;

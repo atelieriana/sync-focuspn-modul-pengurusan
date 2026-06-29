@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class SyncTransPermintaanBantuanSuratPaksa extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 50;
+    const TOTAL_DATA_EACH_CHUNK = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPermintaanBantuanSuratPaksaRepository $migrasiTransPermintaanBantuanSuratPaksaRepository;

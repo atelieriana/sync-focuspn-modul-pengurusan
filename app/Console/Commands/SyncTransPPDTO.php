@@ -98,7 +98,7 @@ class SyncTransPPDTO extends Command
                 'validasi_kpknl' => $transPPDTO['VALIDASI_KPKNL'] == 1,
                 'validasi_kpknl_by' => $transPPDTO['VALIDASI_KPKNL_BY'],
                 'validasi_kpknl_at' => $transPPDTO['VALIDASI_KPKNL_AT'],
-                'valdiasi_kanwil' => $transPPDTO['VALIDASI_KANWIL'] == 1,
+                'validasi_kanwil' => $transPPDTO['VALIDASI_KANWIL'] == 1,
                 'validasi_kanwil_by' => $transPPDTO['VALIDASI_KANWIL_BY'],
                 'validasi_kanwil_at' => $transPPDTO['VALIDASI_KANWIL_AT'],
                 'validasi_pusat' => $transPPDTO['VALIDASI_PUSAT'] == 1,

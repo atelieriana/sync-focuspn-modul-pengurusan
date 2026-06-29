@@ -6,6 +6,7 @@ use App\Repositories\FocusPN\MigrasiTransKeringananSetujuRepository;
 use App\Repositories\FocusPN\TKeringananSetujuRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
 use App\Repositories\ModulPengurusan\TransKeringananSetujuRepository;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -121,10 +122,10 @@ class SyncTransKeringananSetuju extends Command
                 'flag_pkh' => $transKeringananSetuju['FLAG_PKH'],
                 'bobot_norma_waktu' => $transKeringananSetuju['BOBOT_NORMA_WAKTU'],
                 'tanggal_pelunasan_pembayaran' => $transKeringananSetuju['TANGGAL_PELUNASAN_PEMBAYARAN'],
-                'created_by' => $transKeringananSetuju['CREATED_BY'],
-                'created_at' => $transKeringananSetuju['CREATED_AT'],
-                'updated_by' => $transKeringananSetuju['UPDATED_BY'],
-                'updated_at' => $transKeringananSetuju['UPDATED_AT']
+                'created_by' => $transKeringananSetuju['CREATED_BY'] ?? '-',
+                'created_at' => $transKeringananSetuju['CREATED_AT'] ?? Carbon::parse($transKeringananSetuju['TANGGAL_TAHAP']),
+                'updated_by' => $transKeringananSetuju['UPDATED_BY'] ?? '-',
+                'updated_at' => $transKeringananSetuju['UPDATED_AT'] ?? Carbon::parse($transKeringananSetuju['TANGGAL_TAHAP'])
             ];
         }, $this->listTransKeringananSetujuFocusPN->toArray());
         return $this;

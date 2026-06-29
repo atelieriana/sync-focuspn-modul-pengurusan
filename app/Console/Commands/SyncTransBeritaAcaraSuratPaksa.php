@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class SyncTransBeritaAcaraSuratPaksa extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 50;
+    const TOTAL_DATA_EACH_CHUNK = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransBeritaAcaraSuratPaksaRepository $migrasiTransBeritaAcaraSuratPaksaRepository;
@@ -173,6 +173,8 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
                 && trim($jurusitaData['nomor_sk_jurusita']) == trim($nomorSKJurusita)) {
                 return $key;
             }
+
+            return null;
         }
 
         return $this;
