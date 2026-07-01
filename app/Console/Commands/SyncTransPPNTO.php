@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use App\Repositories\FocusPN\MigrasiTransPPNTORepository;
 use App\Repositories\FocusPN\TPPNTORepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
-use App\Repositories\ModulPengurusan\TransPPNTORepository;
-use Exception;
+use App\Repositories\ModulPengurusan\TransPernyataanPiutangTelahOptimalRepository;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -16,11 +16,12 @@ use Illuminate\Support\Str;
 class SyncTransPPNTO extends Command
 {
     const TOTAL_DATA_EACH_CHUNK = 50;
+    const ID_REF_JENIS_PERNYATAAN_PPNTO = 1;
     private DB $database;
     private Storage $storage;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPPNTORepository $migrasiTransPPNTORepository;
-    private TransPPNTORepository $transPPNTORepository;
+    private TransPernyataanPiutangTelahOptimalRepository $transPernyataanPiutangTelahOptimalRepository;
     private Collection $listTransPPNTOFocusPN;
     private Collection $listTransPPNTOModulPengurusan;
     private int $idSatuanKerja;
@@ -34,7 +35,7 @@ class SyncTransPPNTO extends Command
         $this->storage = new Storage();
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
         $this->migrasiTransPPNTORepository = new MigrasiTransPPNTORepository();
-        $this->transPPNTORepository = new TransPPNTORepository();
+        $this->transPernyataanPiutangTelahOptimalRepository = new TransPernyataanPiutangTelahOptimalRepository();
     }
 
     /**
@@ -91,8 +92,9 @@ class SyncTransPPNTO extends Command
                 'uuid' => Str::uuid()->toString(),
                 'id_ref_satuan_kerja_kpknl' => $transPPNTO['ID_REF_SATUAN_KERJA_KPKNL'],
                 'id_ref_satuan_kerja_kreditur' => $transPPNTO['ID_REF_SATUAN_KERJA_KREDITUR'],
-                'nomor_ppnto' => $transPPNTO['NOMOR_PPNTO'],
-                'tanggal_ppnto' => $transPPNTO['TANGGAL_PPNTO'],
+                'id_ref_jenis_pernyataan_piutang_telah_optimal' => self::ID_REF_JENIS_PERNYATAAN_PPNTO,
+                'nomor_pernyataan' => $transPPNTO['NOMOR_PPNTO'],
+                'tanggal_pernyataan' => $transPPNTO['TANGGAL_PPNTO'],
                 'nama_debitur' => $transPPNTO['NAMA_DEBITUR'],
                 'path_to_file' => $this->cloneFile($transPPNTO['PATH_TO_FILE'], $transPPNTO['CREATED_AT']),
                 'validasi_kpknl' => $transPPNTO['VALIDASI_KPKNL'] == 1,
@@ -135,7 +137,7 @@ class SyncTransPPNTO extends Command
 
     private function deleteOldData()
     {
-        $this->transPPNTORepository->deleteByIdSatuanKerjaKPKNL($this->idSatuanKerja);
+        $this->transPernyataanPiutangTelahOptimalRepository->deleteByIdSatuanKerjaKPKNLAndJenisPernyataan($this->idSatuanKerja, self::ID_REF_JENIS_PERNYATAAN_PPNTO);
         return $this;
     }
 
@@ -150,8 +152,8 @@ class SyncTransPPNTO extends Command
             $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
-                $transPPNTORepository = new TransPPNTORepository();
-                $transPPNTORepository->insert($chunk->toArray());
+                $transPernyataanPiutangTelahOptimalRepository = new TransPernyataanPiutangTelahOptimalRepository();
+                $transPernyataanPiutangTelahOptimalRepository->insert($chunk->toArray());
                 $progressBar->advance();
             }
 
@@ -168,7 +170,7 @@ class SyncTransPPNTO extends Command
 
     private function getListTransPPNTOModulPengurusan()
     {
-        $this->listTransPPNTOModulPengurusan = $this->transPPNTORepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerja);
+        $this->listTransPPNTOModulPengurusan = $this->transPernyataanPiutangTelahOptimalRepository->getByIdSatuanKerjaKPKNLAndJenisPernyataan($this->idSatuanKerja, self::ID_REF_JENIS_PERNYATAAN_PPNTO);
         return $this;
     }
 

@@ -229,9 +229,9 @@ class SyncDataTrans extends Command
         ]);
 
         // Sync Trans Dihapus Mutlak
-        $this->call('sync:trans-dihapus-mutlak',[
-            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
-        ]);
+        // $this->call('sync:trans-dihapus-mutlak',[
+        //     'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+        // ]);
 
         // Sync Trans Surat Paksa
         $this->call('sync:trans-surat-paksa',[

@@ -166,8 +166,6 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
      */
     private function searchReferensiJurusita(string $nipJurusita, string $namaJurusita, string $nomorSKJurusita)
     {
-        echo $nipJurusita;
-        exit();
         foreach ($this->remappingRefJurusita as $key => $jurusitaData)
         {
             if ($jurusitaData['nip'] == $nipJurusita
