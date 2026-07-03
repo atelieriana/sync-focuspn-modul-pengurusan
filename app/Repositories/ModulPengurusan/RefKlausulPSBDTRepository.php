@@ -8,10 +8,10 @@ class RefKlausulPSBDTRepository extends RefKlausulPSBDT
 {
     public function getByIdSatuanKerja(int $idSatuanKerja)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerja)
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerja)
             ->get();
     }
-    
+
     /**
      * Digunakan untuk melakukan penghapusan klausul PSBDT berdasarkan id satuan kerja
      * @param $idSatuanKerja
@@ -19,6 +19,6 @@ class RefKlausulPSBDTRepository extends RefKlausulPSBDT
      */
     public function deleteByIdSatuanKerja($idSatuanKerja)
     {
-        return self::where('ID_REF_SATUAN_KERJA_KPKNL', $idSatuanKerja)->forceDelete();
+        return self::where('id_ref_satuan_kerja_kpknl', $idSatuanKerja)->forceDelete();
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransKoreksi extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_KOREKSI';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_koreksi';
     public $timestamps = false;
 }

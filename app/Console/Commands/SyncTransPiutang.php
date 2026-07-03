@@ -73,7 +73,7 @@ class SyncTransPiutang extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -97,32 +97,32 @@ class SyncTransPiutang extends Command
     {
         $this->remappingListTransPiutangFocusPN = array_map(function ($transPiutang) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_REF_SATUAN_KERJA_KREDITUR' => $transPiutang['ID_REF_SATUAN_KERJA_KREDITUR'],
-                'ID_REF_KLASIFIKASI_PIUTANG' => $transPiutang['ID_REF_KLASIFIKASI_PIUTANG'],
-                'ID_REF_SUMBER_PENYERAHAN' => $transPiutang['ID_REF_SUMBER_PENYERAHAN'],
-                'ID_REF_JENIS_USAHA' => null,
-                'TANGGAL_TERJADI_PIUTANG' => $transPiutang['TANGGAL_TERJADI_PIUTANG'],
-                'TANGGAL_JATUH_TEMPO' => $transPiutang['TANGGAL_JATUH_TEMPO'],
-                'NOMOR_AGENDA' => $transPiutang['NOMOR_AGENDA'] ?? null,
-                'TANGGAL_AGENDA' => $transPiutang['TANGGAL_AGENDA'],
-                'NOMOR_PENYERAHAN' => $transPiutang['NOMOR_PENYERAHAN'] ?? null,
-                'TANGGAL_PENYERAHAN' => $transPiutang['TANGGAL_PENYERAHAN'],
-                'KODE_PIUTANG' => null,
-                'NOMOR_PIUTANG' => null,
-                'NOMOR_REGISTER_PIUTANG' => $transPiutang['NOMOR_REGISTER_PIUTANG'],
-                'BULAN_REGISTER_PIUTANG' => $transPiutang['BULAN_REGISTER_PIUTANG'],
-                'TAHUN_REGISTER_PIUTANG' => $transPiutang['TAHUN_REGISTER_PIUTANG'],
-                'KEADAAN_USAHA' => $transPiutang['KEADAAN_USAHA'],
-                'PERMASALAHAN_PIUTANG' => $transPiutang['PERMASALAHAN_PIUTANG'] ?? null,
-                'PENDAPAT' => $transPiutang['PENDAPAT'] ?? null,
-                'SARAN' => $transPiutang['SARAN'] ?? null,
-                'CREATED_BY' => $transPiutang['CREATED_BY'] ?? 'Migrasi FocusPN',
-                'CREATED_AT' => $transPiutang['CREATED_AT'],
-                'UPDATED_BY' => $transPiutang['UPDATED_BY'] ?? 'Migrasi FocusPN',
-                'UPDATED_AT' => $transPiutang['UPDATED_AT'],
-                'ID_FOCUSPN' => $transPiutang['ID_FOCUSPN'],
+                'uuid' => Str::uuid()->toString(),
+                'id_ref_satuan_kerja_kpknl' => $transPiutang['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_ref_satuan_kerja_kreditur' => $transPiutang['ID_REF_SATUAN_KERJA_KREDITUR'],
+                'id_ref_klasifikasi_piutang' => $transPiutang['ID_REF_KLASIFIKASI_PIUTANG'],
+                'id_ref_sumber_penyerahan' => $transPiutang['ID_REF_SUMBER_PENYERAHAN'],
+                'id_ref_jenis_usaha' => null,
+                'tanggal_terjadi_piutang' => $transPiutang['TANGGAL_TERJADI_PIUTANG'],
+                'tanggal_jatuh_tempo' => $transPiutang['TANGGAL_JATUH_TEMPO'],
+                'nomor_agenda' => $transPiutang['NOMOR_AGENDA'] ?? null,
+                'tanggal_agenda' => $transPiutang['TANGGAL_AGENDA'],
+                'nomor_penyerahan' => $transPiutang['NOMOR_PENYERAHAN'] ?? null,
+                'tanggal_penyerahan' => $transPiutang['TANGGAL_PENYERAHAN'],
+                'kode_piutang' => null,
+                'nomor_piutang' => null,
+                'nomor_register_piutang' => $transPiutang['NOMOR_REGISTER_PIUTANG'],
+                'bulan_register_piutang' => $transPiutang['BULAN_REGISTER_PIUTANG'],
+                'tahun_register_piutang' => $transPiutang['TAHUN_REGISTER_PIUTANG'],
+                'keadaan_usaha' => $transPiutang['KEADAAN_USAHA'],
+                'permasalahan_piutang' => $transPiutang['PERMASALAHAN_PIUTANG'] ?? null,
+                'pendapat' => $transPiutang['PENDAPAT'] ?? null,
+                'saran' => $transPiutang['SARAN'] ?? null,
+                'created_by' => $transPiutang['CREATED_BY'] ?? 'Migrasi FocusPN',
+                'created_at' => $transPiutang['CREATED_AT'],
+                'updated_by' => $transPiutang['UPDATED_BY'] ?? 'Migrasi FocusPN',
+                'updated_at' => $transPiutang['UPDATED_AT'],
+                'id_focuspn' => $transPiutang['ID_FOCUSPN'],
             ];
         }, $this->listTransPiutangFocusPN->toArray());
         return $this;
@@ -198,8 +198,8 @@ class SyncTransPiutang extends Command
     {
         $this->remappingListTransPiutangModulPengurusan = array_map(function ($transPiutang) {
             return [
-                'ID' => $transPiutang['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPiutang['ID']
+                'ID' => $transPiutang['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPiutang['id']
             ];
         }, $this->listTransPiutangModulPengurusan->toArray());
 

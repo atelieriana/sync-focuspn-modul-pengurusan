@@ -4,8 +4,8 @@ namespace App\Models\FocusPN;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MigrasiTransDihapusMutlak extends Model
+class MigrasiInterkoneksiOJK extends Model
 {
     protected $connection = 'oracle_focuspn';
-    protected $table = 'MIGRASI_TRANS_DIHAPUS_MUTLAK';
+    protected $table = 'MIGRASI_INTERKONEKSI_OJK';
 }

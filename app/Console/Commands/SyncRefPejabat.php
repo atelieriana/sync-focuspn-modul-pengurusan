@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ModulPengurusan\RefPejabat;
 use App\Repositories\FocusPN\MigrasiRefPejabatRepository;
 use App\Repositories\ModulPengurusan\RefPejabatRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
@@ -66,7 +65,7 @@ class SyncRefPejabat extends Command
     private function setSatuanKerja()
     {
         $this->kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $this->idSatuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->ID;
+        $this->idSatuanKerja = (int) $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->id;
         return $this;
     }
 
@@ -115,22 +114,22 @@ class SyncRefPejabat extends Command
             foreach ($this->listPejabat as $pejabat)
             {
                 $refPejabat = new RefPejabatRepository();
-                $refPejabat->UUID = Str::uuid();
-                $refPejabat->ID_REF_SATUAN_KERJA = $pejabat->ID_REF_SATUAN_KERJA;
-                $refPejabat->ID_REF_JABATAN = $pejabat->ID_REF_JABATAN;
-                $refPejabat->ID_REF_STATUS_PEJABAT = self::STATUS_PEJABAT_AKTIF;
-                $refPejabat->NAMA = $pejabat->NAMA;
-                $refPejabat->NIP = $pejabat->NIP;
-                $refPejabat->TELEPON = $pejabat->TELEPON;
-                $refPejabat->EMAIL = $pejabat->EMAIL;
-                $refPejabat->JENIS_KELAMIN = $pejabat->JENIS_KELAMIN;
-                $refPejabat->NOMOR_SK_PENGANGKATAN = $pejabat->NOMOR_SK_PENGANGKATAN;
-                $refPejabat->TANGGAL_SK_PENGANGKATAN = $pejabat->TANGGAL_SK_PENGKATAN;
-                $refPejabat->PERIHAL_SK_PENGANGKATAN = $pejabat->PERIHAL_SK_PENGKATAN;
-                $refPejabat->CREATED_BY = $pejabat->CREATED_BY;
-                $refPejabat->CREATED_AT = $pejabat->CREATED_AT;
-                $refPejabat->UPDATED_BY = $pejabat->UPDATED_BY;
-                $refPejabat->UPDATED_AT = $pejabat->UPDATED_AT;
+                $refPejabat->uuid = Str::uuid();
+                $refPejabat->id_ref_satuan_kerja = $pejabat->ID_REF_SATUAN_KERJA;
+                $refPejabat->id_ref_jabatan = $pejabat->ID_REF_JABATAN;
+                $refPejabat->id_ref_status_pejabat = self::STATUS_PEJABAT_AKTIF;
+                $refPejabat->nama = $pejabat->NAMA;
+                $refPejabat->nip = $pejabat->NIP;
+                $refPejabat->telepon = $pejabat->TELEPON;
+                $refPejabat->email = $pejabat->EMAIL;
+                $refPejabat->jenis_kelamin = $pejabat->JENIS_KELAMIN;
+                $refPejabat->nomor_sk_pengangkatan = $pejabat->NOMOR_SK_PENGANGKATAN;
+                $refPejabat->tanggal_sk_pengangkatan = $pejabat->TANGGAL_SK_PENGKATAN;
+                $refPejabat->perihal_sk_pengangkatan = $pejabat->PERIHAL_SK_PENGKATAN;
+                $refPejabat->created_by = $pejabat->CREATED_BY;
+                $refPejabat->created_at = $pejabat->CREATED_AT;
+                $refPejabat->updated_by = $pejabat->UPDATED_BY;
+                $refPejabat->updated_at = $pejabat->UPDATED_AT;
                 $refPejabat->save();
             }
 

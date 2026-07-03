@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransSuratKeteranganPengembalian extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_SURAT_KETERANGAN_PENGEMBALIAN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_surat_keterangan_pengembalian';
     public $timestamps = false;
 }

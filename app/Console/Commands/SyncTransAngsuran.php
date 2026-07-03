@@ -73,7 +73,7 @@ class SyncTransAngsuran extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,31 +89,31 @@ class SyncTransAngsuran extends Command
     {
         $this->remappingListTransAngsuranFocusPN = array_map(function ($transAngsuran){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transAngsuran['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_REF_JENIS_PEMBAYARAN' => $transAngsuran['ID_REF_JENIS_PEMBAYARAN'],
-                'ID_REF_REKENING_TUJUAN_PEMBAYARAN' => $transAngsuran['ID_REF_REKENING_TUJUAN_PEMBAYARAN'],
-                'ID_REF_BIAD' => $transAngsuran['ID_REF_BIAD'],
-                'ID_REF_MATA_UANG' => $transAngsuran['ID_REF_MATA_UANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transAngsuran['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_FOCUSPN' => $transAngsuran['ID_FOCUSPN'],
-                'BANK_KORESPONDEN' => $transAngsuran['BANK_KORESPONDEN'],
-                'NOMOR_PEMBAYARAN' => $transAngsuran['NOMOR_PEMBAYARAN'],
-                'TANGGAL_PEMBAYARAN' => $transAngsuran['TANGGAL_PEMBAYARAN'],
-                'NOMOR_CREDIT_NOTA' => $transAngsuran['NOMOR_CREDIT_NOTA'],
-                'TANGGAL_CREDIT_NOTA' => $transAngsuran['TANGGAL_CREDIT_NOTA'],
-                'NOMOR_NTPN' => $transAngsuran['NOMOR_NTPN'],
-                'TANGGAL_NTPN' => $transAngsuran['TANGGAL_NTPN'],
-                'HAK_KREDITUR' => $transAngsuran['HAK_KREDITUR'],
-                'HAK_NEGARA' => $transAngsuran['HAK_NEGARA'],
-                'LEBIH_BAYAR' => $transAngsuran['LEBIH_BAYAR'],
-                'LEBIH_BAYAR_PENYERAH_PIUTANG' => $transAngsuran['LEBIH_BAYAR_PENYERAH_PIUTANG'],
-                'LEBIH_BAYAR_PENANGGUNG_HUTANG' => $transAngsuran['LEBIH_BAYAR_PENANGGUNG_HUTANG'],
-                'KETERANGAN' => $transAngsuran['KETERANGAN'],
-                'CREATED_BY' => $transAngsuran['CREATED_BY'] ?? '-',
-                'CREATED_AT' => $transAngsuran['CREATED_AT'],
-                'UPDATED_BY' => $transAngsuran['UPDATED_BY'] ?? '-',
-                'UPDATED_AT' => $transAngsuran['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transAngsuran['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_ref_jenis_pembayaran' => $transAngsuran['ID_REF_JENIS_PEMBAYARAN'],
+                'id_ref_rekening_tujuan_pembayaran' => $transAngsuran['ID_REF_REKENING_TUJUAN_PEMBAYARAN'],
+                'id_ref_biad' => $transAngsuran['ID_REF_BIAD'],
+                'id_ref_mata_uang' => $transAngsuran['ID_REF_MATA_UANG'],
+                'id_ref_satuan_kerja_kpknl' => $transAngsuran['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_focuspn' => $transAngsuran['ID_FOCUSPN'],
+                'bank_koresponden' => $transAngsuran['BANK_KORESPONDEN'],
+                'nomor_pembayaran' => $transAngsuran['NOMOR_PEMBAYARAN'],
+                'tanggal_pembayaran' => $transAngsuran['TANGGAL_PEMBAYARAN'],
+                'nomor_credit_nota' => $transAngsuran['NOMOR_CREDIT_NOTA'],
+                'tanggal_credit_nota' => $transAngsuran['TANGGAL_CREDIT_NOTA'],
+                'nomor_ntpn' => $transAngsuran['NOMOR_NTPN'],
+                'tanggal_ntpn' => $transAngsuran['TANGGAL_NTPN'],
+                'hak_kreditur' => $transAngsuran['HAK_KREDITUR'],
+                'hak_negara' => $transAngsuran['HAK_NEGARA'],
+                'lebih_bayar' => $transAngsuran['LEBIH_BAYAR'],
+                'lebih_bayar_penyerah_piutang' => $transAngsuran['LEBIH_BAYAR_PENYERAH_PIUTANG'],
+                'lebih_bayar_penanggung_hutang' => $transAngsuran['LEBIH_BAYAR_PENANGGUNG_HUTANG'],
+                'keterangan' => $transAngsuran['KETERANGAN'],
+                'created_by' => $transAngsuran['CREATED_BY'] ?? '-',
+                'created_at' => $transAngsuran['CREATED_AT'],
+                'updated_by' => $transAngsuran['UPDATED_BY'] ?? '-',
+                'updated_at' => $transAngsuran['UPDATED_AT'],
             ];
         }, $this->listTransAngsuranFocusPN->toArray());
 
@@ -171,8 +171,8 @@ class SyncTransAngsuran extends Command
     {
         $this->remappingListTransAngsuranMdoulPengurusan = array_map(function ($transAngsuran) {
             return [
-                'ID' => $transAngsuran['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transAngsuran['ID'],
+                'ID' => $transAngsuran['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transAngsuran['id'],
             ];
         }, $this->listTransAngsuranModulPengurusan->toArray());
 

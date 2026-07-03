@@ -74,7 +74,7 @@ class SyncTransDebiturPerseorangan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -100,16 +100,16 @@ class SyncTransDebiturPerseorangan extends Command
     {
         $this->remappingDebiturPerseoranganFocusPN = array_map(function ($transDebiturPerseorangan) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transDebiturPerseorangan['ID_FOCUSPN'],
-                'ID_TRANS_DEBITUR' => $transDebiturPerseorangan['ID_TRANS_DEBITUR'],
-                'KTP' => $transDebiturPerseorangan['KTP'],
-                'NPWP' => $transDebiturPerseorangan['NPWP'],
-                'PASPOR' => $transDebiturPerseorangan['PASPOR'],
-                'CREATED_BY' => $transDebiturPerseorangan['CREATED_BY'],
-                'CREATED_AT' => $transDebiturPerseorangan['CREATED_AT'],
-                'UPDATED_BY' => $transDebiturPerseorangan['UPDATED_BY'],
-                'UPDATED_AT' => $transDebiturPerseorangan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transDebiturPerseorangan['ID_FOCUSPN'],
+                'id_trans_debitur' => $transDebiturPerseorangan['ID_TRANS_DEBITUR'],
+                'ktp' => $transDebiturPerseorangan['KTP'],
+                'npwp' => $transDebiturPerseorangan['NPWP'],
+                'paspor' => $transDebiturPerseorangan['PASPOR'],
+                'created_by' => $transDebiturPerseorangan['CREATED_BY'],
+                'created_at' => $transDebiturPerseorangan['CREATED_AT'],
+                'updated_by' => $transDebiturPerseorangan['UPDATED_BY'],
+                'updated_at' => $transDebiturPerseorangan['UPDATED_AT']
             ];
         }, $this->listDebiturPerseoranganFocusPN->toArray());
 
@@ -190,8 +190,8 @@ class SyncTransDebiturPerseorangan extends Command
     {
         $this->remappingDebiturPerseoranganModulPengurusan = array_map(function ($transDebiturPerseorangan) {
             return [
-                'ID' => $transDebiturPerseorangan['ID_FOCUSPN'],
-                'ID_TRANS_DEBITUR_PERSEORANGAN' => $transDebiturPerseorangan['ID']
+                'ID' => $transDebiturPerseorangan['id_focuspn'],
+                'ID_TRANS_DEBITUR_PERSEORANGAN' => $transDebiturPerseorangan['id']
             ];
         }, $this->listDebiturPerseoranganModulPengurusan->toArray());
 

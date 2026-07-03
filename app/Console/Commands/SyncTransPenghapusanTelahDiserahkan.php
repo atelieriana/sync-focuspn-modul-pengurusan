@@ -2,23 +2,23 @@
 
 namespace App\Console\Commands;
 
+use App\Repositories\ModulPengurusan\TransPenghapusanPiutangTelahDiserahkanRepository;
 use Exception;
-use App\Repositories\FocusPN\MigrasiTransDihapusMutlakRepository;
+use App\Repositories\FocusPN\MigrasiTransPenghapusanPiutangTelahDiserahkanRepository;
 use App\Repositories\FocusPN\TSPTDMHapusRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
-use App\Repositories\ModulPengurusan\TransDihapusMutlakRepository;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class SyncTransDihapusMutlak extends Command
+class SyncTransPenghapusanTelahDiserahkan extends Command
 {
     const TOTAL_DATA_EACH_CHUNK = 50;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
-    private MigrasiTransDihapusMutlakRepository $migrasiTransDihapusMutlakRepository;
-    private TransDihapusMutlakRepository $transDihapusMutlakRepository;
+    private MigrasiTransPenghapusanPiutangTelahDiserahkanRepository $migrasiTransPenghapusanPiutangTelahDiserahkanRepository;
+    private TransPenghapusanPiutangTelahDiserahkanRepository $transPenghapusanPiutangTelahDiserahkanRepository;
     private Collection $listTransDihapusMutlakFocusPN;
     private Collection $listTransDihapusMutlakModulPengurusan;
     private int $idSatuanKerjaKPKNL;
@@ -30,8 +30,8 @@ class SyncTransDihapusMutlak extends Command
         parent::__construct();
         $this->database = new DB();
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
-        $this->migrasiTransDihapusMutlakRepository = new MigrasiTransDihapusMutlakRepository();
-        $this->transDihapusMutlakRepository = new TransDihapusMutlakRepository();
+        $this->migrasiTransPenghapusanPiutangTelahDiserahkanRepository = new MigrasiTransPenghapusanPiutangTelahDiserahkanRepository();
+        $this->transPenghapusanPiutangTelahDiserahkanRepository = new TransPenghapusanPiutangTelahDiserahkanRepository();
     }
 
     /**
@@ -39,7 +39,7 @@ class SyncTransDihapusMutlak extends Command
      *
      * @var string
      */
-    protected $signature = 'sync:trans-dihapus-mutlak {kode-satuan-kerja : kode satuan kerja 6 digit}';
+    protected $signature = 'sync:trans-penghapusan-telah-diserahkan {kode-satuan-kerja : kode satuan kerja 6 digit}';
 
     /**
      * The console command description.
@@ -69,7 +69,7 @@ class SyncTransDihapusMutlak extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerjaKPKNL = $satuanKerja->ID;
+            $this->idSatuanKerjaKPKNL = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -77,7 +77,7 @@ class SyncTransDihapusMutlak extends Command
 
     private function getListTransDihapusMutlakFocusPN()
     {
-        $this->listTransDihapusMutlakFocusPN = $this->migrasiTransDihapusMutlakRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerjaKPKNL);
+        $this->listTransDihapusMutlakFocusPN = $this->migrasiTransPenghapusanPiutangTelahDiserahkanRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerjaKPKNL);
         return $this;
     }
 
@@ -85,19 +85,19 @@ class SyncTransDihapusMutlak extends Command
     {
         $this->remappingListTransDihapusMutlakFocusPN = array_map(function ($transDihapusMutlak) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transDihapusMutlak['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transDihapusMutlak['ID_TRANS_PIUTANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transDihapusMutlak['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN' => $transDihapusMutlak['ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN'],
-                'KEPUTUSAN_PENGHAPUSAN_OLEH' => $transDihapusMutlak['KEPUTUSAN_PENGHAPUSAN_OLEH'],
-                'NOMOR_KEPUTUSAN' => $transDihapusMutlak['NOMOR_KEPUTUSAN'],
-                'TANGGAL_KEPUTUSAN' => $transDihapusMutlak['TANGGAL_KEPUTUSAN'],
-                'PERIHAL_KEPUTUSAN' => $transDihapusMutlak['PERIHAL_KEPUTUSAN'],
-                'CREATED_BY' => $transDihapusMutlak['CREATED_BY'],
-                'CREATED_AT' => $transDihapusMutlak['CREATED_AT'],
-                'UPDATED_BY' => $transDihapusMutlak['UPDATED_BY'],
-                'UPDATED_AT' => $transDihapusMutlak['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transDihapusMutlak['ID_FOCUSPN'],
+                'id_trans_piutang' => $transDihapusMutlak['ID_TRANS_PIUTANG'],
+                'id_ref_satuan_kerja_kpknl' => $transDihapusMutlak['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_ref_jenis_keputusan_penghapusan' => $transDihapusMutlak['ID_REF_JENIS_KEPUTUSAN_PENGHAPUSAN'],
+                'id_ref_jenis_penghapusan' => $transDihapusMutlak['ID_REF_JENIS_PENGHAPUSAN'],
+                'nomor_sk_penghapusan' => $transDihapusMutlak['NOMOR_KEPUTUSAN'],
+                'tanggal_sk_penghapusan' => $transDihapusMutlak['TANGGAL_KEPUTUSAN'],
+                'perihal_sk_penghapusan' => $transDihapusMutlak['PERIHAL_KEPUTUSAN'],
+                'created_by' => $transDihapusMutlak['CREATED_BY'],
+                'created_at' => $transDihapusMutlak['CREATED_AT'],
+                'updated_by' => $transDihapusMutlak['UPDATED_BY'],
+                'updated_at' => $transDihapusMutlak['UPDATED_AT']
             ];
         }, $this->listTransDihapusMutlakFocusPN->toArray());
         return $this;
@@ -112,7 +112,7 @@ class SyncTransDihapusMutlak extends Command
 
     private function deleteOldData()
     {
-        $this->transDihapusMutlakRepository->deleteByIdSatuanKerja($this->idSatuanKerjaKPKNL);
+        $this->transPenghapusanPiutangTelahDiserahkanRepository->deleteByIdSatuanKerjaKPKNL($this->idSatuanKerjaKPKNL);
         return $this;
     }
 
@@ -127,8 +127,8 @@ class SyncTransDihapusMutlak extends Command
             $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
-                $transDihapusMutlakRepository = new TransDihapusMutlakRepository();
-                $transDihapusMutlakRepository->insert($chunk->toArray());
+                $transPenghapusanPiutangTelahDiserahkanReposity = new TransPenghapusanPiutangTelahDiserahkanRepository();
+                $transPenghapusanPiutangTelahDiserahkanReposity->insert($chunk->toArray());
                 $progressBar->advance();
             }
             $this->database::commit();
@@ -144,7 +144,7 @@ class SyncTransDihapusMutlak extends Command
 
     private function getListTransDihapusMutlakModulPengurusan()
     {
-        $this->listTransDihapusMutlakModulPengurusan = $this->transDihapusMutlakRepository->getByIdSatuanKerja($this->idSatuanKerjaKPKNL);
+        $this->listTransDihapusMutlakModulPengurusan = $this->transPenghapusanPiutangTelahDiserahkanRepository->getByIdSatuanKerjaKPKNL($this->idSatuanKerjaKPKNL);
         return $this;
     }
 
@@ -152,8 +152,8 @@ class SyncTransDihapusMutlak extends Command
     {
         $this->remappingListTransDihapusMutlakModulPengurusan = array_map(function($transDihapusMutlak){
             return [
-                'ID' => $transDihapusMutlak['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transDihapusMutlak['ID']
+                'ID' => $transDihapusMutlak['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transDihapusMutlak['id']
             ];
         }, $this->listTransDihapusMutlakModulPengurusan->toArray());
         return $this;

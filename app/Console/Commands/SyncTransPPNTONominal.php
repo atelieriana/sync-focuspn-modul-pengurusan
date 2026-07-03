@@ -6,7 +6,7 @@ use Exception;
 use App\Repositories\FocusPN\MigrasiTransPPNTONominalRepository;
 use App\Repositories\FocusPN\TPPNTONominalRepository;
 use App\Repositories\ModulPengurusan\RefSatuanKerjaRepository;
-use App\Repositories\ModulPengurusan\TransPPNTONominalRepository;
+use App\Repositories\ModulPengurusan\TransPernyataanPiutangTelahOptimalNominalRepository;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -15,10 +15,11 @@ use Illuminate\Support\Str;
 class SyncTransPPNTONominal extends Command
 {
     const TOTAL_DATA_EACH_CHUNK = 50;
+    const ID_REF_JENIS_PERNYATAAN_PPNTO = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPPNTONominalRepository $migrasiTransPPNTONominalRepository;
-    private TransPPNTONominalRepository $transPPNTONominalRepository;
+    private TransPernyataanPiutangTelahOptimalNominalRepository $transPernyataanPiutangTelahOptimalNominalRepository;
     private Collection $listTransPPNTONominalFocusPN;
     private Collection $listTransPPNTONominalModulPengurusan;
     private int $idSatuanKerja;
@@ -31,9 +32,9 @@ class SyncTransPPNTONominal extends Command
         $this->database = new DB();
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
         $this->migrasiTransPPNTONominalRepository = new MigrasiTransPPNTONominalRepository();
-        $this->transPPNTONominalRepository = new TransPPNTONominalRepository();
+        $this->transPernyataanPiutangTelahOptimalNominalRepository = new TransPernyataanPiutangTelahOptimalNominalRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -69,7 +70,7 @@ class SyncTransPPNTONominal extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,15 +86,15 @@ class SyncTransPPNTONominal extends Command
     {
         $this->remappingListTransPPNTONominalFocusPN = array_map(function($transPPNTONominal){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPPNTONominal['ID_FOCUSPN'],
-                'ID_TRANS_PPNTO' => $transPPNTONominal['ID_TRANS_PPNTO'],
-                'ID_REF_MATA_UANG' => $transPPNTONominal['ID_REF_MATA_UANG'],
-                'NOMINAL' => $transPPNTONominal['NOMINAL'],
-                'CREATED_BY' => $transPPNTONominal['CREATED_BY'],
-                'CREATED_AT' => $transPPNTONominal['CREATED_AT'],
-                'UPDATED_BY' => $transPPNTONominal['UPDATED_BY'],
-                'UPDATED_AT' => $transPPNTONominal['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPPNTONominal['ID_FOCUSPN'],
+                'id_trans_pernyataan_piutang_telah_optimal' => $transPPNTONominal['ID_TRANS_PPNTO'],
+                'id_ref_mata_uang' => $transPPNTONominal['ID_REF_MATA_UANG'],
+                'nominal' => $transPPNTONominal['NOMINAL'],
+                'created_by' => $transPPNTONominal['CREATED_BY'],
+                'created_at' => $transPPNTONominal['CREATED_AT'],
+                'updated_by' => $transPPNTONominal['UPDATED_BY'],
+                'updated_at' => $transPPNTONominal['UPDATED_AT']
             ];
         }, $this->listTransPPNTONominalFocusPN->toArray());
         return $this;
@@ -108,7 +109,7 @@ class SyncTransPPNTONominal extends Command
 
     private function deleteOldData()
     {
-        $this->transPPNTONominalRepository->deleteByIdSatuanKerjaKPKNL($this->idSatuanKerja);
+        $this->transPernyataanPiutangTelahOptimalNominalRepository->deleteByIdSatuanKerjaKPKNLAndJenisPernyataan($this->idSatuanKerja, self::ID_REF_JENIS_PERNYATAAN_PPNTO);
         return $this;
     }
 
@@ -123,8 +124,8 @@ class SyncTransPPNTONominal extends Command
             $progressBar = $this->output->createProgressBar(count($chunkData));
             foreach ($chunkData as $chunk)
             {
-                $transPPNTONominalRepository = new TransPPNTONominalRepository();
-                $transPPNTONominalRepository->insert($chunk->toArray());
+                $transPernyataanPiutangTelahOptimalNominalRepository = new TransPernyataanPiutangTelahOptimalNominalRepository();
+                $transPernyataanPiutangTelahOptimalNominalRepository->insert($chunk->toArray());
                 $progressBar->advance();
             }
 
@@ -141,7 +142,7 @@ class SyncTransPPNTONominal extends Command
 
     private function getListTransPPNTONominalModulPengurusan()
     {
-        $this->listTransPPNTONominalModulPengurusan = $this->transPPNTONominalRepository->getyIdSatuanKerjaKPKNL($this->idSatuanKerja);
+        $this->listTransPPNTONominalModulPengurusan = $this->transPernyataanPiutangTelahOptimalNominalRepository->getByIdSatuanKerjaKPKNLAndJenisPernyataan($this->idSatuanKerja, self::ID_REF_JENIS_PERNYATAAN_PPNTO);
         return $this;
     }
 
@@ -149,8 +150,8 @@ class SyncTransPPNTONominal extends Command
     {
         $this->remappingListTransPPNTONominalModulPengurusan = array_map(function($transPPNTONominal){
             return [
-                'ID' => $transPPNTONominal['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPPNTONominal['ID']
+                'ID' => $transPPNTONominal['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPPNTONominal['id']
             ];
         }, $this->listTransPPNTONominalModulPengurusan->toArray());
         return $this;

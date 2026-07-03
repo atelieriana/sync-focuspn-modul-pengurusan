@@ -73,7 +73,7 @@ class SyncTransNilaiSebelumPenyerahan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,18 +89,18 @@ class SyncTransNilaiSebelumPenyerahan extends Command
     {
         $this->remappingListTransNilaiSebelumPenyerahanFocusPN = array_map(function($transNilaiSebelumPenyerahan) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transNilaiSebelumPenyerahan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transNilaiSebelumPenyerahan['ID_TRANS_PIUTANG'],
-                'ID_REF_MATA_UANG' => $transNilaiSebelumPenyerahan['ID_REF_MATA_UANG'],
-                'POKOK' => $transNilaiSebelumPenyerahan['POKOK'],
-                'BUNGA' => $transNilaiSebelumPenyerahan['BUNGA'],
-                'DENDA' => $transNilaiSebelumPenyerahan['DENDA'],
-                'LAINNYA' => $transNilaiSebelumPenyerahan['LAINNYA'],
-                'CREATED_BY' => $transNilaiSebelumPenyerahan['CREATED_BY'],
-                'CREATED_AT' => $transNilaiSebelumPenyerahan['CREATED_AT'],
-                'UPDATED_BY' => $transNilaiSebelumPenyerahan['UPDATED_BY'],
-                'UPDATED_AT' => $transNilaiSebelumPenyerahan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transNilaiSebelumPenyerahan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transNilaiSebelumPenyerahan['ID_TRANS_PIUTANG'],
+                'id_ref_mata_uang' => $transNilaiSebelumPenyerahan['ID_REF_MATA_UANG'],
+                'pokok' => $transNilaiSebelumPenyerahan['POKOK'],
+                'bunga' => $transNilaiSebelumPenyerahan['BUNGA'],
+                'denda' => $transNilaiSebelumPenyerahan['DENDA'],
+                'lainnya' => $transNilaiSebelumPenyerahan['LAINNYA'],
+                'created_by' => $transNilaiSebelumPenyerahan['CREATED_BY'],
+                'created_at' => $transNilaiSebelumPenyerahan['CREATED_AT'],
+                'updated_by' => $transNilaiSebelumPenyerahan['UPDATED_BY'],
+                'updated_at' => $transNilaiSebelumPenyerahan['UPDATED_AT']
             ];
         }, $this->listTransNilaiSebelumPenyerahanFocusPN->toArray());
 
@@ -157,8 +157,8 @@ class SyncTransNilaiSebelumPenyerahan extends Command
     {
         $this->remappingListTransNilaiSebelumPenyerahanModulPengurusan = array_map(function($transNilaiSebelumPenyerahan){
             return [
-                'ID' => $transNilaiSebelumPenyerahan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transNilaiSebelumPenyerahan['ID']
+                'ID' => $transNilaiSebelumPenyerahan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transNilaiSebelumPenyerahan['id']
             ];
         }, $this->listTransNilaiSebelumPenyerahanModulPengurusan->toArray());
         return $this;

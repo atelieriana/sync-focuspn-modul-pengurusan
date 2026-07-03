@@ -73,7 +73,7 @@ class SyncTransNilaiSP3N extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,18 +89,18 @@ class SyncTransNilaiSP3N extends Command
     {
         $this->remappingListTransNilaiSP3NFocusPN = array_map(function ($transNilaiSP3N) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transNilaiSP3N['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transNilaiSP3N['ID_TRANS_TAHAP_PENGURUSAN'],
-                'ID_REF_MATA_UANG' => $transNilaiSP3N['ID_REF_MATA_UANG'],
-                'POKOK' => $transNilaiSP3N['POKOK'],
-                'BUNGA' => $transNilaiSP3N['BUNGA'],
-                'DENDA' => $transNilaiSP3N['DENDA'],
-                'LAINNYA' => $transNilaiSP3N['LAINNYA'],
-                'CREATED_BY' => $transNilaiSP3N['CREATED_BY'],
-                'CREATED_AT' => $transNilaiSP3N['CREATED_AT'],
-                'UPDATED_BY' => $transNilaiSP3N['UPDATED_BY'],
-                'UPDATED_AT' => $transNilaiSP3N['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transNilaiSP3N['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_trans_tahap_pengurusan' => $transNilaiSP3N['ID_TRANS_TAHAP_PENGURUSAN'],
+                'id_ref_mata_uang' => $transNilaiSP3N['ID_REF_MATA_UANG'],
+                'pokok' => $transNilaiSP3N['POKOK'],
+                'bunga' => $transNilaiSP3N['BUNGA'],
+                'denda' => $transNilaiSP3N['DENDA'],
+                'lainnya' => $transNilaiSP3N['LAINNYA'],
+                'created_by' => $transNilaiSP3N['CREATED_BY'],
+                'created_at' => $transNilaiSP3N['CREATED_AT'],
+                'updated_by' => $transNilaiSP3N['UPDATED_BY'],
+                'updated_at' => $transNilaiSP3N['UPDATED_AT'],
             ];
         }, $this->listTransNilaiSP3NFocusPN->toArray());
 
@@ -158,8 +158,8 @@ class SyncTransNilaiSP3N extends Command
     {
         $this->remappingListTransNilaiSP3NModulPengurusan = array_map(function ($transNilaiSP3N) {
             return [
-                'ID' => $transNilaiSP3N['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transNilaiSP3N['ID'],
+                'ID' => $transNilaiSP3N['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transNilaiSP3N['id'],
             ];
         }, $this->listTransNilaiSP3NModulPengurusan->toArray());
 

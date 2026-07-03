@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class SyncTransPermintaanBantuanSuratPaksa extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 50;
+    const TOTAL_DATA_EACH_CHUNK = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransPermintaanBantuanSuratPaksaRepository $migrasiTransPermintaanBantuanSuratPaksaRepository;
@@ -69,7 +69,7 @@ class SyncTransPermintaanBantuanSuratPaksa extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerjaKPKNL = $satuanKerja->ID;
+            $this->idSatuanKerjaKPKNL = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,15 +85,15 @@ class SyncTransPermintaanBantuanSuratPaksa extends Command
     {
         $this->remappingListTransPermintaanBantuanSuratPaksaFocusPN = array_map(function($transPermintaanBantuanSuratPaksa){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPermintaanBantuanSuratPaksa['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transPermintaanBantuanSuratPaksa['ID_TRANS_PIUTANG'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transPermintaanBantuanSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
-                'ID_SATUAN_KERJA_KPKNL_PERBANTUAN' => $transPermintaanBantuanSuratPaksa['ID_SATUAN_KERJA_KPKNL_PERBANTUAN'],
-                'CREATED_BY' => $transPermintaanBantuanSuratPaksa['CREATED_BY'],
-                'CREATED_AT' => $transPermintaanBantuanSuratPaksa['CREATED_AT'],
-                'UPDATED_BY' => $transPermintaanBantuanSuratPaksa['UPDATED_BY'],
-                'UPDATED_AT' => $transPermintaanBantuanSuratPaksa['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPermintaanBantuanSuratPaksa['ID_FOCUSPN'],
+                'id_trans_piutang' => $transPermintaanBantuanSuratPaksa['ID_TRANS_PIUTANG'],
+                'id_trans_tahap_pengurusan' => $transPermintaanBantuanSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
+                'id_satuan_kerja_kpknl_perbantuan' => $transPermintaanBantuanSuratPaksa['ID_SATUAN_KERJA_KPKNL_PERBANTUAN'],
+                'created_by' => $transPermintaanBantuanSuratPaksa['CREATED_BY'],
+                'created_at' => $transPermintaanBantuanSuratPaksa['CREATED_AT'],
+                'updated_by' => $transPermintaanBantuanSuratPaksa['UPDATED_BY'],
+                'updated_at' => $transPermintaanBantuanSuratPaksa['UPDATED_AT']
             ];
         }, $this->listTransPermintaanBantuanSuratPaksaFocusPN->toArray());
         return $this;
@@ -149,8 +149,8 @@ class SyncTransPermintaanBantuanSuratPaksa extends Command
     {
         $this->remappingListTransPermintaanBantuanSuratPaksaModulPengurusan = array_map(function($transPermintaanBantuanSuratPaksa){
             return [
-                'ID' => $transPermintaanBantuanSuratPaksa['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPermintaanBantuanSuratPaksa['ID']
+                'ID' => $transPermintaanBantuanSuratPaksa['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPermintaanBantuanSuratPaksa['id']
             ];
         }, $this->listTransPermintaanBantuanSuratPaksaModulPengurusan->toArray());
         return $this;

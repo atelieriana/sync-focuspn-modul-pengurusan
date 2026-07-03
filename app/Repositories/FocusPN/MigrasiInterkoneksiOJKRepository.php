@@ -2,9 +2,9 @@
 
 namespace App\Repositories\FocusPN;
 
-use App\Models\FocusPN\MigrasiTransDihapusMutlak;
+use App\Models\FocusPN\MigrasiInterkoneksiOJK;
 
-class MigrasiTransDihapusMutlakRepository extends MigrasiTransDihapusMutlak
+class MigrasiInterkoneksiOJKRepository extends MigrasiInterkoneksiOJK
 {
     public function getByIdSatuanKerjaKPKNL(int $idSatuanKerjaKPKNL)
     {

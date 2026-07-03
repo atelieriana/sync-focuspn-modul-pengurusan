@@ -74,7 +74,7 @@ class SyncTransPengurusBadanHukum extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -93,20 +93,20 @@ class SyncTransPengurusBadanHukum extends Command
     {
         $this->remappingListTransPengurusBadanHukumFocusPN = array_map(function ($transPengurusBadanHukumFocusPN) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPengurusBadanHukumFocusPN['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transPengurusBadanHukumFocusPN['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'NAMA' => trim($transPengurusBadanHukumFocusPN['NAMA']),
-                'JABATAN' => $transPengurusBadanHukumFocusPN['JABATAN'],
-                'KTP' => $transPengurusBadanHukumFocusPN['KTP'],
-                'NPWP' => $transPengurusBadanHukumFocusPN['NPWP'],
-                'KELURAHAN' => $transPengurusBadanHukumFocusPN['KELURAHAN'],
-                'RT_RW' => $transPengurusBadanHukumFocusPN['RT_RW'],
-                'ALAMAT' => $transPengurusBadanHukumFocusPN['ALAMAT'],
-                'CREATED_BY' => $transPengurusBadanHukumFocusPN['CREATED_BY'],
-                'CREATED_AT' => $transPengurusBadanHukumFocusPN['CREATED_AT'],
-                'UPDATED_BY' => $transPengurusBadanHukumFocusPN['UPDATED_BY'],
-                'UPDATED_AT' => $transPengurusBadanHukumFocusPN['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPengurusBadanHukumFocusPN['ID_FOCUSPN'],
+                'id_trans_piutang' => $transPengurusBadanHukumFocusPN['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'nama' => trim($transPengurusBadanHukumFocusPN['NAMA']),
+                'jabatan' => $transPengurusBadanHukumFocusPN['JABATAN'],
+                'ktp' => $transPengurusBadanHukumFocusPN['KTP'],
+                'npwp' => $transPengurusBadanHukumFocusPN['NPWP'],
+                'kelurahan' => $transPengurusBadanHukumFocusPN['KELURAHAN'],
+                'rt_rw' => $transPengurusBadanHukumFocusPN['RT_RW'],
+                'alamat' => $transPengurusBadanHukumFocusPN['ALAMAT'],
+                'created_by' => $transPengurusBadanHukumFocusPN['CREATED_BY'],
+                'created_at' => $transPengurusBadanHukumFocusPN['CREATED_AT'],
+                'updated_by' => $transPengurusBadanHukumFocusPN['UPDATED_BY'],
+                'updated_at' => $transPengurusBadanHukumFocusPN['UPDATED_AT'],
             ];
         }, $this->listTransPengurusBadanHukumFocusPN->toArray());
 
@@ -163,8 +163,8 @@ class SyncTransPengurusBadanHukum extends Command
     {
         $this->remappingListTransPengurusBadanHukumModulPengurusan = array_map(function ($transPengurusBadanHukumModul) {
             return [
-                'ID' => $transPengurusBadanHukumModul['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPengurusBadanHukumModul['ID']
+                'ID' => $transPengurusBadanHukumModul['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPengurusBadanHukumModul['id']
             ];
         }, $this->listTransPengurusBadanHukumModulPengurusan->toArray());
         return $this;

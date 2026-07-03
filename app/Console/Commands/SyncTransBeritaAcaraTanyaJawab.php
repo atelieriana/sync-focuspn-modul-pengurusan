@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class SyncTransBeritaAcaraTanyaJawab extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 100;
+    const TOTAL_DATA_EACH_CHUNK = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransBeritaAcaraTanyaJawabRepository $migrasiTransBeritaAcaraTanyaJawabRepository;
@@ -33,7 +33,7 @@ class SyncTransBeritaAcaraTanyaJawab extends Command
         $this->migrasiTransBeritaAcaraTanyaJawabRepository = new MigrasiTransBeritaAcaraTanyaJawabRepository();
         $this->transBeritaAcaraTanyaJawabRepository = new TransBeritaAcaraTanyaJawabRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -73,7 +73,7 @@ class SyncTransBeritaAcaraTanyaJawab extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,21 +89,21 @@ class SyncTransBeritaAcaraTanyaJawab extends Command
     {
         $this->remappingListTransBeritaAcaraTanyaJawabFocusPN = array_map(function($transBeritaAcaraTanyaJawab){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transBeritaAcaraTanyaJawab['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transBeritaAcaraTanyaJawab['ID_TRANS_PIUTANG'],
-                'ID_TAHAP_PENGURUSAN' => $transBeritaAcaraTanyaJawab['ID_TAHAP_PENGURUSAN'],
-                'NAMA_PEWAWANCARA' => $transBeritaAcaraTanyaJawab['NAMA_PEWAWANCARA'],
-                'NIP_PEWAWANCARA' => $transBeritaAcaraTanyaJawab['NIP_PEWAWANCARA'],
-                'JABATAN_PEWAWANCARA' => $transBeritaAcaraTanyaJawab['JABATAN_PEWAWANCARA'],
-                'NAMA_SAKSI_KPKNL' => $transBeritaAcaraTanyaJawab['NAMA_SAKSI_KPKNL'],
-                'NIP_SAKSI_KPKNL' => $transBeritaAcaraTanyaJawab['NIP_SAKSI_KPKNL'],
-                'NAMA_SAKSI_PENANGGUNG_HUTANG' => $transBeritaAcaraTanyaJawab['NAMA_SAKSI_PH'],
-                'WAKTU_TANYA_JAWAB' => $transBeritaAcaraTanyaJawab['WAKTU_TANYA_JAWAB'],
-                'CREATED_BY' => $transBeritaAcaraTanyaJawab['CREATED_BY'],
-                'CREATED_AT' => $transBeritaAcaraTanyaJawab['CREATED_AT'],
-                'UPDATED_BY' => $transBeritaAcaraTanyaJawab['UPDATED_BY'],
-                'UPDATED_AT' => $transBeritaAcaraTanyaJawab['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transBeritaAcaraTanyaJawab['ID_FOCUSPN'],
+                'id_trans_piutang' => $transBeritaAcaraTanyaJawab['ID_TRANS_PIUTANG'],
+                'id_tahap_pengurusan' => $transBeritaAcaraTanyaJawab['ID_TAHAP_PENGURUSAN'],
+                'nama_pewawancara' => $transBeritaAcaraTanyaJawab['NAMA_PEWAWANCARA'],
+                'nip_pewawancara' => $transBeritaAcaraTanyaJawab['NIP_PEWAWANCARA'],
+                'jabatan_pewawancara' => $transBeritaAcaraTanyaJawab['JABATAN_PEWAWANCARA'],
+                'nama_saksi_kpknl' => $transBeritaAcaraTanyaJawab['NAMA_SAKSI_KPKNL'],
+                'nip_saksi_kpknl' => $transBeritaAcaraTanyaJawab['NIP_SAKSI_KPKNL'],
+                'nama_saksi_penanggung_hutang' => $transBeritaAcaraTanyaJawab['NAMA_SAKSI_PH'],
+                'waktu_tanya_jawab' => $transBeritaAcaraTanyaJawab['WAKTU_TANYA_JAWAB'],
+                'created_by' => $transBeritaAcaraTanyaJawab['CREATED_BY'],
+                'created_at' => $transBeritaAcaraTanyaJawab['CREATED_AT'],
+                'updated_by' => $transBeritaAcaraTanyaJawab['UPDATED_BY'],
+                'updated_at' => $transBeritaAcaraTanyaJawab['UPDATED_AT']
             ];
         }, $this->listTransBeritaAcaraTanyaJawabFocusPN->toArray());
 
@@ -163,8 +163,8 @@ class SyncTransBeritaAcaraTanyaJawab extends Command
     {
         $this->remappingListTransBeritaAcaraTanyaJawabModulPengurusan = array_map(function ($transBeritaAcaraTanyaJawab){
             return [
-                'ID' => $transBeritaAcaraTanyaJawab['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraTanyaJawab['ID'],
+                'ID' => $transBeritaAcaraTanyaJawab['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraTanyaJawab['id'],
             ];
         }, $this->listTransBeritaAcaraTanyaJawabModulPengurusan->toArray());
 

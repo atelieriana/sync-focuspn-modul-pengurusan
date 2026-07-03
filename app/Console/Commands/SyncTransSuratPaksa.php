@@ -69,7 +69,7 @@ class SyncTransSuratPaksa extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerjaKPKNL = $satuanKerja->ID;
+            $this->idSatuanKerjaKPKNL = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,15 +85,15 @@ class SyncTransSuratPaksa extends Command
     {
         $this->remappingListTransSuratPaksaFocusPN = array_map(function($transSuratPaksa){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transSuratPaksa['ID_FOCUSPN'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
-                'ID_REF_ALASAN_SURAT_PAKSA' => $transSuratPaksa['ID_REF_ALASAN_SURAT_PAKSA'],
-                'TANGGAL_JATUH_TEMPO' => $transSuratPaksa['TANGGAL_JATUH_TEMPO'],
-                'CREATED_BY' => $transSuratPaksa['CREATED_BY'],
-                'CREATED_AT' => $transSuratPaksa['CREATED_AT'],
-                'UPDATED_BY' => $transSuratPaksa['UPDATED_BY'],
-                'UPDATED_AT' => $transSuratPaksa['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transSuratPaksa['ID_FOCUSPN'],
+                'id_trans_tahap_pengurusan' => $transSuratPaksa['ID_TRANS_TAHAP_PENGURUSAN'],
+                'id_ref_alasan_surat_paksa' => $transSuratPaksa['ID_REF_ALASAN_SURAT_PAKSA'],
+                'tanggal_jatuh_tempo' => $transSuratPaksa['TANGGAL_JATUH_TEMPO'],
+                'created_by' => $transSuratPaksa['CREATED_BY'],
+                'created_at' => $transSuratPaksa['CREATED_AT'],
+                'updated_by' => $transSuratPaksa['UPDATED_BY'],
+                'updated_at' => $transSuratPaksa['UPDATED_AT']
             ];
         }, $this->listTransSuratPaksaFocusPN->toArray());
 
@@ -153,8 +153,8 @@ class SyncTransSuratPaksa extends Command
     {
         $this->remappingListTransSuratPaksaModulPengurusan = array_map(function($transSuratPaksa){
             return [
-                'ID' => $transSuratPaksa['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transSuratPaksa['ID']
+                'ID' => $transSuratPaksa['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transSuratPaksa['id']
             ];
         }, $this->listTransSuratPaksaModulPengurusan->toArray());
 

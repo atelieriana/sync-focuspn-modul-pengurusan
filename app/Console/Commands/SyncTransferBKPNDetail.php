@@ -28,6 +28,7 @@ class SyncTransferBKPNDetail extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->database = new DB();
         $this->refSatuanKerjaRepository = new RefSatuanKerjaRepository();
         $this->migrasiTransferBKPNDetailRepository = new MigrasiTransferBKPNDetailRepository();
         $this->transferBKPNDetailRepository = new TransferBKPNDetailRepository();
@@ -68,7 +69,7 @@ class SyncTransferBKPNDetail extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerjaKPKNL = $satuanKerja->ID;
+            $this->idSatuanKerjaKPKNL = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -84,14 +85,14 @@ class SyncTransferBKPNDetail extends Command
     {
         $this->remappingListTransferBKPNDetailFocusPN = array_map(function($transferBKPNDetail){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANSFER_BKPN' => $transferBKPNDetail['ID_TRANSFER_BKPN'],
-                'ID_TRANS_PIUTANG' => $transferBKPNDetail['ID_TRANS_PIUTANG'],
-                'ID_TAHAP_PENGURUSAN' => $transferBKPNDetail['ID_TAHAP_PENGURUSAN'],
-                'CREATED_BY' => $transferBKPNDetail['CREATED_BY'],
-                'CREATED_AT' => $transferBKPNDetail['CREATED_AT'],
-                'UPDATED_BY' => $transferBKPNDetail['UPDATED_BY'],
-                'UPDATED_AT' => $transferBKPNDetail['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_transfer_bkpn' => $transferBKPNDetail['ID_TRANSFER_BKPN'],
+                'id_trans_piutang' => $transferBKPNDetail['ID_TRANS_PIUTANG'],
+                'id_tahap_pengurusan' => $transferBKPNDetail['ID_TAHAP_PENGURUSAN'],
+                'created_by' => $transferBKPNDetail['CREATED_BY'],
+                'created_at' => $transferBKPNDetail['CREATED_AT'],
+                'updated_by' => $transferBKPNDetail['UPDATED_BY'],
+                'updated_at' => $transferBKPNDetail['UPDATED_AT']
             ];
         }, $this->listTransferBKPNDetailFocusPN->toArray());
 
@@ -102,7 +103,7 @@ class SyncTransferBKPNDetail extends Command
     {
         $this->deleteOldData()
             ->saveNewData();
-        
+
         return $this;
     }
 
@@ -150,8 +151,8 @@ class SyncTransferBKPNDetail extends Command
     {
         $this->remappingListTransferBKPNDetailModulPengurusan = array_map(function($transferBKPNDetail){
             return [
-                'NOMOR_BA' => $transferBKPNDetail['NOMOR_BA_PENYERAHAN'],
-                'ID_TRANSFER_BKPN_DETAIL' => $transferBKPNDetail['ID']
+                'NOMOR_BA' => $transferBKPNDetail['nomor_ba_penyerahan'],
+                'ID_TRANSFER_BKPN_DETAIL' => $transferBKPNDetail['id']
             ];
         }, $this->listTransferBKPNDetailModulPengurusan->toArray());
 

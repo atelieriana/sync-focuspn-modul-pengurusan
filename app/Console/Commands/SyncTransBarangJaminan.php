@@ -73,7 +73,7 @@ class SyncTransBarangJaminan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,16 +89,16 @@ class SyncTransBarangJaminan extends Command
     {
         $this->remappingListTransBarangJaminanFocusPN = array_map(function($transBarangJaminan){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transBarangJaminan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transBarangJaminan['ID_TRANS_PIUTANG'],
-                'NILAI_BARANG_JAMINAN' => $transBarangJaminan['NILAI_BARANG_JAMINAN'],
-                'NILAI_APPRAISAL' => $transBarangJaminan['NILAI_APPRAISAL'],
-                'KETERANGAN' => $transBarangJaminan['KETERANGAN'],
-                'CREATED_BY' => $transBarangJaminan['CREATED_BY'] ?? '-',
-                'CREATED_AT' => $transBarangJaminan['CREATED_AT'],
-                'UPDATED_BY' => $transBarangJaminan['UPDATED_BY'] ?? '-',
-                'UPDATED_AT' => $transBarangJaminan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transBarangJaminan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transBarangJaminan['ID_TRANS_PIUTANG'],
+                'nilai_barang_jaminan' => $transBarangJaminan['NILAI_BARANG_JAMINAN'],
+                'nilai_appraisal' => $transBarangJaminan['NILAI_APPRAISAL'],
+                'keterangan' => $transBarangJaminan['KETERANGAN'],
+                'created_by' => $transBarangJaminan['CREATED_BY'] ?? '-',
+                'created_at' => $transBarangJaminan['CREATED_AT'],
+                'updated_by' => $transBarangJaminan['UPDATED_BY'] ?? '-',
+                'updated_at' => $transBarangJaminan['UPDATED_AT']
             ];
         }, $this->listTransBarangJaminanFocusPN->toArray());
 
@@ -155,8 +155,8 @@ class SyncTransBarangJaminan extends Command
     {
         $this->remappingListTransBarangJaminanModulPengurusan = array_map(function($transBarangJaminan){
             return [
-                'ID' => $transBarangJaminan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transBarangJaminan['ID']
+                'ID' => $transBarangJaminan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transBarangJaminan['id']
             ];
         }, $this->listTransBarangJaminanModulPengurusan->toArray());
         return $this;

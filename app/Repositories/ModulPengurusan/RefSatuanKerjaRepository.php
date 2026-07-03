@@ -8,8 +8,8 @@ class RefSatuanKerjaRepository extends RefSatuanKerja
 {
     public function getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja)
     {
-        return self::select('ID')
-            ->where('KODE_SATUAN_KERJA_6', $kodeSatuanKerja)
+        return self::select('id')
+            ->where('kode_satuan_kerja_6', $kodeSatuanKerja)
             ->first();
     }
 }

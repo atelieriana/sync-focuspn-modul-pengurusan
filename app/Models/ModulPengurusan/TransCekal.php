@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransCekal extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_CEKAL';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_cekal';
     public $timestamps = false;
 }

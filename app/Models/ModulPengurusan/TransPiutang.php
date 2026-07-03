@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransPiutang extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_PIUTANG';
-    protected $primaryKey = 'ID';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_piutang';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 }

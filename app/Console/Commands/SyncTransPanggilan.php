@@ -69,7 +69,7 @@ class SyncTransPanggilan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,20 +85,20 @@ class SyncTransPanggilan extends Command
     {
         $this->remappingTransPanggilanFocusPN = array_map(function($transPanggilan){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPanggilan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transPanggilan['ID_TRANS_PIUTANG'],
-                'ID_REF_JENIS_PANGGILAN' => $transPanggilan['ID_REF_JENIS_PANGGILAN'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transPanggilan['ID_TRANS_TAHAP'],
-                'HARI' => $transPanggilan['HARI'],
-                'WAKTU' => $transPanggilan['PUKUL'],
-                'TANGGAL' => $transPanggilan['TANGGAL'],
-                'TEMPAT' => $transPanggilan['TEMPAT'],
-                'ALAMAT' => $transPanggilan['ALAMAT'],
-                'CREATED_BY' => $transPanggilan['CREATED_BY'],
-                'CREATED_AT' => $transPanggilan['CREATED_AT'],
-                'UPDATED_BY' => $transPanggilan['UPDATED_BY'],
-                'UPDATED_AT' => $transPanggilan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPanggilan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transPanggilan['ID_TRANS_PIUTANG'],
+                'id_ref_jenis_panggilan' => $transPanggilan['ID_REF_JENIS_PANGGILAN'],
+                'id_trans_tahap_pengurusan' => $transPanggilan['ID_TRANS_TAHAP'],
+                'hari' => $transPanggilan['HARI'],
+                'waktu' => $transPanggilan['PUKUL'],
+                'tanggal' => $transPanggilan['TANGGAL'],
+                'tempat' => $transPanggilan['TEMPAT'],
+                'alamat' => $transPanggilan['ALAMAT'],
+                'created_by' => $transPanggilan['CREATED_BY'],
+                'created_at' => $transPanggilan['CREATED_AT'],
+                'updated_by' => $transPanggilan['UPDATED_BY'],
+                'updated_at' => $transPanggilan['UPDATED_AT']
             ];
         }, $this->listTransPanggilanFocusPN->toArray());
         return $this;
@@ -154,8 +154,8 @@ class SyncTransPanggilan extends Command
     {
         $this->remappingTransPanggilanModulPengurusan = array_map(function($transPanggilan){
             return [
-                'ID' => $transPanggilan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPanggilan['ID']
+                'ID' => $transPanggilan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPanggilan['id']
             ];
         }, $this->listTransPanggilanModulPengurusan->toArray());
         return $this;

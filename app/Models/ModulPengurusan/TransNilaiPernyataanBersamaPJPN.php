@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransNilaiPernyataanBersamaPJPN extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_NILAI_PERNYATAAN_BERSAMA_PJPN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_nilai_pernyataan_bersama_pjpn';
     public $timestamps = false;
 }

@@ -70,7 +70,7 @@ class SyncRefJurusita extends Command
     private function setSatuanKerja()
     {
         $this->kodeSatuanKerja = $this->argument('kode-satuan-kerja');
-        $this->idSatuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->ID;
+        $this->idSatuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($this->kodeSatuanKerja)->id;
         return $this;
     }
 
@@ -84,16 +84,16 @@ class SyncRefJurusita extends Command
     {
         $this->remappingListJurusitaFocusPN = array_map(function ($refJurusita){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_REF_SATUAN_KERJA_KPKNL' => $this->idSatuanKerja,
-                'NIP' => $refJurusita['NIP_JURUSITA'],
-                'NAMA_LENGKAP' => $refJurusita['NAMA_JURUSITA'],
-                'NOMOR_SK_PENGANGKATAN' => trim($refJurusita['NOMOR_SK_JURUSITA']),
-                'STATUS' => self::STATUS_PEJABAT_JURUSITA_AKTIF,
-                'CREATED_BY' => 'Migrasi FocusPN',
-                'CREATED_AT' => Carbon::now(),
-                'UPDATED_BY' => 'Migrasi FocusPN',
-                'UPDATED_AT' => Carbon::now(),
+                'uuid' => Str::uuid()->toString(),
+                'id_ref_satuan_kerja_kpknl' => $this->idSatuanKerja,
+                'nip' => $refJurusita['NIP_JURUSITA'],
+                'nama_lengkap' => $refJurusita['NAMA_JURUSITA'],
+                'nomor_sk_pengangkatan' => trim($refJurusita['NOMOR_SK_JURUSITA']),
+                'status' => self::STATUS_PEJABAT_JURUSITA_AKTIF,
+                'created_by' => 'Migrasi FocusPN',
+                'created_at' => Carbon::now(),
+                'updated_by' => 'Migrasi FocusPN',
+                'updated_at' => Carbon::now(),
             ];
         }, $this->listJurusitaFocusPN->toArray());
         return $this;
@@ -115,9 +115,9 @@ class SyncRefJurusita extends Command
     private function saveNewData()
     {
         $this->info('Tahapan sinkonrisasi REF_JURUSITA: ');
-        
+
         $this->database::beginTransaction();
-        try 
+        try
         {
             $chunkData = collect($this->remappingListJurusitaFocusPN)->chunk(self::TOTAL_DATA_EACH_CHUNK);
             $progressBar = $this->output->createProgressBar(count($chunkData));
@@ -132,7 +132,7 @@ class SyncRefJurusita extends Command
             $progressBar->finish();
             $this->output->newLine();
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
             $this->database::rollBack();
             $this->error($e->getMessage());

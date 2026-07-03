@@ -8,6 +8,30 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class SyncDataTrans extends Command
 {
+    private array $numbers = [ "537827", "506069", "537831",
+                               "119703", "506081", "506090",
+                               "537848", "119745", "537852",
+                               "119656", "506461", "537873",
+                               "537894", "506126", "119809",
+                               "538154", "537902", "506157",
+                               "119724", "506188", "506194",
+                               "537721", "604442", "537916",
+                               "537937", "119312", "537738",
+                               "604460", "537759", "506208",
+                               "525343", "119393", "537763",
+                               "119511", "506239", "411786",
+                               "537784", "537770", "537791",
+                               "506276", "537810", "538140",
+                               "506282", "537920", "604456",
+                               "506302", "119834", "506333",
+                               "537958", "537962", "537941",
+                               "506364", "506370", "538065",
+                               "525591", "538072", "538086",
+                               "538108", "418495", "538019",
+                               "538190", "119944", "538030",
+                               "537983", "538023", "538002",
+                               "538133", "538044", "538129",
+                               "537990", "525474", ];
     /**
      * The name and signature of the console command.
      *
@@ -134,7 +158,7 @@ class SyncDataTrans extends Command
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja'),
         ]);
 
-        // Sync Trans Laporan Pen
+        // Sync Trans Laporan Pemberitahuan Surat Paksa
         $this->call('sync:trans-laporan-pemberitahuan-surat-paksa', [
             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
         ]);
@@ -205,9 +229,9 @@ class SyncDataTrans extends Command
         ]);
 
         // Sync Trans Dihapus Mutlak
-        $this->call('sync:trans-dihapus-mutlak',[
-            'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
-        ]);
+         $this->call('sync:trans-penghapusan-telah-diserahkan',[
+             'kode-satuan-kerja' => $this->argument('kode-satuan-kerja')
+         ]);
 
         // Sync Trans Surat Paksa
         $this->call('sync:trans-surat-paksa',[

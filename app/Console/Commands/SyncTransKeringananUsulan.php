@@ -73,7 +73,7 @@ class SyncTransKeringananUsulan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,28 +89,28 @@ class SyncTransKeringananUsulan extends Command
     {
         $this->remappingListTransKeringananUsulanFocusPN = array_map(function ($transKeringananUsulan) {
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transKeringananUsulan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transKeringananUsulan['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'T_BKPN_ID' => $transKeringananUsulan['T_BKPN_ID'],
-                'KODE_KPKNL' => $transKeringananUsulan['KODE_KPKNL_FOCUSPN'],
-                'SITE_ID' => $transKeringananUsulan['SITE_ID'],
-                'R_KERINGANAN_ID' => $transKeringananUsulan['R_KERINGANAN_ID'],
-                'R_CARA_BAYAR_ID' => $transKeringananUsulan['R_CARA_BAYAR_ID'],
-                'R_MATAUANG_ID' => $transKeringananUsulan['R_MATAUANG_ID'],
-                'POKOK' => $transKeringananUsulan['POKOK'],
-                'BUNGA' => $transKeringananUsulan['BUNGA'],
-                'DENDA' => $transKeringananUsulan['DENDA'],
-                'LAINNYA' => $transKeringananUsulan['LAINNYA'],
-                'BIAD' => $transKeringananUsulan['BIAD'],
-                'WAKTU' => $transKeringananUsulan['WAKTU'],
-                'TANGGAL_PELUNASAN' => $transKeringananUsulan['TANGGAL_PELUNASAN'],
-                'NOMOR_USULAN' => $transKeringananUsulan['NOMOR_USULAN'],
-                'TANGGAL_USULAN' => $transKeringananUsulan['TANGGAL_USULAN'],
-                'CREATED_BY' => $transKeringananUsulan['CREATED_BY'],
-                'CREATED_AT' => $transKeringananUsulan['CREATED_AT'],
-                'UPDATED_BY' => $transKeringananUsulan['UPDATED_BY'],
-                'UPDATED_AT' => $transKeringananUsulan['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transKeringananUsulan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transKeringananUsulan['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                't_bkpn_id' => $transKeringananUsulan['T_BKPN_ID'],
+                'kode_kpknl' => $transKeringananUsulan['KODE_KPKNL_FOCUSPN'],
+                'site_id' => $transKeringananUsulan['SITE_ID'],
+                'r_keringanan_id' => $transKeringananUsulan['R_KERINGANAN_ID'],
+                'r_cara_bayar_id' => $transKeringananUsulan['R_CARA_BAYAR_ID'],
+                'r_matauang_id' => $transKeringananUsulan['R_MATAUANG_ID'],
+                'pokok' => $transKeringananUsulan['POKOK'],
+                'bunga' => $transKeringananUsulan['BUNGA'],
+                'denda' => $transKeringananUsulan['DENDA'],
+                'lainnya' => $transKeringananUsulan['LAINNYA'],
+                'biad' => $transKeringananUsulan['BIAD'],
+                'waktu' => $transKeringananUsulan['WAKTU'],
+                'tanggal_pelunasan' => $transKeringananUsulan['TANGGAL_PELUNASAN'],
+                'nomor_usulan' => $transKeringananUsulan['NOMOR_USULAN'],
+                'tanggal_usulan' => $transKeringananUsulan['TANGGAL_USULAN'],
+                'created_by' => $transKeringananUsulan['CREATED_BY'],
+                'created_at' => $transKeringananUsulan['CREATED_AT'],
+                'updated_by' => $transKeringananUsulan['UPDATED_BY'],
+                'updated_at' => $transKeringananUsulan['UPDATED_AT'],
             ];
         }, $this->listTransKeringananUsulanFocusPN->toArray());
 
@@ -169,8 +169,8 @@ class SyncTransKeringananUsulan extends Command
     {
         $this->remappingListTransKeringananUsulanModulPengurusan = array_map(function ($transKeringananUsulan) {
             return [
-                'ID' => $transKeringananUsulan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transKeringananUsulan['ID']
+                'ID' => $transKeringananUsulan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transKeringananUsulan['id']
             ];
         }, $this->listTransKeringananUsulanModulPengurusan->toArray());
 

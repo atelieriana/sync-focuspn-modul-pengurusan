@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransKeringananUsulan extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_KERINGANAN_USULAN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_keringanan_usulan';
     public $timestamps = false;
 }

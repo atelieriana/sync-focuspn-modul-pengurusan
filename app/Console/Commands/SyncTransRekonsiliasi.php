@@ -73,7 +73,7 @@ class SyncTransRekonsiliasi extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerjaKPKNL = $satuanKerja->ID;
+            $this->idSatuanKerjaKPKNL = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -89,30 +89,30 @@ class SyncTransRekonsiliasi extends Command
     {
         $this->remappingTransRekonsiliasiFocusPN = array_map(function($transRekonsiliasi){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transRekonsiliasi['ID_FOCUSPN'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transRekonsiliasi['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_REF_SATUAN_KERJA_KREDITUR' => $transRekonsiliasi['ID_REF_SATUAN_KERJA_KREDITUR'],
-                'TAHUN' => $transRekonsiliasi['TAHUN'],
-                'PERIODE' => $transRekonsiliasi['PERIODE'],
-                'NOMOR_BAR_PENYERAH_PIUTANG' => $transRekonsiliasi['NOMOR_BAR_PENYERAH_PIUTANG'],
-                'NOMOR_BAR_KPKNL' => $transRekonsiliasi['NOMOR_BAR_KPKNL'],
-                'TANGGAL_REKON' => $transRekonsiliasi['TANGGAL_REKON'],
-                'PATH_TO_FILE' => $this->cloneFile($transRekonsiliasi['PATH_TO_FILE'], $transRekonsiliasi['CREATED_AT']),
-                'VALIDASI_KPKNL' => $transRekonsiliasi['VALIDASI_KPKNL'],
-                'VALIDASI_KPKNL_BY' => $transRekonsiliasi['VALIDASI_KPKNL_BY'],
-                'VALIDASI_KPKNL_AT' => $transRekonsiliasi['VALIDASI_KPKNL_AT'],
-                'VALIDASI_KANWIL' => $transRekonsiliasi['VALIDASI_KANWIL'],
-                'VALIDASI_KANWIL_BY' => $transRekonsiliasi['VALIDASI_KANWIL_BY'],
-                'VALIDASI_KANWIL_AT' => $transRekonsiliasi['VALIDASI_KANWIL_AT'],
-                'VALIDASI_PUSAT' => $transRekonsiliasi['VALIDASI_PUSAT'],
-                'VALIDASI_PUSAT_BY' => $transRekonsiliasi['VALIDASI_PUSAT_BY'],
-                'VALIDASI_PUSAT_AT' => $transRekonsiliasi['VALIDASI_PUSAT_AT'],
-                'ALASAN_REJECT' => $transRekonsiliasi['ALASAN_REJECT'],
-                'CREATED_BY' => $transRekonsiliasi['CREATED_BY'],
-                'CREATED_AT' => $transRekonsiliasi['CREATED_AT'],
-                'UPDATED_BY' => $transRekonsiliasi['UPDATED_BY'],
-                'UPDATED_AT' => $transRekonsiliasi['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transRekonsiliasi['ID_FOCUSPN'],
+                'id_ref_satuan_kerja_kpknl' => $transRekonsiliasi['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_ref_satuan_kerja_kreditur' => $transRekonsiliasi['ID_REF_SATUAN_KERJA_KREDITUR'],
+                'tahun' => $transRekonsiliasi['TAHUN'],
+                'periode' => $transRekonsiliasi['PERIODE'],
+                'nomor_bar_penyerahan_piutang' => $transRekonsiliasi['NOMOR_BAR_PENYERAH_PIUTANG'],
+                'nomor_bar_kpknl' => $transRekonsiliasi['NOMOR_BAR_KPKNL'],
+                'tanggal_rekon' => $transRekonsiliasi['TANGGAL_REKON'],
+                'path_to_file' => $this->cloneFile($transRekonsiliasi['PATH_TO_FILE'], $transRekonsiliasi['CREATED_AT']),
+                'validasi_kpknl' => $transRekonsiliasi['VALIDASI_KPKNL'] == 1,
+                'validasi_kpknl_by' => $transRekonsiliasi['VALIDASI_KPKNL_BY'],
+                'validasi_kpknl_at' => $transRekonsiliasi['VALIDASI_KPKNL_AT'],
+                'validasi_kanwil' => $transRekonsiliasi['VALIDASI_KANWIL'] == 1,
+                'validasi_kanwil_by' => $transRekonsiliasi['VALIDASI_KANWIL_BY'],
+                'validasi_kanwil_at' => $transRekonsiliasi['VALIDASI_KANWIL_AT'],
+                'validasi_pusat' => $transRekonsiliasi['VALIDASI_PUSAT'] == 1,
+                'validasi_pusat_by' => $transRekonsiliasi['VALIDASI_PUSAT_BY'],
+                'validasi_pusat_at' => $transRekonsiliasi['VALIDASI_PUSAT_AT'],
+                'alasan_reject' => $transRekonsiliasi['ALASAN_REJECT'],
+                'created_by' => $transRekonsiliasi['CREATED_BY'],
+                'created_at' => $transRekonsiliasi['CREATED_AT'],
+                'updated_by' => $transRekonsiliasi['UPDATED_BY'],
+                'updated_at' => $transRekonsiliasi['UPDATED_AT'],
             ];
         }, $this->listTransRekonsiliasiFocusPN->toArray());
         return $this;
@@ -178,8 +178,8 @@ class SyncTransRekonsiliasi extends Command
     {
         $this->remappingTransRekonsiliasiModulPengurusan = array_map(function($transRekonsiliasi){
             return [
-                'ID' => $transRekonsiliasi['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transRekonsiliasi['ID']
+                'ID' => $transRekonsiliasi['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transRekonsiliasi['id']
             ];
         }, $this->listTransRekonsiliasiModulPengurusan->toArray());
         return $this;

@@ -68,7 +68,7 @@ class SyncTransKoreksi extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -84,20 +84,20 @@ class SyncTransKoreksi extends Command
     {
         $this->remappingListTransKoreksiFocusPN = array_map(function ($transKoreksi){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transKoreksi['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_TAHAP_PENGURUSAN' => $transKoreksi['ID_TAHAP_PENGURUSAN'],
-                'ID_REF_MATA_UANG' => $transKoreksi['ID_REF_MATA_UANG'],
-                'ID_REF_BIAD' => $transKoreksi['ID_REF_BIAD'],
-                'ID_FOCUSPN' => $transKoreksi['ID_FOCUSPN'],
-                'KOREKSI_POKOK' => $transKoreksi['KOREKSI_POKOK'],
-                'KOREKSI_BUNGA' => $transKoreksi['KOREKSI_BUNGA'],
-                'KOREKSI_DENDA' => $transKoreksi['KOREKSI_DENDA'],
-                'KOREKSI_LAINNYA' => $transKoreksi['KOREKSI_LAINNYA'],
-                'CREATED_BY' => $transKoreksi['CREATED_BY'],
-                'CREATED_AT' => $transKoreksi['CREATED_AT'],
-                'UPDATED_BY' => $transKoreksi['UPDATED_BY'],
-                'UPDATED_AT' => $transKoreksi['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transKoreksi['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_tahap_pengurusan' => $transKoreksi['ID_TAHAP_PENGURUSAN'],
+                'id_ref_mata_uang' => $transKoreksi['ID_REF_MATA_UANG'],
+                'id_ref_biad' => $transKoreksi['ID_REF_BIAD'],
+                'id_focuspn' => $transKoreksi['ID_FOCUSPN'],
+                'koreksi_pokok' => $transKoreksi['KOREKSI_POKOK'],
+                'koreksi_bunga' => $transKoreksi['KOREKSI_BUNGA'],
+                'koreksi_denda' => $transKoreksi['KOREKSI_DENDA'],
+                'koreksi_lainnya' => $transKoreksi['KOREKSI_LAINNYA'],
+                'created_by' => $transKoreksi['CREATED_BY'],
+                'created_at' => $transKoreksi['CREATED_AT'],
+                'updated_by' => $transKoreksi['UPDATED_BY'],
+                'updated_at' => $transKoreksi['UPDATED_AT'],
             ];
         }, $this->listTransKoreksiFocusPN->toArray());
 
@@ -154,8 +154,8 @@ class SyncTransKoreksi extends Command
     {
         $this->remappingListTransKoreksiModulPengurusan = array_map(function ($transKoreksi){
             return [
-                'ID' => $transKoreksi['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transKoreksi['ID']
+                'ID' => $transKoreksi['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transKoreksi['id']
             ];
         }, $this->listTransKoreksiModulPengurusan->toArray());
         return $this;

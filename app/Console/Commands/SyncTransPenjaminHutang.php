@@ -74,7 +74,7 @@ class SyncTransPenjaminHutang extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -100,22 +100,22 @@ class SyncTransPenjaminHutang extends Command
     {
         $this->remappingListTransPenjaminHutangFocusPN = array_map(function ($transPenjaminHutang){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transPenjaminHutang['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transPenjaminHutang['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
-                'ID_REF_JENIS_PENJAMIN_HUTANG' => $transPenjaminHutang['ID_REF_JENIS_PENJAMIN_HUTANG'],
-                'NAMA' => trim($transPenjaminHutang['NAMA']),
-                'TELEPON' => $transPenjaminHutang['TELEPON'],
-                'KTP' => $transPenjaminHutang['KTP'],
-                'NPWP' => $transPenjaminHutang['NPWP'],
-                'PASPOR' => $transPenjaminHutang['PASPOR'],
-                'KELURAHAN' => $transPenjaminHutang['KELURAHAN'],
-                'RT_RW' => $transPenjaminHutang['RT_RW'],
-                'ALAMAT' => $transPenjaminHutang['ALAMAT'],
-                'CREATED_BY' => $transPenjaminHutang['CREATED_BY'] ?? '-',
-                'CREATED_AT' => $transPenjaminHutang['CREATED_AT'],
-                'UPDATED_BY' => $transPenjaminHutang['UPDATED_BY'] ?? '-',
-                'UPDATED_AT' => $transPenjaminHutang['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transPenjaminHutang['ID_FOCUSPN'],
+                'id_trans_piutang' => $transPenjaminHutang['ID_TRANS_PIUTANG_MODUL_PENGURUSAN'],
+                'id_ref_jenis_penjamin_hutang' => $transPenjaminHutang['ID_REF_JENIS_PENJAMIN_HUTANG'],
+                'nama' => trim($transPenjaminHutang['NAMA']),
+                'telepon' => $transPenjaminHutang['TELEPON'],
+                'ktp' => $transPenjaminHutang['KTP'],
+                'npwp' => $transPenjaminHutang['NPWP'],
+                'paspor' => $transPenjaminHutang['PASPOR'],
+                'kelurahan' => $transPenjaminHutang['KELURAHAN'],
+                'rt_rw' => $transPenjaminHutang['RT_RW'],
+                'alamat' => $transPenjaminHutang['ALAMAT'],
+                'created_by' => $transPenjaminHutang['CREATED_BY'] ?? '-',
+                'created_at' => $transPenjaminHutang['CREATED_AT'],
+                'updated_by' => $transPenjaminHutang['UPDATED_BY'] ?? '-',
+                'updated_at' => $transPenjaminHutang['UPDATED_AT']
             ];
         }, $this->listTransPenjaminHutangFocusPN->toArray());
         return $this;
@@ -192,8 +192,8 @@ class SyncTransPenjaminHutang extends Command
     {
         $this->remappingListTransPenjaminHutangModulPengurusan = array_map(function($transPenjaminHutang) {
             return [
-                'ID' => $transPenjaminHutang['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transPenjaminHutang['ID']
+                'ID' => $transPenjaminHutang['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transPenjaminHutang['id']
             ];
         }, $this->listTransPenjaminHutangModulPengurusan->toArray());
 

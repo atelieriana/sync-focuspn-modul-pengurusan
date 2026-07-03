@@ -69,7 +69,7 @@ class SyncTransBelumDapatDitagih extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,17 +85,17 @@ class SyncTransBelumDapatDitagih extends Command
     {
         $this->remappingListTransBelumDapatDitagihFocusPN = array_map(function($transBelumDapatDitagih){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transBelumDapatDitagih['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transBelumDapatDitagih['ID_TRANS_PIUTANG'],
-                'ID_TRANS_TAHAP_PENGURUSAN' => $transBelumDapatDitagih['ID_TRANS_TAHAP_PENGURUSAN'],
-                'ID_REF_JENIS_NILAI_BARANG_JAMINAN' => $transBelumDapatDitagih['ID_REF_JENIS_NILAI_BARANG_JAMINAN'],
-                'ID_REF_KLAUSUL_PSBDT' => $transBelumDapatDitagih['ID_REF_KLAUSUL_PSBDT'],
-                'ID_REF_BIAD' => $transBelumDapatDitagih['ID_REF_BIAD'],
-                'CREATED_BY' => $transBelumDapatDitagih['CREATED_BY'],
-                'CREATED_AT' => $transBelumDapatDitagih['CREATED_AT'],
-                'UPDATED_BY' => $transBelumDapatDitagih['UPDATED_BY'],
-                'UPDATED_AT' => $transBelumDapatDitagih['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transBelumDapatDitagih['ID_FOCUSPN'],
+                'id_trans_piutang' => $transBelumDapatDitagih['ID_TRANS_PIUTANG'],
+                'id_trans_tahap_pengurusan' => $transBelumDapatDitagih['ID_TRANS_TAHAP_PENGURUSAN'],
+                'id_ref_jenis_nilai_barang_jaminan' => $transBelumDapatDitagih['ID_REF_JENIS_NILAI_BARANG_JAMINAN'],
+                'id_ref_klausul_psbdt' => $transBelumDapatDitagih['ID_REF_KLAUSUL_PSBDT'],
+                'id_ref_biad' => $transBelumDapatDitagih['ID_REF_BIAD'],
+                'created_by' => $transBelumDapatDitagih['CREATED_BY'],
+                'created_at' => $transBelumDapatDitagih['CREATED_AT'],
+                'updated_by' => $transBelumDapatDitagih['UPDATED_BY'],
+                'updated_at' => $transBelumDapatDitagih['UPDATED_AT']
             ];
         }, $this->listTransBelumDapatDitagihFocusPN->toArray());
         return $this;
@@ -151,8 +151,8 @@ class SyncTransBelumDapatDitagih extends Command
     {
         $this->remappingListTransBelumDapatDitagihModulPengurusan = array_map(function($transBelumDapatDitagih){
             return [
-                'ID' => $transBelumDapatDitagih['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transBelumDapatDitagih['ID']
+                'ID' => $transBelumDapatDitagih['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transBelumDapatDitagih['id']
             ];
         }, $this->listTransBelumDapatDitagihModulPengurusan->toArray());
         return $this;

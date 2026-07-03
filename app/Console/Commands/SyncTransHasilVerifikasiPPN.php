@@ -74,7 +74,7 @@ class SyncTransHasilVerifikasiPPN extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -90,17 +90,17 @@ class SyncTransHasilVerifikasiPPN extends Command
     {
         $this->remappingListTransHasilVerifikasiPPNFocusPN = array_map(function($transHasilVerifikasiPPN){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transHasilVerifikasiPPN['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transHasilVerifikasiPPN['ID_TRANS_PIUTANG'],
-                'ID_TAHAP_PENGURUSAN' => $transHasilVerifikasiPPN['ID_TAHAP_PENGURUSAN'],
-                'ID_REF_ALASAN_VERIFIKASI_PPN' => $transHasilVerifikasiPPN['ID_REF_ALASAN_VERIFIKASI_PPN'],
-                'NOMOR_ND_PERMINTAAN' => $transHasilVerifikasiPPN['NOMOR_ND_PERMINTAAN'],
-                'TANGGAL_ND_PERMINTAAN' => $transHasilVerifikasiPPN['TANGGAL_ND_PERMINTAAN'],
-                'CREATED_BY' => $transHasilVerifikasiPPN['CREATED_BY'],
-                'CREATED_AT' => $transHasilVerifikasiPPN['CREATED_AT'],
-                'UPDATED_BY' => $transHasilVerifikasiPPN['UPDATED_BY'],
-                'UPDATED_AT' => $transHasilVerifikasiPPN['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transHasilVerifikasiPPN['ID_FOCUSPN'],
+                'id_trans_piutang' => $transHasilVerifikasiPPN['ID_TRANS_PIUTANG'],
+                'id_tahap_pengurusan' => $transHasilVerifikasiPPN['ID_TAHAP_PENGURUSAN'],
+                'id_ref_alasan_verifikasi_ppn' => $transHasilVerifikasiPPN['ID_REF_ALASAN_VERIFIKASI_PPN'],
+                'nomor_nd_permintaan' => $transHasilVerifikasiPPN['NOMOR_ND_PERMINTAAN'],
+                'tanggal_nd_permintaan' => $transHasilVerifikasiPPN['TANGGAL_ND_PERMINTAAN'],
+                'created_by' => $transHasilVerifikasiPPN['CREATED_BY'],
+                'created_at' => $transHasilVerifikasiPPN['CREATED_AT'],
+                'updated_by' => $transHasilVerifikasiPPN['UPDATED_BY'],
+                'updated_at' => $transHasilVerifikasiPPN['UPDATED_AT']
             ];
         }, $this->listTransHasilVerifikasiPPNFocusPN->toArray());
 
@@ -156,8 +156,8 @@ class SyncTransHasilVerifikasiPPN extends Command
     {
         $this->remappingListTransHasilVerifikasiPPNModulPengurusan = array_map(function($transHasilVerifikasiPPN){
             return [
-                'ID' => $transHasilVerifikasiPPN['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transHasilVerifikasiPPN['ID']
+                'ID' => $transHasilVerifikasiPPN['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transHasilVerifikasiPPN['id']
             ];
         }, $this->listTransHasilVerifikasiPPNModulPengurusan->toArray());
 

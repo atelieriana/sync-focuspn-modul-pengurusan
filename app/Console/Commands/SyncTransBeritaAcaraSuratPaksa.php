@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 class SyncTransBeritaAcaraSuratPaksa extends Command
 {
-    const TOTAL_DATA_EACH_CHUNK = 50;
+    const TOTAL_DATA_EACH_CHUNK = 1;
     private DB $database;
     private RefSatuanKerjaRepository $refSatuanKerjaRepository;
     private MigrasiTransBeritaAcaraSuratPaksaRepository $migrasiTransBeritaAcaraSuratPaksaRepository;
@@ -80,12 +80,12 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
     }
-    
+
     /**
      * Digunakan untuk mendapatkan list transaksi berita acara surat paksa dari Focus PN
      * @return $this
@@ -113,17 +113,17 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
     private function mappingListRefJurusita()
     {
         $this->remappingRefJurusita = array_reduce($this->listJurusita->toArray(), function($result, $jurusitaData){
-            $result[$jurusitaData['ID']] = [
-                'NIP' => $jurusitaData['NIP'],
-                'NAMA_LENGKAP' => $jurusitaData['NAMA_LENGKAP'],
-                'NOMOR_SK_JURUSITA' => $jurusitaData['NOMOR_SK_PENGANGKATAN']
+            $result[$jurusitaData['id']] = [
+                'nip' => $jurusitaData['nip'],
+                'nama_lengkap' => $jurusitaData['nama_lengkap'],
+                'nomor_sk_jurusita' => $jurusitaData['nomor_sk_pengangkatan']
             ];
             return $result;
         }, []);
 
         return $this;
     }
-    
+
     /**
      * Digunakan untuk melakukan mapping list transaksi berita acara surat paksa dari Focus PN
      * @return $this
@@ -131,30 +131,30 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
     private function mappingListTransBeritaAcaraSuratPaksaFocusPN()
     {
         $this->remappingTransBeritaAcaraSuratPaksaFocusPN = array_map(function($transBeritaAcaraSuratPaksa){
-            $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraSuratPaksa['NIP_JURUSITA'], 
+            $idRefJurusita = $this->searchReferensiJurusita($transBeritaAcaraSuratPaksa['NIP_JURUSITA'],
                                                             $transBeritaAcaraSuratPaksa['NAMA_JURUSITA'],
                                                             $transBeritaAcaraSuratPaksa['NOMOR_SK_JURUSITA']);
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_TRANS_PIUTANG' => $transBeritaAcaraSuratPaksa['ID_TRANS_PIUTANG'],
-                'ID_TAHAP_PENGURUSAN' => $transBeritaAcaraSuratPaksa['ID_TAHAP_PENGURUSAN'],
-                'ID_REF_JURUSITA' => $idRefJurusita,
-                'ID_FOCUSPN' => $transBeritaAcaraSuratPaksa['ID_FOCUSPN'],
-                'NOMOR_SK_JURUSITA' => $transBeritaAcaraSuratPaksa['NOMOR_SK_JURUSITA'],
-                'NOMOR_SURAT_TUGAS' => $transBeritaAcaraSuratPaksa['NOMOR_SURAT_TUGAS'],
-                'TANGGAL_SURAT_TUGAS' => $transBeritaAcaraSuratPaksa['TANGGAL_SURAT_TUGAS'],
-                'NAMA_SAKSI_1' => $transBeritaAcaraSuratPaksa['NAMA_SAKSI_1'],
-                'USIA_SAKSI_1' => $transBeritaAcaraSuratPaksa['USIA_SAKSI_1'],
-                'ALAMAT_SAKSI_1' => $transBeritaAcaraSuratPaksa['ALAMAT_SAKSI_1'],
-                'NAMA_SAKSI_2' => $transBeritaAcaraSuratPaksa['NAMA_SAKSI_2'],
-                'USIA_SAKSI_2' => $transBeritaAcaraSuratPaksa['USIA_SAKSI_2'],
-                'ALAMAT_SAKSI_2' => $transBeritaAcaraSuratPaksa['ALAMAT_SAKSI_2'],
-                'WAKTU_PENYAMPAIAN_SURAT_PAKSA' => $transBeritaAcaraSuratPaksa['WAKTU_SURAT_PAKSA'],
-                'LOKASI_PENYITAAN' => $transBeritaAcaraSuratPaksa['LOKASI_PENYITAAN'],
-                'CREATED_BY' => $transBeritaAcaraSuratPaksa['CREATED_BY'],
-                'CREATED_AT' => $transBeritaAcaraSuratPaksa['CREATED_AT'],
-                'UPDATED_BY' => $transBeritaAcaraSuratPaksa['UPDATED_BY'],
-                'UPDATED_AT' => $transBeritaAcaraSuratPaksa['UPDATED_AT'],
+                'uuid' => Str::uuid()->toString(),
+                'id_trans_piutang' => $transBeritaAcaraSuratPaksa['ID_TRANS_PIUTANG'],
+                'id_tahap_pengurusan' => $transBeritaAcaraSuratPaksa['ID_TAHAP_PENGURUSAN'],
+                'id_ref_jurusita' => $idRefJurusita,
+                'id_focuspn' => $transBeritaAcaraSuratPaksa['ID_FOCUSPN'],
+                'nomor_sk_jurusita' => $transBeritaAcaraSuratPaksa['NOMOR_SK_JURUSITA'],
+                'nomor_surat_tugas' => $transBeritaAcaraSuratPaksa['NOMOR_SURAT_TUGAS'],
+                'tanggal_surat_tugas' => $transBeritaAcaraSuratPaksa['TANGGAL_SURAT_TUGAS'],
+                'nama_saksi_1' => $transBeritaAcaraSuratPaksa['NAMA_SAKSI_1'],
+                'usia_saksi_1' => $transBeritaAcaraSuratPaksa['USIA_SAKSI_1'],
+                'alamat_saksi_1' => $transBeritaAcaraSuratPaksa['ALAMAT_SAKSI_1'],
+                'nama_saksi_2' => $transBeritaAcaraSuratPaksa['NAMA_SAKSI_2'],
+                'usia_saksi_2' => $transBeritaAcaraSuratPaksa['USIA_SAKSI_2'],
+                'alamat_saksi_2' => $transBeritaAcaraSuratPaksa['ALAMAT_SAKSI_2'],
+                'waktu_penyampaian_surat_paksa' => $transBeritaAcaraSuratPaksa['WAKTU_SURAT_PAKSA'],
+                'lokasi_penyitaan' => $transBeritaAcaraSuratPaksa['LOKASI_PENYITAAN'],
+                'created_by' => $transBeritaAcaraSuratPaksa['CREATED_BY'],
+                'created_at' => $transBeritaAcaraSuratPaksa['CREATED_AT'],
+                'updated_by' => $transBeritaAcaraSuratPaksa['UPDATED_BY'],
+                'updated_at' => $transBeritaAcaraSuratPaksa['UPDATED_AT'],
             ];
         }, $this->listTransBeritaAcaraSuratPaksaFocusPN->toArray());
         return $this;
@@ -166,12 +166,16 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
      */
     private function searchReferensiJurusita(string $nipJurusita, string $namaJurusita, string $nomorSKJurusita)
     {
-        foreach ($this->remappingRefJurusita as $key => $jurusitaData) 
+        foreach ($this->remappingRefJurusita as $key => $jurusitaData)
         {
-            if ($jurusitaData['NIP'] == $nipJurusita 
-                && $jurusitaData['NAMA_LENGKAP'] == $namaJurusita
-                && trim($jurusitaData['NOMOR_SK_JURUSITA']) == trim($nomorSKJurusita)) {
+            if ($jurusitaData['nip'] == $nipJurusita
+                && $jurusitaData['nama_lengkap'] == $namaJurusita
+                && trim($jurusitaData['nomor_sk_jurusita']) == trim($nomorSKJurusita)) {
                 return $key;
+            }
+            else
+            {
+                return null;   
             }
         }
 
@@ -242,8 +246,8 @@ class SyncTransBeritaAcaraSuratPaksa extends Command
     {
         $this->remappingListTransBeritaAcaraSuratPaksaModulPengurusan = array_map(function ($transBeritaAcaraSuratPaksa){
             return [
-                'ID' => $transBeritaAcaraSuratPaksa['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraSuratPaksa['ID']
+                'ID' => $transBeritaAcaraSuratPaksa['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transBeritaAcaraSuratPaksa['id']
             ];
         }, $this->listTransBeritaAcaraSuratPaksaModulPengurusan->toArray());
 

@@ -33,7 +33,7 @@ class SyncTransTembusan extends Command
         $this->migrasiTransTembusanRepository = new MigrasiTransTembusanRepository();
         $this->transTembusanRepository = new TransTembusanRepository();
     }
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -69,7 +69,7 @@ class SyncTransTembusan extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,16 +85,16 @@ class SyncTransTembusan extends Command
     {
         $this->remappingListTransTembusanFocusPN = array_map(function($transTembusan){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $transTembusan['ID_FOCUSPN'],
-                'ID_TRANS_PIUTANG' => $transTembusan['ID_TRANS_PIUTANG'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $transTembusan['ID_REF_SATUAN_KERJA_KPKNL'],
-                'ID_TAHAP_PENGURUSAN' => $transTembusan['ID_TAHAP_PENGURUSAN'],
-                'NOMOR_URUT' => $transTembusan['NOMOR_URUT'],
-                'CREATED_BY' => $transTembusan['CREATED_BY'],
-                'CREATED_AT' => $transTembusan['CREATED_AT'],
-                'UPDATED_BY' => $transTembusan['UPDATED_BY'],
-                'UPDATED_AT' => $transTembusan['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $transTembusan['ID_FOCUSPN'],
+                'id_trans_piutang' => $transTembusan['ID_TRANS_PIUTANG'],
+                'id_ref_satuan_kerja_kpknl' => $transTembusan['ID_REF_SATUAN_KERJA_KPKNL'],
+                'id_tahap_pengurusan' => $transTembusan['ID_TAHAP_PENGURUSAN'],
+                'nomor_urut' => $transTembusan['NOMOR_URUT'],
+                'created_by' => $transTembusan['CREATED_BY'],
+                'created_at' => $transTembusan['CREATED_AT'],
+                'updated_by' => $transTembusan['UPDATED_BY'],
+                'updated_at' => $transTembusan['UPDATED_AT']
             ];
         }, $this->listTransTembusanFocusPN->toArray());
 
@@ -105,7 +105,7 @@ class SyncTransTembusan extends Command
     {
         $this->deleteOldData()
             ->saveNewData();
-        
+
         return $this;
     }
 
@@ -154,8 +154,8 @@ class SyncTransTembusan extends Command
     {
         $this->remappingListTransTembusanModulPengurusan = array_map(function($transTembusan){
             return [
-                'ID' => $transTembusan['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $transTembusan['ID']
+                'ID' => $transTembusan['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $transTembusan['id']
             ];
         }, $this->listTransTembusanModulPengurusan->toArray());
 

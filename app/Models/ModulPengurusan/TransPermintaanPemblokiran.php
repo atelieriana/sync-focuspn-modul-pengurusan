@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransPermintaanPemblokiran extends Model
 {
-    protected $connection = 'oracle_modul_pengurusan';
-    protected $table = 'TRANS_PERMINTAAN_PEMBLOKIRAN';
+    protected $connection = 'pgsql_pengurusan';
+    protected $table = 'trans_permintaan_pemblokiran';
     public $timestamps = false;
 }

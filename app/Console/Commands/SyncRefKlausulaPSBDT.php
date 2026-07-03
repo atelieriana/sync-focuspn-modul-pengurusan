@@ -69,7 +69,7 @@ class SyncRefKlausulaPSBDT extends Command
         $kodeSatuanKerja = $this->argument('kode-satuan-kerja');
         $satuanKerja = $this->refSatuanKerjaRepository->getIdSatuanKerjaByKodeSatuanKerja($kodeSatuanKerja);
         if (!is_null($satuanKerja))
-            $this->idSatuanKerja = $satuanKerja->ID;
+            $this->idSatuanKerja = $satuanKerja->id;
         else
             $this->error('Kode satuan kerja tidak ditemukan');
         return $this;
@@ -85,14 +85,14 @@ class SyncRefKlausulaPSBDT extends Command
     {
         $this->remappingListKlausulPSBDTFocusPN = array_map(function($refKlausulPSBDT){
             return [
-                'UUID' => Str::uuid()->toString(),
-                'ID_FOCUSPN' => $refKlausulPSBDT['ID_FOCUSPN'],
-                'ID_REF_SATUAN_KERJA_KPKNL' => $refKlausulPSBDT['ID_REF_SATUAN_KERJA_KPKNL'],
-                'KLAUSUL_PSBDT' => $refKlausulPSBDT['KLAUSUL_PSBDT'],
-                'CREATED_BY' => $refKlausulPSBDT['CREATED_BY'],
-                'CREATED_AT' => $refKlausulPSBDT['CREATED_AT'],
-                'UPDATED_BY' => $refKlausulPSBDT['UPDATED_BY'],
-                'UPDATED_AT' => $refKlausulPSBDT['UPDATED_AT']
+                'uuid' => Str::uuid()->toString(),
+                'id_focuspn' => $refKlausulPSBDT['ID_FOCUSPN'],
+                'id_ref_satuan_kerja_kpknl' => $refKlausulPSBDT['ID_REF_SATUAN_KERJA_KPKNL'],
+                'klausul_psbdt' => $refKlausulPSBDT['KLAUSUL_PSBDT'],
+                'created_by' => $refKlausulPSBDT['CREATED_BY'],
+                'created_at' => $refKlausulPSBDT['CREATED_AT'],
+                'updated_by' => $refKlausulPSBDT['UPDATED_BY'],
+                'updated_at' => $refKlausulPSBDT['UPDATED_AT']
             ];
         }, $this->listKlausulPSBDTFocusPN->toArray());
         return $this;
@@ -156,8 +156,8 @@ class SyncRefKlausulaPSBDT extends Command
     {
         $this->remappingListKlausulPSBDTModulPengurusan = array_map(function($refKlausulPSBDT){
             return [
-                'ID' => $refKlausulPSBDT['ID_FOCUSPN'],
-                'ID_MODUL_PENGURUSAN' => $refKlausulPSBDT['ID']
+                'ID' => $refKlausulPSBDT['id_focuspn'],
+                'ID_MODUL_PENGURUSAN' => $refKlausulPSBDT['id']
             ];
         }, $this->listKlausulPSBDTModulPengurusan->toArray());
         return $this;
