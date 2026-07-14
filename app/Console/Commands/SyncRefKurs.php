@@ -67,7 +67,7 @@ class SyncRefKurs extends Command
             return [
                 'uuid' => Str::uuid()->toString(),
                 'id_mata_uang' => $refKurs['ID_MATA_UANG'],
-                'nilai_kurs' => $refKurs['NILAI_KURS'],
+                'nilai_kurs' => (float)$refKurs['NILAI_KURS'],
                 'reviewed' => $refKurs['REVIEWED'] == 1,
                 'sumber' => $refKurs['SUMBER'],
                 'tanggal_kurs' => $refKurs['TANGGAL_KURS'],
