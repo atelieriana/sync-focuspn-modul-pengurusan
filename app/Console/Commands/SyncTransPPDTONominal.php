@@ -90,7 +90,7 @@ class SyncTransPPDTONominal extends Command
                 'id_focuspn' => $transPPDTONominal['ID_FOCUSPN'],
                 'id_trans_pernyataan_piutang_telah_optimal' => $transPPDTONominal['ID_TRANS_PPDTO'],
                 'id_ref_mata_uang' => $transPPDTONominal['ID_REF_MATA_UANG'],
-                'nominal' => $transPPDTONominal['NOMINAL'],
+                'nominal' => $transPPDTONominal['NOMINAL'] ?? 0,
                 'created_by' => $transPPDTONominal['CREATED_BY'],
                 'created_at' => $transPPDTONominal['CREATED_AT'],
                 'updated_by' => $transPPDTONominal['UPDATED_BY'],

@@ -161,7 +161,7 @@ class SyncTransPenghapusanTelahDiserahkan extends Command
 
     public function resyncIdTransDihapusMutlakModulPengurusan()
     {
-        $this->info('Tahapan sinkonrisasi TRANS_DIHAPUS_MUTLAK ke T_SPTDM_HAPUS: ');
+        $this->info('Tahapan sinkonrisasi trans_penghapusan_mutlak_telah_diserahkan ke T_SPTDM_HAPUS: ');
 
         $this->database::beginTransaction();
         try

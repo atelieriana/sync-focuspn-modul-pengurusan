@@ -94,6 +94,7 @@ class SyncTransBarangJaminan extends Command
                 'id_trans_piutang' => $transBarangJaminan['ID_TRANS_PIUTANG'],
                 'keterangan' => $transBarangJaminan['KETERANGAN'],
                 'freetext_focuspn' => $transBarangJaminan['KETERANGAN'],
+                'is_harta_kekayaan_lain' => false,
                 'created_by' => $transBarangJaminan['CREATED_BY'] ?? '-',
                 'created_at' => $transBarangJaminan['CREATED_AT'],
                 'updated_by' => $transBarangJaminan['UPDATED_BY'] ?? '-',
